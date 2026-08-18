@@ -6,6 +6,21 @@
     <meta name="theme-color" content="#0F172A" />
     <meta name="description" content="Mzansi AI Educator - Culturally contextualized, offline-first AI literacy Progressive Web App." />
 
+    <!-- Restore GitHub Pages deep links before React Router starts -->
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var route = params.get('p');
+        if (!route) return;
+        params.delete('p');
+        var query = params.toString();
+        var target = '/mzansi-ai-educator' + (route.charAt(0) === '/' ? route : '/' + route);
+        if (query) target += '?' + query;
+        target += window.location.hash;
+        window.history.replaceState(null, '', target);
+      })();
+    </script>
+
     <!-- App Icons & Manifest -->
     <link rel="icon" type="image/svg+xml" href="/mzansi-ai-educator/icon.svg" />
     <link rel="apple-touch-icon" href="/mzansi-ai-educator/icon.svg" />
