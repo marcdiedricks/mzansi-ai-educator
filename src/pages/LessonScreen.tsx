@@ -38,6 +38,15 @@ export function LessonScreen() {
 
   if (!lesson) return <div className="p-6 text-center space-y-4"><h2 className="text-xl font-bold text-[#2D3E50]">Lesson Not Found</h2><p className="text-xs text-gray-500">The requested curriculum content is not available.</p><button onClick={() => navigate('/learn')} className="bg-[#2D3E50] text-white text-xs font-bold px-4 py-2 rounded-xl">Return to Curriculum</button></div>;
 
+  const handleBack = () => {
+    if (moduleData?.lessonIds.length === 1) {
+      navigate('/learn');
+      return;
+    }
+
+    navigate(moduleId ? `/learn/${moduleId}` : '/learn');
+  };
+
   const handleToggleCompleted = () => {
     if (!lessonId) return;
     setCompleted(toggleLessonCompletion(lessonId));
@@ -56,7 +65,7 @@ export function LessonScreen() {
 
   return <div className="flex flex-col min-h-screen bg-white pb-24">
     <header className="flex items-center justify-between p-4 border-b-2 border-[#E2E8F0] bg-white sticky top-0 z-20">
-      <button onClick={() => navigate(moduleId ? `/learn/${moduleId}` : '/learn')} className="p-2 -ml-2 text-gray-500 hover:text-[#2D3E50] rounded-lg" aria-label="Go back"><ArrowLeft className="w-6 h-6" /></button>
+      <button onClick={handleBack} className="p-2 -ml-2 text-gray-500 hover:text-[#2D3E50] rounded-lg" aria-label="Go back"><ArrowLeft className="w-6 h-6" /></button>
       <div className="text-center"><span className="text-[9px] font-bold uppercase tracking-wider text-gray-400 block">{moduleData?.title || 'Level 1'}</span><span className="text-xs font-bold text-[#2D3E50] truncate max-w-[200px] block">{lesson.title}</span></div>
       <button onClick={handleToggleCompleted} className={`p-2 rounded-lg ${completed ? 'text-emerald-600' : 'text-gray-400'}`} aria-label={completed ? 'Mark lesson incomplete' : 'Mark lesson complete'}>{completed ? <CheckSquare className="w-5 h-5" /> : <Square className="w-5 h-5" />}</button>
     </header>
