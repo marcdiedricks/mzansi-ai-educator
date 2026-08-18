@@ -19,10 +19,14 @@ export const level: Level = {
     'MZAIE-L1-M03',
     'MZAIE-L1-M04',
     'MZAIE-L1-M05',
+    'MZAIE-L2-M01',
+    'MZAIE-L2-M02',
+    'MZAIE-L2-M03',
   ],
 };
 
 export const modules: Module[] = [
+  // --- LEVEL 1 MODULES ---
   {
     id: 'MZAIE-L1-M01',
     title: '1.1 What Is AI?',
@@ -68,9 +72,39 @@ export const modules: Module[] = [
     competencyIds: ['AI_UNDERSTANDING', 'CRITICAL_QUESTIONING'],
     version: '1.0',
   },
+
+  // --- LEVEL 2 MODULES ---
+  {
+    id: 'MZAIE-L2-M01',
+    title: '2.1 The Art of Effective Prompting',
+    description: 'Master structured prompting techniques to get high-value, precise outputs.',
+    order: 6,
+    lessonIds: ['MZAIE-L2-M01-L01'],
+    competencyIds: ['AI_UNDERSTANDING', 'CRITICAL_QUESTIONING'],
+    version: '1.0',
+  },
+  {
+    id: 'MZAIE-L2-M02',
+    title: '2.2 Real-World AI Productivity Tools',
+    description: 'Explore practical tools for summarization, writing assistance, coding, and study support.',
+    order: 7,
+    lessonIds: ['MZAIE-L2-M02-L01'],
+    competencyIds: ['AI_UNDERSTANDING', 'RESPONSIBLE_AI_USE'],
+    version: '1.0',
+  },
+  {
+    id: 'MZAIE-L2-M03',
+    title: '2.3 Critical Fact-Checking & Bias Detection',
+    description: 'Learn step-by-step methods to audit AI answers, detect hallucinations, and safeguard accuracy.',
+    order: 8,
+    lessonIds: ['MZAIE-L2-M03-L01'],
+    competencyIds: ['CRITICAL_QUESTIONING', 'HUMAN_JUDGEMENT'],
+    version: '1.0',
+  },
 ];
 
 export const lessons: Lesson[] = [
+  // --- LEVEL 1 LESSONS ---
   {
     id: 'MZAIE-L1-M01-L01',
     title: 'What Is Artificial Intelligence?',
@@ -553,6 +587,238 @@ export const lessons: Lesson[] = [
         variant: 'standard',
         content:
           'Generative AI is a powerful creative writing, coding, and brainstorming assistant, but human judgement and verification are always required.',
+      },
+    ],
+  },
+
+  // --- LEVEL 2 LESSONS ---
+  {
+    id: 'MZAIE-L2-M01-L01',
+    title: 'Mastering Prompting with the C-R-E-O Framework',
+    levelId: 'MZAIE-L1',
+    moduleId: 'MZAIE-L2-M01',
+    locale: 'en-ZA',
+    version: '1.0',
+    estimatedMinutes: 10,
+    objectives: [
+      'Learn how to craft professional, high-yield prompts using the C-R-E-O (Context, Role, Explicit instructions, Output) framework.',
+    ],
+    competencyIds: ['AI_UNDERSTANDING', 'CRITICAL_QUESTIONING'],
+    activityIds: [],
+    assessmentId: null,
+    sourceIds: [],
+    offlineEligible: true,
+    trustState: 'VERIFIED_CURRICULUM',
+    quiz: [
+      {
+        id: 'q1',
+        question: 'What does the "C" stand for in the C-R-E-O prompting framework?',
+        options: [
+          'Computer specifications',
+          'Context (the background situation and target audience)',
+          'Coding language',
+          'Cloud storage',
+        ],
+        correctIndex: 1,
+        explanation:
+          'Context provides the AI with critical background details so it tailors the tone, vocabulary, and relevance of its response.',
+      },
+      {
+        id: 'q2',
+        question: 'Why should you specify an explicit Output Format in your prompt?',
+        options: [
+          'It forces the AI to structure answers directly into tables, bullet lists, or templates you need.',
+          'It reduces your monthly data subscription.',
+          'It translates the text into binary machine code.',
+          'It prevents the AI from searching the internet.',
+        ],
+        correctIndex: 0,
+        explanation:
+          'Specifying the output format (like a 3-column table or bulleted list) eliminates unnecessary filler and saves formatting time.',
+      },
+    ],
+    blocks: [
+      {
+        id: 'l2_m1_b1',
+        type: 'objective',
+        variant: 'standard',
+        content:
+          'Transition from vague questions to structured, professional instructions that yield immediate high-quality answers.',
+      },
+      {
+        id: 'l2_m1_b2',
+        type: 'explanation',
+        variant: 'standard',
+        content:
+          'The C-R-E-O framework ensures complete clarity:\n- **Context**: State the background and target audience.\n- **Role**: Assign a persona (e.g. "Act as a senior educator").\n- **Explicit Instructions**: Detail the exact tasks, constraints, and exclusions.\n- **Output**: Define the structure (e.g. Markdown table, bulleted action points).',
+      },
+      {
+        id: 'l2_m1_b3',
+        type: 'example',
+        variant: 'SouthAfricanContext',
+        content:
+          'Example prompt: "Context: I run a youth development NGO in Khayelitsha. Role: Experienced grant writer. Explicit: Draft a 200-word executive summary for digital literacy funding. Output: 3 clear paragraphs with a bulleted budget summary."',
+      },
+      {
+        id: 'l2_m1_b4',
+        type: 'keyPoint',
+        variant: 'standard',
+        content:
+          'A precise prompt saves hours of revision. The more specific your constraints, the better the AI output.',
+      },
+      {
+        id: 'l2_m1_b5',
+        type: 'reflection',
+        variant: 'standard',
+        content:
+          'Take a recent prompt you asked an AI. How could you rewrite it using the C-R-E-O framework to make it twice as effective?',
+      },
+      {
+        id: 'l2_m1_b6',
+        type: 'summary',
+        variant: 'standard',
+        content:
+          'Structured prompting transforms AI from an unpredictable conversational toy into a high-leverage professional tool.',
+      },
+    ],
+  },
+  {
+    id: 'MZAIE-L2-M02-L01',
+    title: 'Practical AI Productivity in Work & Study',
+    levelId: 'MZAIE-L1',
+    moduleId: 'MZAIE-L2-M02',
+    locale: 'en-ZA',
+    version: '1.0',
+    estimatedMinutes: 10,
+    objectives: [
+      'Apply AI for summarization, drafting formal communications, study flashcard generation, and logic drafting.',
+    ],
+    competencyIds: ['AI_UNDERSTANDING', 'RESPONSIBLE_AI_USE'],
+    activityIds: [],
+    assessmentId: null,
+    sourceIds: [],
+    offlineEligible: true,
+    trustState: 'VERIFIED_CURRICULUM',
+    quiz: [
+      {
+        id: 'q1',
+        question: 'Which of the following is a high-value use of AI for a student or professional?',
+        options: [
+          'Asking the AI to generate practice exam questions and summarize complex textbook chapters.',
+          'Submitting unedited AI-generated essays as their own original work without reviewing.',
+          'Entering confidential client passwords to test the AI memory.',
+          'Believing every historical date provided without verification.',
+        ],
+        correctIndex: 0,
+        explanation:
+          'AI excels as an interactive study partner, summarizer, and brainstorming assistant when coupled with human critical review.',
+      },
+    ],
+    blocks: [
+      {
+        id: 'l2_m2_b1',
+        type: 'objective',
+        variant: 'standard',
+        content:
+          'Harness AI to eliminate repetitive administrative friction and accelerate learning and research workflows.',
+      },
+      {
+        id: 'l2_m2_b2',
+        type: 'explanation',
+        variant: 'standard',
+        content:
+          'AI can synthesize lengthy PDF policy documents into concise bullet summaries, generate mock interview questions, and assist in drafting professional correspondence.',
+      },
+      {
+        id: 'l2_m2_b3',
+        type: 'example',
+        variant: 'SouthAfricanContext',
+        content:
+          'An entrepreneur can paste municipal tender specifications and ask AI: "List the mandatory compliance documents required according to section 4 in a checklist format."',
+      },
+      {
+        id: 'l2_m2_b4',
+        type: 'keyPoint',
+        variant: 'standard',
+        content:
+          'Use AI to create the first draft or breakdown, then use your human expertise and local context to refine and finalize.',
+      },
+      {
+        id: 'l2_m2_b5',
+        type: 'summary',
+        variant: 'standard',
+        content:
+          'AI boosts productivity when treated as an accelerator rather than an autopilot.',
+      },
+    ],
+  },
+  {
+    id: 'MZAIE-L2-M03-L01',
+    title: 'Verification, Hallucinations & Critical Auditing',
+    levelId: 'MZAIE-L1',
+    moduleId: 'MZAIE-L2-M03',
+    locale: 'en-ZA',
+    version: '1.0',
+    estimatedMinutes: 10,
+    objectives: [
+      'Develop practical auditing techniques to cross-examine AI claims, catch fake citations, and ensure accountability.',
+    ],
+    competencyIds: ['CRITICAL_QUESTIONING', 'HUMAN_JUDGEMENT'],
+    activityIds: [],
+    assessmentId: null,
+    sourceIds: [],
+    offlineEligible: true,
+    trustState: 'VERIFIED_CURRICULUM',
+    quiz: [
+      {
+        id: 'q1',
+        question: 'What should you do if an AI cites a legal case or academic paper you have never heard of?',
+        options: [
+          'Assume it must be true because computers do not make mistakes.',
+          'Independently verify the case name, date, and citations on official legal databases or verified repositories.',
+          'Ignore it completely.',
+          'Share it immediately on social media as breaking news.',
+        ],
+        correctIndex: 1,
+        explanation:
+          'AI models frequently hallucinate plausible-sounding legal citations, book titles, and statistical studies. Human verification is essential.',
+      },
+    ],
+    blocks: [
+      {
+        id: 'l2_m3_b1',
+        type: 'objective',
+        variant: 'standard',
+        content:
+          'Equip yourself with a rigorous verification checklist to evaluate AI-generated facts, statistics, and citations.',
+      },
+      {
+        id: 'l2_m3_b2',
+        type: 'explanation',
+        variant: 'standard',
+        content:
+          'Never rely on an unverified AI output for medical, legal, financial, or engineering decisions. Practice the "Trust but Verify" rule: check primary sources for every factual assertion.',
+      },
+      {
+        id: 'l2_m3_b3',
+        type: 'example',
+        variant: 'SouthAfricanContext',
+        content:
+          'When asking an AI about South African Labour Relations Act dispute resolution rules, always double-check the exact section numbers against official government gazettes.',
+      },
+      {
+        id: 'l2_m3_b4',
+        type: 'keyPoint',
+        variant: 'standard',
+        content:
+          'Human judgement remains irreplaceable. The author of the prompt and final document remains 100% accountable for the information presented.',
+      },
+      {
+        id: 'l2_m3_b5',
+        type: 'summary',
+        variant: 'standard',
+        content:
+          'Critical thinking and empirical verification are the ultimate antidotes to algorithmic misinformation and hallucinations.',
       },
     ],
   },
