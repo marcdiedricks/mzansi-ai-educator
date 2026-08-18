@@ -1,0 +1,6 @@
+{
+  "name": "Mzansi AI Educator",
+  "description": "Learn AI. Use it responsibly. Build for Africa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
