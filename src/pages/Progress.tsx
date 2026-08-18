@@ -15,7 +15,9 @@ export function Progress() {
   const level1Lessons = lessons.filter((lesson) => lesson.levelId === 'MZAIE-L1');
   const level1LessonIds = new Set(level1Lessons.map((lesson) => lesson.id));
   const completedLevel1Lessons = progress.completedLessons.filter((id) => level1LessonIds.has(id));
-  const level1QuizScores = Object.entries(progress.quizScores).filter(([lessonId]) => level1LessonIds.has(lessonId));
+  const level1QuizScores: Array<[string, number]> = Object.entries(progress.quizScores).filter(
+    ([lessonId]) => level1LessonIds.has(lessonId)
+  ) as Array<[string, number]>;
 
   const totalLessons = level1Lessons.length;
   const completedLessons = completedLevel1Lessons.length;
