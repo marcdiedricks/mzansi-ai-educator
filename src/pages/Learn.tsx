@@ -7,6 +7,15 @@ export function Learn() {
   const level = api.getLevel();
   const modules = api.getModulesForLevel();
 
+  const openModule = (moduleId: string, lessonIds: string[]) => {
+    if (lessonIds.length === 1) {
+      navigate(`/learn/${moduleId}/lesson/${lessonIds[0]}`);
+      return;
+    }
+
+    navigate(`/learn/${moduleId}`);
+  };
+
   return (
     <div className="p-6 space-y-6">
       <header>
@@ -19,22 +28,27 @@ export function Learn() {
           <div className="text-[#E67E22] font-bold text-[10px] uppercase tracking-wider mb-1">{level.title}</div>
           <h2 className="text-xl font-bold text-[#1A202C]">Level 1</h2>
         </div>
-        
+
         <div className="divide-y-2 divide-[#E2E8F0]">
           {modules.map((mod, index) => {
             const hasLessons = mod.lessonIds.length > 0;
+            const opensDirectly = mod.lessonIds.length === 1;
+
             return (
-              <button 
+              <button
                 key={mod.id}
-                onClick={() => navigate(`/learn/${mod.id}`)}
-                className="w-full flex items-center p-5 hover:bg-[#F8F9FA] text-left transition-colors focus-visible:outline-none focus-visible:bg-[#F8F9FA] group"
+                onClick={() => hasLessons && openModule(mod.id, mod.lessonIds)}
+                disabled={!hasLessons}
+                className="w-full flex items-center p-5 hover:bg-[#F8F9FA] text-left transition-colors focus-visible:outline-none focus-visible:bg-[#F8F9FA] group disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <div className="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold mr-4 shrink-0 group-hover:bg-[#2D3E50] group-hover:text-white transition-colors">
                   {index + 1}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-[#1A202C] truncate">{mod.title}</h3>
-                  <p className="text-xs font-medium text-gray-500">{hasLessons ? 'Tap to view lessons' : 'Content coming soon'}</p>
+                  <p className="text-xs font-medium text-gray-500">
+                    {!hasLessons ? 'Content coming soon' : opensDirectly ? 'Tap to start lesson' : 'Tap to choose a lesson'}
+                  </p>
                 </div>
                 <div className="ml-4 text-gray-300 group-hover:text-[#E67E22] transition-colors">
                   <BookOpen className="w-5 h-5" />
