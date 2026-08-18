@@ -10,6 +10,7 @@ import { AppShell } from './components/AppShell';
 import { Home } from './pages/Home';
 import { Learn } from './pages/Learn';
 import { Practice } from './pages/Practice';
+import { PracticeChallenge } from './pages/PracticeChallenge';
 import { Glossary } from './pages/Glossary';
 import { Certificates } from './pages/Certificates';
 import { More } from './pages/More';
@@ -28,7 +29,6 @@ export default function App() {
         <Route path="/" element={<LaunchScreen />} />
         <Route path="/onboarding" element={<Onboarding />} />
 
-        {/* Main application shell */}
         <Route element={<AppShell />}>
           <Route path="/home" element={<Home />} />
           <Route path="/learn" element={<Learn />} />
@@ -39,23 +39,19 @@ export default function App() {
           <Route path="/progress" element={<Progress />} />
         </Route>
 
-        {/* Ask Mzansi Tutor local/offline learning support */}
         <Route path="/tutor" element={<Tutor />} />
 
-        {/* Functional learning flow used by Home, Learn and ModuleScreen */}
         <Route path="/learn/:moduleId" element={<ModuleScreen />} />
         <Route path="/learn/:moduleId/lesson/:lessonId" element={<LessonScreen />} />
 
-        {/* Offline interactive labs */}
         <Route path="/practice/madlibs-sim" element={<MadLibsSim />} />
         <Route path="/practice/intelligent-paper" element={<IntelligentPaper />} />
         <Route path="/practice/monster-mapping" element={<MonsterMapping />} />
+        <Route path="/practice/challenge/:challengeId" element={<PracticeChallenge />} />
 
-        {/* Backward-compatible learning routes */}
         <Route path="/module/:moduleId" element={<ModuleScreen />} />
         <Route path="/lesson/:lessonId" element={<LessonScreen />} />
 
-        {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
