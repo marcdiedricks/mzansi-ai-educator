@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../lib/curriculum/api';
-import { ArrowLeft, Clock, CheckCircle2, Info, Lightbulb, MessageSquare, Bookmark, HelpCircle, CheckSquare, Square } from 'lucide-react';
+import { ArrowLeft, Clock, CheckCircle2, Info, Lightbulb, MessageSquare, Bookmark, HelpCircle, CheckSquare, Square, ExternalLink, PlayCircle } from 'lucide-react';
 import { LessonBlock } from '../lib/curriculum/types';
 import { isLessonCompleted, toggleLessonCompletion, recordQuizScore } from '../lib/progress';
+import { getActiveVideoResourcesForLesson } from '../lib/videoResources';
 
 function renderBlock(block: LessonBlock) {
   switch (block.type) {
@@ -22,6 +23,7 @@ export function LessonScreen() {
   const navigate = useNavigate();
   const lesson = lessonId ? api.getLesson(lessonId) : undefined;
   const moduleData = moduleId ? api.getModule(moduleId) : undefined;
+  const videoResources = lessonId ? getActiveVideoResourcesForLesson(lessonId) : [];
   const [completed, setCompleted] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
@@ -73,6 +75,14 @@ export function LessonScreen() {
     <main className="flex-1 p-4 sm:p-6 space-y-5 max-w-xl mx-auto w-full">
       <div className="space-y-2"><div className="flex items-center gap-2"><span className="text-xs font-bold text-[#E67E22] bg-orange-50 border border-orange-200 px-2.5 py-1 rounded-md">Curriculum Content</span><div className="flex items-center text-xs font-bold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-md"><Clock className="w-3.5 h-3.5 mr-1" />{lesson.estimatedMinutes} min</div></div><h1 className="text-xl sm:text-2xl font-bold text-[#2D3E50] leading-tight">{lesson.title}</h1></div>
       <div className="space-y-4">{lesson.blocks.map(renderBlock)}</div>
+
+      {videoResources.length > 0 && <section className="mt-8 pt-6 border-t-2 border-[#E2E8F0] space-y-3">
+        <div className="flex items-center gap-2"><PlayCircle className="w-5 h-5 text-[#E67E22]" /><h2 className="text-base font-bold text-[#2D3E50]">Watch & Learn</h2></div>
+        <p className="text-xs text-gray-500">Optional external videos. Internet and mobile data may be required. The lesson itself does not depend on these links.</p>
+        <div className="space-y-2.5">{videoResources.map((resource) => <a key={resource.id} href={resource.url} target="_blank" rel="noreferrer" className="block bg-white border-2 border-[#E2E8F0] rounded-2xl p-4 hover:border-[#2D3E50] transition-colors">
+          <div className="flex items-start gap-3"><div className="w-10 h-10 rounded-xl bg-orange-50 text-[#E67E22] flex items-center justify-center shrink-0"><PlayCircle className="w-5 h-5" /></div><div className="flex-1 min-w-0"><div className="flex items-start justify-between gap-2"><h3 className="font-bold text-sm text-[#1A202C]">{resource.title}</h3><ExternalLink className="w-4 h-4 text-gray-400 shrink-0" /></div><p className="text-xs text-gray-500 mt-1">{resource.provider} · {resource.language}{resource.durationMinutes ? ` · ${resource.durationMinutes} min` : ''}</p><p className="text-[11px] text-amber-700 mt-2">{resource.dataWarning}</p></div></div>
+        </a>)}</div>
+      </section>}
 
       {lesson.quiz && lesson.quiz.length > 0 && <section className="mt-8 pt-6 border-t-2 border-[#E2E8F0] space-y-4">
         <div className="flex items-center gap-2"><HelpCircle className="w-5 h-5 text-[#E67E22]" /><h2 className="text-base font-bold text-[#2D3E50]">Quick Knowledge Check</h2></div>
