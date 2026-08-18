@@ -6,6 +6,7 @@ import {
   Brain,
   CheckCircle2,
   Globe,
+  MessageCircle,
   ShieldCheck,
   WifiOff,
 } from 'lucide-react';
@@ -90,6 +91,27 @@ export function Home() {
           {completedDiscover.length > 0 ? 'Continue learning' : 'Start DISCOVER'}
           <ArrowRight className="w-4 h-4" />
         </button>
+      </section>
+
+      <section className="bg-white border-2 border-[#E2E8F0] rounded-2xl p-4 shadow-sm">
+        <div className="flex items-start gap-3">
+          <div className="w-11 h-11 rounded-xl bg-orange-50 text-[#E67E22] flex items-center justify-center shrink-0">
+            <MessageCircle className="w-6 h-6" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between gap-2">
+              <h2 className="text-base font-bold text-[#2D3E50]">Ask Mzansi Tutor</h2>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 bg-gray-100 rounded-lg px-2 py-1">Online help</span>
+            </div>
+            <p className="text-xs text-gray-600 leading-relaxed mt-1">
+              Get help with the lesson, ask what an AI term means, or ask for a South African everyday example. Your core course remains available without the tutor.
+            </p>
+            <div className="mt-3 flex items-center gap-2 text-xs font-bold text-[#2D3E50]">
+              <ShieldCheck className="w-4 h-4 text-[#E67E22]" />
+              Tutor access is being restored without breaking the working course.
+            </div>
+          </div>
+        </div>
       </section>
 
       <section>
