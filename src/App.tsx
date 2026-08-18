@@ -16,6 +16,9 @@ import { More } from './pages/More';
 import { Progress } from './pages/Progress';
 import { ModuleScreen } from './pages/ModuleScreen';
 import { LessonScreen } from './pages/LessonScreen';
+import { MadLibsSim } from './pages/labs/MadLibsSim';
+import { IntelligentPaper } from './pages/labs/IntelligentPaper';
+import { MonsterMapping } from './pages/labs/MonsterMapping';
 
 export default function App() {
   return (
@@ -23,8 +26,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LaunchScreen />} />
         <Route path="/onboarding" element={<Onboarding />} />
-        
-        {/* App Shell Routes */}
+
+        {/* Main application shell */}
         <Route element={<AppShell />}>
           <Route path="/home" element={<Home />} />
           <Route path="/learn" element={<Learn />} />
@@ -35,7 +38,16 @@ export default function App() {
           <Route path="/progress" element={<Progress />} />
         </Route>
 
-        {/* Learning Flow Routes */}
+        {/* Functional learning flow used by Home, Learn and ModuleScreen */}
+        <Route path="/learn/:moduleId" element={<ModuleScreen />} />
+        <Route path="/learn/:moduleId/lesson/:lessonId" element={<LessonScreen />} />
+
+        {/* Offline interactive labs */}
+        <Route path="/practice/madlibs-sim" element={<MadLibsSim />} />
+        <Route path="/practice/intelligent-paper" element={<IntelligentPaper />} />
+        <Route path="/practice/monster-mapping" element={<MonsterMapping />} />
+
+        {/* Backward-compatible learning routes */}
         <Route path="/module/:moduleId" element={<ModuleScreen />} />
         <Route path="/lesson/:lessonId" element={<LessonScreen />} />
 
