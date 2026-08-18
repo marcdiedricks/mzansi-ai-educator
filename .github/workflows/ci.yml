@@ -1,0 +1,31 @@
+name: Validate Mzansi AI Educator
+
+on:
+  pull_request:
+    branches: ['main']
+  push:
+    branches-ignore: ['main']
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Type check
+        run: bun run lint
+
+      - name: Build production bundle
+        run: bun run build
