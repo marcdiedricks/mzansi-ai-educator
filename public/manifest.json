@@ -2,7 +2,7 @@
   "name": "Mzansi AI Educator",
   "short_name": "Mzansi AI",
   "description": "Learn AI. Use it responsibly. Build for Africa.",
-  "start_url": "/",
+  "start_url": "/mzansi-ai-educator/",
   "display": "standalone",
   "background_color": "#F8FAFC",
   "theme_color": "#0F172A",
