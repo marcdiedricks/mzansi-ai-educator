@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mzansi AI Educator</title>
+  <script>
+    (function () {
+      var repo = '/mzansi-ai-educator';
+      var path = window.location.pathname;
+      var route = path.indexOf(repo) === 0 ? path.slice(repo.length) : path;
+      var query = window.location.search ? '&' + window.location.search.slice(1) : '';
+      var target = repo + '/?p=' + encodeURIComponent(route || '/') + query + window.location.hash;
+      window.location.replace(target);
+    })();
+  </script>
+</head>
+<body></body>
+</html>
