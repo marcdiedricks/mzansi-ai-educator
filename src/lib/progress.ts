@@ -9,23 +9,28 @@ export interface UserProgress {
 
 const PROGRESS_STORAGE_KEY = 'mzansi_ai_user_progress';
 
+const emptyProgress = (): UserProgress => ({
+  completedLessons: [],
+  quizScores: {},
+  completedLabs: [],
+});
+
 export function getUserProgress(): UserProgress {
   try {
     const raw = localStorage.getItem(PROGRESS_STORAGE_KEY);
-    if (!raw) {
-      return {
-        completedLessons: [],
-        quizScores: {},
-        completedLabs: [],
-      };
-    }
-    return JSON.parse(raw);
-  } catch (e) {
+    if (!raw) return emptyProgress();
+
+    const parsed = JSON.parse(raw) as Partial<UserProgress>;
     return {
-      completedLessons: [],
-      quizScores: {},
-      completedLabs: [],
+      completedLessons: Array.isArray(parsed.completedLessons) ? parsed.completedLessons : [],
+      quizScores: parsed.quizScores && typeof parsed.quizScores === 'object' ? parsed.quizScores : {},
+      completedLabs: Array.isArray(parsed.completedLabs) ? parsed.completedLabs : [],
+      lastVisitedLessonId: parsed.lastVisitedLessonId,
+      certificateClaimed: parsed.certificateClaimed,
+      certificateDate: parsed.certificateDate,
     };
+  } catch {
+    return emptyProgress();
   }
 }
 
@@ -44,7 +49,7 @@ export function toggleLessonCompletion(lessonId: string): boolean {
   const updatedLessons = isDone
     ? current.completedLessons.filter((id) => id !== lessonId)
     : [...current.completedLessons, lessonId];
-  
+
   saveUserProgress({
     ...current,
     completedLessons: updatedLessons,
@@ -55,21 +60,16 @@ export function toggleLessonCompletion(lessonId: string): boolean {
 }
 
 export function isLessonCompleted(lessonId: string): boolean {
-  const current = getUserProgress();
-  return current.completedLessons.includes(lessonId);
+  return getUserProgress().completedLessons.includes(lessonId);
 }
 
 export function recordQuizScore(lessonId: string, score: number) {
   const current = getUserProgress();
-  const updatedScores = { ...current.quizScores, [lessonId]: score };
-  const updatedLessons = current.completedLessons.includes(lessonId)
-    ? current.completedLessons
-    : [...current.completedLessons, lessonId];
+  const safeScore = Math.max(0, Math.min(100, Math.round(score)));
 
   saveUserProgress({
     ...current,
-    quizScores: updatedScores,
-    completedLessons: updatedLessons,
+    quizScores: { ...current.quizScores, [lessonId]: safeScore },
     lastVisitedLessonId: lessonId,
   });
 }
