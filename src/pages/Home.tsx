@@ -106,13 +106,10 @@ export function Home() {
             <p className="text-xs text-gray-600 leading-relaxed mt-1">
               Get help with the lesson, ask what an AI term means, or ask for a South African everyday example. Your core course remains available without the tutor.
             </p>
-            <button
-              onClick={() => navigate('/tutor')}
-              className="mt-3 inline-flex items-center justify-center gap-2 bg-[#2D3E50] hover:bg-slate-700 text-white text-sm font-bold py-2.5 px-4 rounded-xl transition-colors"
-            >
-              Ask Mzansi Tutor
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="mt-3 flex items-center gap-2 text-xs font-bold text-[#2D3E50]">
+              <ShieldCheck className="w-4 h-4 text-[#E67E22]" />
+              Tutor access is being restored without breaking the working course.
+            </div>
           </div>
         </div>
       </section>
