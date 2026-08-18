@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Sparkles, 
-  FileText, 
-  GitBranch, 
-  CheckCircle2, 
-  ArrowRight, 
-  Brain, 
-  WifiOff, 
+import {
+  Sparkles,
+  FileText,
+  GitBranch,
+  CheckCircle2,
+  ArrowRight,
+  Brain,
+  WifiOff,
   Target,
   Shield,
   Search,
-  HelpCircle
 } from 'lucide-react';
 import { getUserProgress } from '../lib/progress';
 
@@ -61,9 +60,14 @@ export function Practice() {
     },
   ];
 
+  const quickChallenges = [
+    { id: 'hallucination', title: 'Spot the AI Hallucination', icon: Search, tag: 'Module 1.5' },
+    { id: 'popia', title: 'POPIA Privacy Check Scenario', icon: Shield, tag: 'Module 1.3' },
+    { id: 'ubuntu', title: 'Ubuntu Algorithmic Fairness Case', icon: Target, tag: 'Module 1.4' },
+  ];
+
   return (
     <div className="flex flex-col gap-4 w-full p-4 sm:p-6 pb-24">
-      {/* Header */}
       <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 w-full">
         <div>
           <div className="flex items-center gap-2 text-[#E67E22] mb-1">
@@ -81,7 +85,6 @@ export function Practice() {
         </div>
       </header>
 
-      {/* Featured Unplugged Lab Engines */}
       <section className="flex flex-col gap-3 w-full">
         <h2 className="text-xs font-bold uppercase tracking-wider text-gray-400">
           Featured Interactive Lab Engines
@@ -101,21 +104,15 @@ export function Practice() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <h3 className="font-bold text-sm sm:text-base text-[#1A202C]">
-                        {lab.title}
-                      </h3>
+                      <h3 className="font-bold text-sm sm:text-base text-[#1A202C]">{lab.title}</h3>
                       {lab.completed && (
                         <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
                           <CheckCircle2 className="w-3 h-3" /> Completed
                         </span>
                       )}
                     </div>
-                    <span className="text-[10px] font-bold text-[#E67E22] uppercase tracking-wider block mb-1">
-                      {lab.subtitle}
-                    </span>
-                    <p className="text-xs text-gray-600 leading-relaxed">
-                      {lab.desc}
-                    </p>
+                    <span className="text-[10px] font-bold text-[#E67E22] uppercase tracking-wider block mb-1">{lab.subtitle}</span>
+                    <p className="text-xs text-gray-600 leading-relaxed">{lab.desc}</p>
                   </div>
                 </div>
 
@@ -134,23 +131,19 @@ export function Practice() {
         </div>
       </section>
 
-      {/* Quick Micro-Practice Scenarios */}
       <section className="flex flex-col gap-2.5 w-full mt-2">
         <h2 className="text-xs font-bold uppercase tracking-wider text-gray-400">
           Curriculum Quick Practice Challenges
         </h2>
+        <p className="text-[11px] text-gray-500">Short offline scenarios with immediate feedback.</p>
 
         <div className="flex flex-col gap-2 w-full">
-          {[
-            { title: 'Spot the AI Hallucination', icon: Search, tag: 'Module 1.5' },
-            { title: 'POPIA Privacy Check Scenario', icon: Shield, tag: 'Module 1.3' },
-            { title: 'Ubuntu Algorithmic Fairness Case', icon: Target, tag: 'Module 1.4' },
-          ].map((item, idx) => {
+          {quickChallenges.map((item) => {
             const Icon = item.icon;
             return (
               <button
-                key={idx}
-                onClick={() => navigate('/learn')}
+                key={item.id}
+                onClick={() => navigate(`/practice/challenge/${item.id}`)}
                 className="w-full flex items-center justify-between p-3.5 bg-white border-2 border-[#E2E8F0] hover:border-[#E67E22] rounded-xl text-left transition-all group"
               >
                 <div className="flex items-center gap-3">
