@@ -14,6 +14,7 @@ import { Glossary } from './pages/Glossary';
 import { Certificates } from './pages/Certificates';
 import { More } from './pages/More';
 import { Progress } from './pages/Progress';
+import { Tutor } from './pages/Tutor';
 import { ModuleScreen } from './pages/ModuleScreen';
 import { LessonScreen } from './pages/LessonScreen';
 import { MadLibsSim } from './pages/labs/MadLibsSim';
@@ -37,6 +38,9 @@ export default function App() {
           <Route path="/more" element={<More />} />
           <Route path="/progress" element={<Progress />} />
         </Route>
+
+        {/* Ask Mzansi Tutor local/offline learning support */}
+        <Route path="/tutor" element={<Tutor />} />
 
         {/* Functional learning flow used by Home, Learn and ModuleScreen */}
         <Route path="/learn/:moduleId" element={<ModuleScreen />} />

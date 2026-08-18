@@ -101,15 +101,18 @@ export function Home() {
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between gap-2">
               <h2 className="text-base font-bold text-[#2D3E50]">Ask Mzansi Tutor</h2>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 bg-gray-100 rounded-lg px-2 py-1">Online help</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-2 py-1">Local tutor</span>
             </div>
             <p className="text-xs text-gray-600 leading-relaxed mt-1">
-              Get help with the lesson, ask what an AI term means, or ask for a South African everyday example. Your core course remains available without the tutor.
+              Ask about AI terms, CREO prompting, bias, training data, generative AI, or request a South African everyday example. This restored tutor works from a built-in local knowledge layer.
             </p>
-            <div className="mt-3 flex items-center gap-2 text-xs font-bold text-[#2D3E50]">
-              <ShieldCheck className="w-4 h-4 text-[#E67E22]" />
-              Tutor access is being restored without breaking the working course.
-            </div>
+            <button
+              onClick={() => navigate('/tutor')}
+              className="mt-3 inline-flex items-center gap-2 bg-[#2D3E50] hover:bg-slate-700 text-white text-sm font-bold py-2.5 px-4 rounded-xl transition-colors"
+            >
+              Open Ask Mzansi Tutor
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
