@@ -85,26 +85,33 @@ export function Learn() {
             <div>
               <div className="text-[#E67E22] font-bold text-[10px] uppercase tracking-wider mb-1">Level 2 · Apply</div>
               <h2 className="text-xl font-bold text-[#1A202C]">Practical AI Skills</h2>
-              <p className="text-xs text-gray-600 mt-1">Eight practical modules are now mapped. Lesson content will be added one module at a time.</p>
+              <p className="text-xs text-gray-600 mt-1">Modules are being completed one at a time. Level 2 opens after Level 1 is completed.</p>
             </div>
             <Lock className="w-5 h-5 text-gray-400 shrink-0 mt-1" />
           </div>
         </div>
 
         <div className="divide-y-2 divide-[#E2E8F0]">
-          {LEVEL_TWO_MODULES.map((mod, index) => (
-            <div key={mod.id} className="flex items-start p-5 bg-white">
-              <div className="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold mr-4 shrink-0">
-                {index + 1}
+          {LEVEL_TWO_MODULES.map((mod, index) => {
+            const lessonReady = Boolean(mod.lessonId);
+            return (
+              <div key={mod.id} className="flex items-start p-5 bg-white">
+                <div className="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold mr-4 shrink-0">
+                  {index + 1}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#E67E22]">Module {mod.code}</p>
+                    {lessonReady && <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-md px-2 py-0.5">20 min lesson ready</span>}
+                  </div>
+                  <h3 className="font-bold text-[#1A202C] mt-0.5">{mod.title}</h3>
+                  <p className="text-xs text-gray-500 mt-1 leading-relaxed">{mod.description}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mt-2">{lessonReady ? 'Ready · opens after Level 1' : 'Content coming next'}</p>
+                </div>
+                <Lock className="w-4 h-4 text-gray-300 shrink-0 ml-3 mt-1" />
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-[#E67E22]">Module {mod.code}</p>
-                <h3 className="font-bold text-[#1A202C] mt-0.5">{mod.title}</h3>
-                <p className="text-xs text-gray-500 mt-1 leading-relaxed">{mod.description}</p>
-              </div>
-              <Lock className="w-4 h-4 text-gray-300 shrink-0 ml-3 mt-1" />
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
     </div>
