@@ -1,6 +1,6 @@
 import { BookOpen, CheckCircle2, Lock } from 'lucide-react';
 import { api } from '../lib/curriculum/api';
-import { PROGRAMME_LEVELS } from '../lib/programmeLevels';
+import { LEVEL_TWO_MODULES, PROGRAMME_LEVELS } from '../lib/programmeLevels';
 import { useNavigate } from 'react-router-dom';
 
 export function Learn() {
@@ -76,6 +76,35 @@ export function Learn() {
               </button>
             );
           })}
+        </div>
+      </section>
+
+      <section className="bg-white border-2 border-[#E2E8F0] rounded-2xl overflow-hidden">
+        <div className="bg-[#F8F9FA] p-5 border-b-2 border-[#E2E8F0]">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <div className="text-[#E67E22] font-bold text-[10px] uppercase tracking-wider mb-1">Level 2 · Apply</div>
+              <h2 className="text-xl font-bold text-[#1A202C]">Practical AI Skills</h2>
+              <p className="text-xs text-gray-600 mt-1">Eight practical modules are now mapped. Lesson content will be added one module at a time.</p>
+            </div>
+            <Lock className="w-5 h-5 text-gray-400 shrink-0 mt-1" />
+          </div>
+        </div>
+
+        <div className="divide-y-2 divide-[#E2E8F0]">
+          {LEVEL_TWO_MODULES.map((mod, index) => (
+            <div key={mod.id} className="flex items-start p-5 bg-white">
+              <div className="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold mr-4 shrink-0">
+                {index + 1}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[#E67E22]">Module {mod.code}</p>
+                <h3 className="font-bold text-[#1A202C] mt-0.5">{mod.title}</h3>
+                <p className="text-xs text-gray-500 mt-1 leading-relaxed">{mod.description}</p>
+              </div>
+              <Lock className="w-4 h-4 text-gray-300 shrink-0 ml-3 mt-1" />
+            </div>
+          ))}
         </div>
       </section>
     </div>
