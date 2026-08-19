@@ -37,7 +37,7 @@ export const LEVEL_TWO_MODULES: ProgrammeModuleShell[] = [
 ];
 
 export const LEVEL_THREE_MODULES: ProgrammeModuleShell[] = [
-  { id: 'MZAIE-P3-M01', code: '3.1', title: 'From Problem to AI Solution', description: 'Define a real problem, identify who it affects and decide whether AI is actually useful.' },
+  { id: 'MZAIE-P3-M01', code: '3.1', title: 'From Problem to AI Solution', description: 'Define a real problem, identify who it affects and decide whether AI is actually useful.', lessonId: 'MZAIE-P3-M01-L01' },
   { id: 'MZAIE-P3-M02', code: '3.2', title: 'Designing AI Assistants & Workflows', description: 'Map a useful assistant or workflow with clear inputs, steps, outputs and human checkpoints.' },
   { id: 'MZAIE-P3-M03', code: '3.3', title: 'Knowledge, Data & Source Design', description: 'Choose trustworthy knowledge and data, organise sources and set boundaries for what the solution may use.' },
   { id: 'MZAIE-P3-M04', code: '3.4', title: 'Building with No-Code & Low-Code AI', description: 'Turn a design into a simple working prototype using accessible tools and reusable building blocks.' },
