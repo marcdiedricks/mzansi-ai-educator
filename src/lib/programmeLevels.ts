@@ -33,5 +33,5 @@ export const LEVEL_TWO_MODULES: ProgrammeModuleShell[] = [
   { id: 'MZAIE-P2-M05', code: '2.5', title: 'AI for Mathematics, Data & Problem Solving', description: 'Use AI to support calculations, tables, data interpretation and structured problem-solving.', lessonId: 'MZAIE-P2-M05-L01' },
   { id: 'MZAIE-P2-M06', code: '2.6', title: 'AI for Work & Productivity', description: 'Apply AI to planning, administration, task breakdowns, workplace communication and practical workflows.', lessonId: 'MZAIE-P2-M06-L01' },
   { id: 'MZAIE-P2-M07', code: '2.7', title: 'AI for Creativity & Content', description: 'Use AI responsibly for ideas, stories, visual concepts, presentations and creative development.', lessonId: 'MZAIE-P2-M07-L01' },
-  { id: 'MZAIE-P2-M08', code: '2.8', title: 'AI in South African Communities', description: 'Apply AI thinking to real needs in schools, TVET colleges, NGOs, churches, small businesses and communities.' },
+  { id: 'MZAIE-P2-M08', code: '2.8', title: 'AI in South African Communities', description: 'Apply AI thinking to real needs in schools, TVET colleges, NGOs, churches, small businesses and communities.', lessonId: 'MZAIE-P2-M08-L01' },
 ];
