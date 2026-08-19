@@ -8,6 +8,7 @@ import { levelTwoWorkProductivityLesson } from './levelTwoWorkProductivityLesson
 import { levelTwoCreativityLesson } from './levelTwoCreativityLesson';
 import { levelTwoCommunitiesLesson } from './levelTwoCommunitiesLesson';
 import { levelThreeProblemSolutionLesson } from './levelThreeProblemSolutionLesson';
+import { levelThreeAssistantsWorkflowsLesson } from './levelThreeAssistantsWorkflowsLesson';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
@@ -33,6 +34,7 @@ const newLevelTwoLessons: Lesson[] = [
 
 const newLevelThreeLessons: Lesson[] = [
   levelThreeProblemSolutionLesson,
+  levelThreeAssistantsWorkflowsLesson,
 ];
 
 function enhance(lesson: Lesson) {
