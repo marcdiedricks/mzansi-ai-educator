@@ -1,6 +1,7 @@
 import { modules, lessons, level, programme } from './data';
 import { levelTwoLessons } from './levelTwoLessons';
 import { levelTwoWritingLesson } from './levelTwoWritingLesson';
+import { levelTwoAdvancedCreoLesson } from './levelTwoAdvancedCreoLesson';
 import { LEVEL_TWO_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
@@ -14,7 +15,11 @@ import { enhanceFactCheckingBiasLesson } from './factCheckingBiasEnhancement';
 // Run validation upon API initialization
 validateCurriculumData();
 
-const newLevelTwoLessons: Lesson[] = [...levelTwoLessons, levelTwoWritingLesson];
+const newLevelTwoLessons: Lesson[] = [
+  ...levelTwoLessons,
+  levelTwoWritingLesson,
+  levelTwoAdvancedCreoLesson,
+];
 
 function enhance(lesson: Lesson) {
   return enhanceFactCheckingBiasLesson(
