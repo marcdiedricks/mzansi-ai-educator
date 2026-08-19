@@ -33,6 +33,17 @@ const levelThreeResources = [
   ['3.8 Build a South African AI Prototype', 'AI Competency Framework for Students: responsible AI co-creation', 'UNESCO', 'https://www.unesco.org/en/articles/ai-competency-framework-students'],
 ];
 
+const levelFourResources = [
+  ['4.1 Solving Real Community Problems', 'Ethics of AI: practical cases and community impact', 'UNESCO', 'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics/cases'],
+  ['4.2 Human-Centred AI Design', 'AI Competency Framework for Students: human-centred AI creation', 'UNESCO', 'https://www.unesco.org/en/articles/ai-competency-framework-students'],
+  ['4.3 AI for Education, NGOs & Churches', 'Guidance for generative AI in education and research', 'UNESCO', 'https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research'],
+  ['4.4 Small Business & Entrepreneurship', 'Build Smarter Workflows with AI for Nonprofits', 'Google for Nonprofits', 'https://help.youtube.com/nonprofits/'],
+  ['4.5 Public Service & Civic Innovation', 'Recommendation on the Ethics of Artificial Intelligence: public-interest governance', 'UNESCO', 'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics'],
+  ['4.6 Measuring Impact & Evidence', 'AI Competency Framework for Students: evaluation and responsible use', 'UNESCO', 'https://www.unesco.org/en/articles/ai-competency-framework-students'],
+  ['4.7 Leadership, Ethics & Governance', 'Recommendation on the Ethics of Artificial Intelligence', 'UNESCO', 'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics'],
+  ['4.8 Capstone: Build & Present a South African AI Solution', 'AI Competency Framework for Students: responsible AI co-creation', 'UNESCO', 'https://www.unesco.org/en/articles/ai-competency-framework-students'],
+];
+
 function ResourceList({ resources, startIndex = 0 }: { resources: string[][]; startIndex?: number }) {
   return (
     <div className="space-y-3">
@@ -58,7 +69,7 @@ export function VideoResources() {
     <div className="p-6 pb-12">
       <header className="mb-5">
         <h1 className="text-2xl font-bold text-[#2D3E50] mb-1">Lesson Video Links</h1>
-        <p className="text-sm font-medium text-gray-500">Optional trusted video and multimedia support for Levels 1, 2 and 3.</p>
+        <p className="text-sm font-medium text-gray-500">Optional trusted video and multimedia support for Levels 1, 2, 3 and 4.</p>
       </header>
 
       <div className="mb-5 p-4 rounded-2xl bg-blue-50 border-2 border-blue-100 flex gap-3">
@@ -80,9 +91,14 @@ export function VideoResources() {
         <ResourceList resources={levelTwoResources} startIndex={8} />
       </section>
 
-      <section>
+      <section className="mb-8">
         <div className="mb-3"><p className="text-xs font-black tracking-wider text-blue-700">LEVEL 3 · CREATE</p><h2 className="text-lg font-bold text-[#2D3E50]">AI Creator & Builder</h2><p className="text-xs text-gray-500 mt-1">Resources support the build journey. They are optional and do not affect learner progression.</p></div>
         <ResourceList resources={levelThreeResources} startIndex={16} />
+      </section>
+
+      <section>
+        <div className="mb-3"><p className="text-xs font-black tracking-wider text-blue-700">LEVEL 4 · LEAD & SOLVE</p><h2 className="text-lg font-bold text-[#2D3E50]">AI Innovation & Problem-Solving</h2><p className="text-xs text-gray-500 mt-1">Leadership and capstone resources are optional enrichment and never affect offline completion.</p></div>
+        <ResourceList resources={levelFourResources} startIndex={24} />
       </section>
     </div>
   );
