@@ -2,6 +2,7 @@ import { modules, lessons, level, programme } from './data';
 import { levelTwoLessons } from './levelTwoLessons';
 import { levelTwoWritingLesson } from './levelTwoWritingLesson';
 import { levelTwoAdvancedCreoLesson } from './levelTwoAdvancedCreoLesson';
+import { levelTwoResearchLesson } from './levelTwoResearchLesson';
 import { LEVEL_TWO_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
@@ -12,13 +13,13 @@ import { enhancePromptingCreoLesson } from './promptingCreoEnhancement';
 import { enhanceProductivityLesson } from './productivityEnhancement';
 import { enhanceFactCheckingBiasLesson } from './factCheckingBiasEnhancement';
 
-// Run validation upon API initialization
 validateCurriculumData();
 
 const newLevelTwoLessons: Lesson[] = [
   ...levelTwoLessons,
   levelTwoWritingLesson,
   levelTwoAdvancedCreoLesson,
+  levelTwoResearchLesson,
 ];
 
 function enhance(lesson: Lesson) {
@@ -58,13 +59,11 @@ export const api = {
   getLesson: (lessonId: string) => {
     const existingLesson = lessons.find((l) => l.id === lessonId);
     if (existingLesson) return enhance(existingLesson);
-
     return newLevelTwoLessons.find((l) => l.id === lessonId);
   },
   getLessonsForModule: (moduleId: string) => {
     const existingLessons = lessons.filter((l) => l.moduleId === moduleId).map(enhance);
     if (existingLessons.length > 0) return existingLessons;
-
     return newLevelTwoLessons.filter((l) => l.moduleId === moduleId);
   },
 };
