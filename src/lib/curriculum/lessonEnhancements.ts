@@ -48,6 +48,31 @@ const everydayAiQuiz: NonNullable<Lesson['quiz']> = [
   { id:'q5', question:'Why should learners think critically about recommendation feeds?', options:['Because recommendations can repeatedly narrow what they see.','Because recommendation systems never use data.','Because all recommended content is false.','Because AI cannot work on phones.'], correctIndex:0, explanation:'Personalised feeds can reinforce existing interests and reduce exposure to different viewpoints, so learners should compare sources and explore beyond recommendations.' },
 ];
 
+const privacyBlocks: Lesson['blocks'] = [
+  { id:'m3_b1', type:'objective', variant:'standard', content:'Understand personal information, digital footprints, privacy and safe AI use in a South African context, including the role of POPIA.' },
+  { id:'m3_b2', type:'explanation', variant:'standard', content:'AI and digital services can work with many kinds of data. Personal information can include details that identify or relate to a person, such as a name, contact details, location, photographs, identifiers, online activity or other information connected to that person.' },
+  { id:'m3_b3', type:'explanation', variant:'plain', content:'In plain language: information about you has value. Before sharing it with an app, website or AI tool, ask what you are sharing, why the service needs it, who may receive it and what could happen if it is exposed.' },
+  { id:'m3_b4', type:'keyPoint', variant:'standard', content:'POPIA, the Protection of Personal Information Act, is South Africa’s central data-protection law. It establishes conditions for lawful processing of personal information. A beginner does not need to memorise the Act, but should understand that organisations have responsibilities when they collect, use, store or share personal information.' },
+  { id:'m3_b5', type:'example', variant:'SouthAfricanContext', content:'A school using an online AI service should think carefully before uploading learner names, photographs, assessment records or identifying information. The fact that a tool is useful does not remove privacy, security and safeguarding responsibilities.' },
+  { id:'m3_b6', type:'keyPoint', variant:'standard', content:'Do not paste passwords, PINs, banking credentials, identity numbers, private medical details or confidential information into a public AI service. Treat a prompt box as a place where information may leave your immediate control.' },
+  { id:'m3_b7', type:'explanation', variant:'standard', content:'Different services have different data practices. Some may store prompts, some may offer controls over history or model improvement, and policies can change. Do not assume every AI service stores or trains on data in exactly the same way. Check the service’s current privacy information when the detail matters.' },
+  { id:'m3_b8', type:'example', variant:'SouthAfricanContext', content:'Suppose you want AI help writing a letter about a family problem. You can often remove names, ID numbers, addresses and other identifying details and describe the situation more generally. This is an example of data minimisation: sharing only what is needed for the task.' },
+  { id:'m3_b9', type:'keyPoint', variant:'standard', content:'Permissions deserve attention too. If an app asks for access to your microphone, contacts, camera or precise location, ask whether that permission is necessary for the feature you want to use.' },
+  { id:'m3_b10', type:'reflection', variant:'standard', content:'Look at one app you use. Which permissions does it have? Which are essential to its purpose, and which would you question before granting?' },
+  { id:'m3_b11', type:'explanation', variant:'standard', content:'Privacy and security are related but different. Privacy concerns appropriate use of personal information. Security concerns protecting information and systems against loss, unauthorised access or misuse. Responsible AI use needs both.' },
+  { id:'m3_b12', type:'example', variant:'SouthAfricanContext', content:'A community organisation may want an AI tool to summarise beneficiary feedback. A safer approach is to remove names and unnecessary identifying details before using an external service, and to follow the organisation’s consent and data-handling rules.' },
+  { id:'m3_b13', type:'reflection', variant:'standard', content:'Before entering information into an AI tool, use four questions: Do I need to share this? Can I remove identifying details? Do I trust the service for this type of information? Would I be comfortable if this information were exposed?' },
+  { id:'m3_b14', type:'summary', variant:'standard', content:'Safe AI use starts with data awareness. Know what personal information is, share only what is necessary, protect sensitive details, question unnecessary permissions, understand that services have different data practices, and remember that South African organisations have responsibilities under POPIA.' },
+];
+
+const privacyQuiz: NonNullable<Lesson['quiz']> = [
+  { id:'q1', question:'What is POPIA?', options:['A South African law concerned with protection and lawful processing of personal information.','A type of artificial intelligence model.','A mobile network standard.','A password manager built into every phone.'], correctIndex:0, explanation:'POPIA is South Africa’s Protection of Personal Information Act. It sets conditions and responsibilities around processing personal information.' },
+  { id:'q2', question:'Which information should you avoid putting into a public AI prompt?', options:['A made-up example about a fictional shop.','A general question about mathematics.','Your banking PIN and identity number.','A request to explain the word algorithm.'], correctIndex:2, explanation:'Passwords, PINs, identity numbers and other highly sensitive information should not be entered into public AI tools.' },
+  { id:'q3', question:'What does data minimisation mean in everyday AI use?', options:['Share every detail so the AI has more information.','Share only the information needed for the task and remove unnecessary identifying details.','Delete every app from your phone.','Never use digital services.'], correctIndex:1, explanation:'Data minimisation means limiting information to what is necessary. Removing names, addresses and identifiers can reduce privacy risk when they are not needed.' },
+  { id:'q4', question:'Which statement about AI services and prompt data is safest?', options:['Every AI service handles prompt data in exactly the same way.','No AI service ever stores prompts.','Data practices differ between services and can change, so check current privacy information when it matters.','Anything typed into an AI tool automatically becomes public on the internet.'], correctIndex:2, explanation:'Services have different policies and settings. Avoid universal claims and check the current service information for sensitive or important use.' },
+  { id:'q5', question:'Why should you review an app’s permissions?', options:['To see whether requested access is necessary for what the app needs to do.','Because every permission request is automatically dangerous.','To make AI answers longer.','Because POPIA bans all phone permissions.'], correctIndex:0, explanation:'A sensible privacy habit is to question whether access to location, contacts, microphone, camera or other data is genuinely needed for the feature.' },
+];
+
 export function enhanceLesson(lesson: Lesson): Lesson {
   if (lesson.id === 'MZAIE-L1-M01-L01') {
     return {
@@ -78,6 +103,22 @@ export function enhanceLesson(lesson: Lesson): Lesson {
       ],
       blocks: everydayAiBlocks,
       quiz: everydayAiQuiz,
+    };
+  }
+
+  if (lesson.id === 'MZAIE-L1-M03-L01') {
+    return {
+      ...lesson,
+      version:'1.1',
+      estimatedMinutes:20,
+      objectives:[
+        'Identify common forms of personal information and sensitive information in digital life.',
+        'Explain, at beginner level, why POPIA matters when organisations process personal information.',
+        'Use data minimisation and permission-checking habits when working with AI tools.',
+        'Distinguish privacy from security and make safer choices before sharing information.',
+      ],
+      blocks: privacyBlocks,
+      quiz: privacyQuiz,
     };
   }
 
