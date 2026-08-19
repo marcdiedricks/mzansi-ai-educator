@@ -2,12 +2,13 @@ import { modules, lessons, level, programme } from './data';
 import { validateCurriculumData } from './validation';
 import { enhanceLesson } from './lessonEnhancements';
 import { enhanceUbuntuLesson } from './lessonEnhancementsUbuntu';
+import { enhanceGenerativeAiLesson } from './generativeAiEnhancement';
 
 // Run validation upon API initialization
 validateCurriculumData();
 
 function enhance(lesson: (typeof lessons)[number]) {
-  return enhanceUbuntuLesson(enhanceLesson(lesson));
+  return enhanceGenerativeAiLesson(enhanceUbuntuLesson(enhanceLesson(lesson)));
 }
 
 export const api = {
