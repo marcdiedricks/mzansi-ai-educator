@@ -70,6 +70,7 @@ export const LEVEL_TWO_MODULES: ProgrammeModuleShell[] = [
     code: '2.2',
     title: 'AI for Writing & Communication',
     description: 'Use AI to improve emails, reports, applications, presentations and everyday communication.',
+    lessonId: 'MZAIE-P2-M02-L01',
   },
   {
     id: 'MZAIE-P2-M03',
