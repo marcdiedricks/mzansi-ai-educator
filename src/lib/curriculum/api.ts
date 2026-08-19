@@ -15,7 +15,7 @@ import { levelThreeConversationUxLesson } from './levelThreeConversationUxLesson
 import { levelThreeTestingBiasLesson } from './levelThreeTestingBiasLesson';
 import { levelThreePrivacySafetyLesson } from './levelThreePrivacySafetyLesson';
 import { levelThreeSouthAfricanPrototypeLesson } from './levelThreeSouthAfricanPrototypeLesson';
-import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES } from '../programmeLevels';
+import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
 import { enhanceLesson } from './lessonEnhancements';
@@ -64,7 +64,7 @@ function enhance(lesson: Lesson) {
 }
 
 function getProgrammeModule(moduleId: string): Module | undefined {
-  const shell = [...LEVEL_TWO_MODULES, ...LEVEL_THREE_MODULES].find((module) => module.id === moduleId);
+  const shell = [...LEVEL_TWO_MODULES, ...LEVEL_THREE_MODULES, ...LEVEL_FOUR_MODULES].find((module) => module.id === moduleId);
   if (!shell) return undefined;
 
   return {

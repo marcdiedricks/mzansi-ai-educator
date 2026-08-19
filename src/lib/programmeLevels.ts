@@ -46,3 +46,14 @@ export const LEVEL_THREE_MODULES: ProgrammeModuleShell[] = [
   { id: 'MZAIE-P3-M07', code: '3.7', title: 'Privacy, Safety & Responsible Deployment', description: 'Protect personal information, reduce risk and define human oversight before real-world use.', lessonId: 'MZAIE-P3-M07-L01' },
   { id: 'MZAIE-P3-M08', code: '3.8', title: 'Build a South African AI Prototype', description: 'Combine the Level 3 skills into a small responsible prototype for a genuine South African need.', lessonId: 'MZAIE-P3-M08-L01' },
 ];
+
+export const LEVEL_FOUR_MODULES: ProgrammeModuleShell[] = [
+  { id: 'MZAIE-P4-M01', code: '4.1', title: 'Solving Real Community Problems', description: 'Frame a meaningful local challenge, identify who is affected and define what useful improvement would look like.' },
+  { id: 'MZAIE-P4-M02', code: '4.2', title: 'Human-Centred AI Design', description: 'Lead solution design around people, context, accessibility, dignity and real-world constraints before choosing technology.' },
+  { id: 'MZAIE-P4-M03', code: '4.3', title: 'AI for Education, NGOs & Churches', description: 'Design responsible AI-supported services for learning, community organisations, faith communities and social support settings.' },
+  { id: 'MZAIE-P4-M04', code: '4.4', title: 'Small Business & Entrepreneurship', description: 'Use AI to improve practical small-business workflows, customer service, planning and opportunity discovery without removing human accountability.' },
+  { id: 'MZAIE-P4-M05', code: '4.5', title: 'Public Service & Civic Innovation', description: 'Explore responsible AI approaches to public information, civic access and community-facing services while protecting rights and fairness.' },
+  { id: 'MZAIE-P4-M06', code: '4.6', title: 'Measuring Impact & Evidence', description: 'Define useful outcomes, collect appropriate evidence and judge whether an AI-supported solution is actually helping people.' },
+  { id: 'MZAIE-P4-M07', code: '4.7', title: 'Leadership, Ethics & Governance', description: 'Set accountability, oversight, escalation and governance rules for responsible AI use in real organisations and communities.' },
+  { id: 'MZAIE-P4-M08', code: '4.8', title: 'Capstone: Build & Present a South African AI Solution', description: 'Combine the programme into a tested, evidence-backed solution proposal for a genuine South African need and present it responsibly.' },
+];
