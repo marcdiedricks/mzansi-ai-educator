@@ -32,7 +32,12 @@ jobs:
       - name: Install Dependencies
         run: bun install
 
+      - name: Write Build Version
+        run: printf '{"sha":"%s"}' "$GITHUB_SHA" > public/version.json
+
       - name: Build Static PWA
+        env:
+          VITE_BUILD_SHA: ${{ github.sha }}
         run: bun run build
 
       - name: Setup GitHub Pages
