@@ -1,4 +1,5 @@
 import { TERMINOLOGY_DATA } from './terminology';
+import { SOURCE_BACKED_TERMS } from './terminologyExpansion';
 import { lessons, modules } from './curriculum/data';
 
 export type TutorMode = 'connected' | 'local';
@@ -35,9 +36,9 @@ const LOCAL_RESPONSES = [
       'Prediction in AI means estimating what is likely to happen or what is likely to come next, based on patterns in data. Predictive text on a phone is a simple example. It does not know the future. It estimates a likely next word.',
   },
   {
-    keywords: ['generative ai', 'llm', 'large language model', 'token'],
+    keywords: ['generative ai', 'token'],
     answer:
-      'Generative AI creates new outputs such as text or images from patterns learned during training. A large language model works with pieces of language called tokens and predicts likely continuations. It can still make mistakes, so important claims must be checked.',
+      'Generative AI creates new outputs such as text or images from patterns learned during training. It can still make mistakes, so important claims must be checked.',
   },
 ];
 
@@ -47,14 +48,26 @@ function normalize(value: string) {
 
 function glossaryAnswer(question: string): string | undefined {
   const q = normalize(question);
-  const item = TERMINOLOGY_DATA.find((term) => {
-    const candidates = [term.term, term.afrikaans.term, term.isizulu.term, term.sesotho.term];
+
+  const baseItem = TERMINOLOGY_DATA.find((term) => {
+    const candidates = [term.term, term.afrikaans.term, term.isizulu.term, term.sesotho.term, term.isixhosa?.term].filter(Boolean) as string[];
     return candidates.some((candidate) => q.includes(normalize(candidate))) || q.includes(normalize(term.id.replace(/-/g, ' ')));
   });
 
-  if (!item) return undefined;
+  if (baseItem) {
+    return `${baseItem.term}: ${baseItem.english.definition}\n\nEveryday example: ${baseItem.english.example}`;
+  }
 
-  return `${item.term}: ${item.english.definition}\n\nEveryday example: ${item.english.example}`;
+  const expandedItem = SOURCE_BACKED_TERMS.find((term) => {
+    const candidates = [term.term, term.afrikaans.term, term.isixhosa.term, term.isizulu.term];
+    return candidates.some((candidate) => q.includes(normalize(candidate))) || q.includes(normalize(term.id.replace(/-/g, ' ')));
+  });
+
+  if (expandedItem) {
+    return `${expandedItem.term}: ${expandedItem.english.definition}\n\nEveryday example: ${expandedItem.english.example}\n\nThis term is included in the source-backed Mzansi AI glossary.`;
+  }
+
+  return undefined;
 }
 
 function curriculumAnswer(question: string): string | undefined {
@@ -114,7 +127,7 @@ export function answerLocally(question: string): TutorAnswer {
     mode: 'local',
     text:
       answer ||
-      'I can help with AI concepts, glossary terms, lesson explanations, comparisons, practice questions, CREO prompt improvement, study guidance and fact-checking habits. If the connected tutor is available, I can also answer broader questions beyond the local course knowledge. Try asking “Explain machine learning simply”, “Compare AI and automation”, or “Improve my prompt”.',
+      'I can help with AI concepts, glossary terms, lesson explanations, comparisons, practice questions, CREO prompt improvement, study guidance and fact-checking habits. My local glossary now also covers terms such as hallucination, LLM, computer vision, NLP, explainable AI, fairness and human-in-the-loop. If the connected tutor is available, I can also answer broader questions beyond the local course knowledge.',
   };
 }
 
