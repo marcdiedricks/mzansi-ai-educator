@@ -77,6 +77,7 @@ export const LEVEL_TWO_MODULES: ProgrammeModuleShell[] = [
     code: '2.3',
     title: 'Advanced Prompting with CREO',
     description: 'Build stronger multi-step prompts using Context, Request, Examples and Output.',
+    lessonId: 'MZAIE-P2-M03-L01',
   },
   {
     id: 'MZAIE-P2-M04',
