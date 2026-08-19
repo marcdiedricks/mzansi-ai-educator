@@ -1,22 +1,53 @@
 import { Download, ExternalLink, Wifi } from 'lucide-react';
 
-const resources = [
-  ['What is AI?', 'AI: What is Machine Learning?', 'Code.org', 'https://www.youtube.com/watch?v=OeU5m6vRyCk'],
-  ['AI Around You', 'What is Machine Learning?', 'Code.org', 'https://www.youtube.com/watch?v=KHbwOetbmbs'],
-  ['Data, Privacy & Safety', 'Ethics & AI: Privacy & the Future of Work', 'Code.org', 'https://code.org/en-US/resources/videos'],
-  ['Ubuntu and Technology', 'Why is ethics crucial in the development of AI?', 'UNESCO', 'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics/cases'],
-  ['How Generative AI Works', 'Exploring Generative AI', 'Code.org', 'https://code.org/en-US/resources/videos'],
-  ['Effective Prompting (CREO)', 'Exploring Generative AI', 'Code.org', 'https://code.org/en-US/resources/videos'],
-  ['AI for Productivity', 'Artificial intelligence and the Futures of Learning', 'UNESCO', 'https://www.unesco.org/en/digital-education/ai-future-learning'],
-  ['Critical Fact-Checking & Bias', 'Ethics & AI: Equal Access and Algorithmic Bias', 'Code.org', 'https://www.youtube.com/watch?v=tJQSyzBUAew'],
+const levelOneResources = [
+  ['1.1 What is AI?', 'AI: What is Machine Learning?', 'Code.org', 'https://www.youtube.com/watch?v=OeU5m6vRyCk'],
+  ['1.2 AI Around You', 'What is Machine Learning?', 'Code.org', 'https://www.youtube.com/watch?v=KHbwOetbmbs'],
+  ['1.3 Data, Privacy & Safety', 'Ethics & AI: Privacy & the Future of Work', 'Code.org', 'https://code.org/en-US/resources/videos'],
+  ['1.4 Ubuntu and Technology', 'Why is ethics crucial in the development of AI?', 'UNESCO', 'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics/cases'],
+  ['1.5 How Generative AI Works', 'Exploring Generative AI', 'Code.org', 'https://code.org/en-US/resources/videos'],
+  ['1.6 Effective Prompting (CREO)', 'Exploring Generative AI', 'Code.org', 'https://code.org/en-US/resources/videos'],
+  ['1.7 AI for Productivity', 'Artificial intelligence and the Futures of Learning', 'UNESCO', 'https://www.unesco.org/en/digital-education/ai-future-learning'],
+  ['1.8 Critical Fact-Checking & Bias', 'Ethics & AI: Equal Access and Algorithmic Bias', 'Code.org', 'https://www.youtube.com/watch?v=tJQSyzBUAew'],
 ];
+
+const levelTwoResources = [
+  ['2.1 AI for Learning & Study', 'Artificial intelligence and the Futures of Learning', 'UNESCO', 'https://www.unesco.org/en/digital-education/ai-future-learning'],
+  ['2.2 AI for Writing & Communication', 'Exploring Generative AI: inputs, outputs and responsible creation', 'Code.org', 'https://code.org/en-US/resources/videos'],
+  ['2.3 Advanced Prompting with CREO', 'Exploring Generative AI: how prompts shape outputs', 'Code.org', 'https://code.org/en-US/resources/videos'],
+  ['2.4 AI Research & Source Verification', 'Ethics & AI: Equal Access and Algorithmic Bias', 'Code.org', 'https://www.youtube.com/watch?v=tJQSyzBUAew'],
+  ['2.5 AI for Mathematics, Data & Problem Solving', 'What is Machine Learning? Data, patterns and prediction', 'Code.org', 'https://www.youtube.com/watch?v=KHbwOetbmbs'],
+  ['2.6 AI for Work & Productivity', 'Build Smarter Workflows with AI for Nonprofits', 'Google for Nonprofits', 'https://help.youtube.com/nonprofits/'],
+  ['2.7 AI for Creativity & Content', 'Exploring Generative AI: creativity and content', 'Code.org', 'https://code.org/en-US/resources/videos'],
+  ['2.8 AI in South African Communities', 'Why is ethics crucial in the development of AI?', 'UNESCO', 'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics/cases'],
+];
+
+function ResourceList({ resources, startIndex = 0 }: { resources: string[][]; startIndex?: number }) {
+  return (
+    <div className="space-y-3">
+      {resources.map(([lesson, title, provider, url], index) => (
+        <a key={lesson} href={url} target="_blank" rel="noopener noreferrer" className="block bg-white border-2 border-[#E2E8F0] rounded-2xl p-4 hover:bg-[#F8F9FA]">
+          <div className="flex gap-3">
+            <div className="w-8 h-8 rounded-full bg-[#EDF2F7] flex items-center justify-center font-bold text-[#2D3E50] shrink-0">{startIndex + index + 1}</div>
+            <div className="min-w-0 flex-1">
+              <p className="font-bold text-[#1A202C]">{lesson}</p>
+              <p className="text-sm text-gray-600 mt-1">{title}</p>
+              <p className="text-xs font-bold text-gray-400 mt-2">{provider} · English</p>
+            </div>
+            <ExternalLink className="w-5 h-5 text-gray-400 shrink-0" />
+          </div>
+        </a>
+      ))}
+    </div>
+  );
+}
 
 export function VideoResources() {
   return (
     <div className="p-6 pb-12">
       <header className="mb-5">
         <h1 className="text-2xl font-bold text-[#2D3E50] mb-1">Lesson Video Links</h1>
-        <p className="text-sm font-medium text-gray-500">Optional trusted videos for each lesson.</p>
+        <p className="text-sm font-medium text-gray-500">Optional trusted videos for Levels 1 and 2.</p>
       </header>
 
       <div className="mb-5 p-4 rounded-2xl bg-blue-50 border-2 border-blue-100 flex gap-3">
@@ -24,29 +55,25 @@ export function VideoResources() {
         <p className="text-sm text-blue-900">Videos open externally and need internet/data. Your built-in lessons still work offline.</p>
       </div>
 
-      <a
-        href="/mzansi-ai-educator/VIDEO_LINK_REPOSITORY.md"
-        download
-        className="mb-6 w-full flex items-center justify-center gap-2 rounded-xl bg-[#2D3E50] text-white font-bold px-4 py-3"
-      >
+      <a href="/mzansi-ai-educator/VIDEO_LINK_REPOSITORY.md" download className="mb-7 w-full flex items-center justify-center gap-2 rounded-xl bg-[#2D3E50] text-white font-bold px-4 py-3">
         <Download className="w-5 h-5" /> Download Video Link List
       </a>
 
-      <div className="space-y-3">
-        {resources.map(([lesson, title, provider, url], index) => (
-          <a key={lesson} href={url} target="_blank" rel="noopener noreferrer" className="block bg-white border-2 border-[#E2E8F0] rounded-2xl p-4 hover:bg-[#F8F9FA]">
-            <div className="flex gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#EDF2F7] flex items-center justify-center font-bold text-[#2D3E50] shrink-0">{index + 1}</div>
-              <div className="min-w-0 flex-1">
-                <p className="font-bold text-[#1A202C]">{lesson}</p>
-                <p className="text-sm text-gray-600 mt-1">{title}</p>
-                <p className="text-xs font-bold text-gray-400 mt-2">{provider} · English</p>
-              </div>
-              <ExternalLink className="w-5 h-5 text-gray-400 shrink-0" />
-            </div>
-          </a>
-        ))}
-      </div>
+      <section className="mb-8">
+        <div className="mb-3">
+          <p className="text-xs font-black tracking-wider text-blue-700">LEVEL 1 · UNDERSTAND</p>
+          <h2 className="text-lg font-bold text-[#2D3E50]">AI Foundations & Responsible Use</h2>
+        </div>
+        <ResourceList resources={levelOneResources} />
+      </section>
+
+      <section>
+        <div className="mb-3">
+          <p className="text-xs font-black tracking-wider text-blue-700">LEVEL 2 · APPLY</p>
+          <h2 className="text-lg font-bold text-[#2D3E50]">Practical AI Skills</h2>
+        </div>
+        <ResourceList resources={levelTwoResources} startIndex={8} />
+      </section>
     </div>
   );
 }
