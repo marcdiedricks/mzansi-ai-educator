@@ -14,6 +14,7 @@ import { PracticeChallenge } from './pages/PracticeChallenge';
 import { Glossary } from './pages/Glossary';
 import { Certificates } from './pages/Certificates';
 import { More } from './pages/More';
+import { VideoResources } from './pages/VideoResources';
 import { Progress } from './pages/Progress';
 import { Tutor } from './pages/Tutor';
 import { ModuleScreen } from './pages/ModuleScreen';
@@ -36,22 +37,19 @@ export default function App() {
           <Route path="/glossary" element={<Glossary />} />
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/more" element={<More />} />
+          <Route path="/video-resources" element={<VideoResources />} />
           <Route path="/progress" element={<Progress />} />
         </Route>
 
         <Route path="/tutor" element={<Tutor />} />
-
         <Route path="/learn/:moduleId" element={<ModuleScreen />} />
         <Route path="/learn/:moduleId/lesson/:lessonId" element={<LessonScreen />} />
-
         <Route path="/practice/madlibs-sim" element={<MadLibsSim />} />
         <Route path="/practice/intelligent-paper" element={<IntelligentPaper />} />
         <Route path="/practice/monster-mapping" element={<MonsterMapping />} />
         <Route path="/practice/challenge/:challengeId" element={<PracticeChallenge />} />
-
         <Route path="/module/:moduleId" element={<ModuleScreen />} />
         <Route path="/lesson/:lessonId" element={<LessonScreen />} />
-
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
