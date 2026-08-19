@@ -5,16 +5,19 @@ import { enhanceUbuntuLesson } from './lessonEnhancementsUbuntu';
 import { enhanceGenerativeAiLesson } from './generativeAiEnhancement';
 import { enhancePromptingCreoLesson } from './promptingCreoEnhancement';
 import { enhanceProductivityLesson } from './productivityEnhancement';
+import { enhanceFactCheckingBiasLesson } from './factCheckingBiasEnhancement';
 
 // Run validation upon API initialization
 validateCurriculumData();
 
 function enhance(lesson: (typeof lessons)[number]) {
-  return enhanceProductivityLesson(
-    enhancePromptingCreoLesson(
-      enhanceGenerativeAiLesson(
-        enhanceUbuntuLesson(
-          enhanceLesson(lesson)
+  return enhanceFactCheckingBiasLesson(
+    enhanceProductivityLesson(
+      enhancePromptingCreoLesson(
+        enhanceGenerativeAiLesson(
+          enhanceUbuntuLesson(
+            enhanceLesson(lesson)
+          )
         )
       )
     )
