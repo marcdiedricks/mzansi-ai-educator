@@ -15,6 +15,7 @@ export interface ProgrammeModuleShell {
   code: string;
   title: string;
   description: string;
+  lessonId?: string;
 }
 
 export const PROGRAMME_LEVELS: ProgrammeLevelSummary[] = [
@@ -62,6 +63,7 @@ export const LEVEL_TWO_MODULES: ProgrammeModuleShell[] = [
     code: '2.1',
     title: 'AI for Learning & Study',
     description: 'Use AI to explain, revise, plan and practise while keeping your own thinking active.',
+    lessonId: 'MZAIE-P2-M01-L01',
   },
   {
     id: 'MZAIE-P2-M02',
