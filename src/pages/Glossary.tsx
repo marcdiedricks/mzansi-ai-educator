@@ -24,11 +24,14 @@ export function Glossary() {
       item.english.definition.toLowerCase().includes(query) ||
       item.afrikaans.term.toLowerCase().includes(query) ||
       item.isizulu.term.toLowerCase().includes(query) ||
-      item.sesotho.term.toLowerCase().includes(query)
+      item.sesotho.term.toLowerCase().includes(query) ||
+      item.isixhosa?.term.toLowerCase().includes(query) ||
+      item.isixhosa?.definition.toLowerCase().includes(query)
     );
   });
 
   const selectedLabel = languageLabels.find((item) => item.key === selectedLanguage)?.label || 'English';
+  const verifiedIsiXhosaCount = TERMINOLOGY_DATA.filter((item) => item.isixhosa).length;
 
   return (
     <div className="p-4 sm:p-6 space-y-4 pb-24">
@@ -81,12 +84,12 @@ export function Glossary() {
       </div>
 
       {selectedLanguage === 'isixhosa' && (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 flex gap-2.5">
-          <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+        <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex gap-2.5">
+          <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
           <div>
-            <p className="text-xs font-bold text-amber-900">isiXhosa terminology review in progress</p>
-            <p className="text-[11px] text-amber-800 mt-0.5 leading-relaxed">
-              We will keep the official AI term visible and will only publish isiXhosa explanations after language review. No invented translations are shown.
+            <p className="text-xs font-bold text-emerald-900">Source-backed isiXhosa terminology</p>
+            <p className="text-[11px] text-emerald-800 mt-0.5 leading-relaxed">
+              {verifiedIsiXhosaCount} of {TERMINOLOGY_DATA.length} current entries now use terminology from the Google + PanSALB AI Terminologies dataset. Remaining terms stay under review rather than being guessed.
             </p>
           </div>
         </div>
@@ -95,7 +98,8 @@ export function Glossary() {
       <div className="flex flex-col gap-3 w-full">
         {filteredTerms.map((termItem) => {
           const isExpanded = expandedTermId === termItem.id;
-          const currentLangData = selectedLanguage === 'isixhosa' ? null : termItem[selectedLanguage];
+          const currentLangData = selectedLanguage === 'isixhosa' ? termItem.isixhosa : termItem[selectedLanguage];
+          const isVerifiedIsiXhosa = selectedLanguage === 'isixhosa' && Boolean(termItem.isixhosa);
 
           return (
             <div key={termItem.id} className="bg-white border-2 border-[#E2E8F0] rounded-2xl overflow-hidden transition-all">
@@ -108,12 +112,17 @@ export function Glossary() {
                     <span className="text-[9px] font-bold uppercase tracking-wider bg-orange-50 text-[#E67E22] px-2 py-0.5 rounded border border-orange-200">
                       {termItem.category}
                     </span>
+                    {isVerifiedIsiXhosa && (
+                      <span className="text-[9px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">
+                        Verified source
+                      </span>
+                    )}
                   </div>
                   <h3 className="font-bold text-[#1A202C] text-sm sm:text-base">{termItem.term}</h3>
                   {selectedLanguage !== 'english' && currentLangData && (
                     <p className="text-xs font-bold text-[#2D3E50] mt-0.5">{currentLangData.term}</p>
                   )}
-                  {selectedLanguage === 'isixhosa' && (
+                  {selectedLanguage === 'isixhosa' && !currentLangData && (
                     <p className="text-[11px] font-medium text-amber-700 mt-0.5">isiXhosa explanation under review</p>
                   )}
                 </div>
@@ -130,17 +139,26 @@ export function Glossary() {
                         <h4 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Definition ({selectedLabel})</h4>
                         <p className="text-xs font-medium text-[#1A202C] leading-relaxed">{currentLangData.definition}</p>
                       </div>
-                      <div className="bg-white p-3 rounded-xl border border-[#E2E8F0]">
-                        <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#E67E22] mb-1">
-                          <Sparkles className="w-3.5 h-3.5" /> Everyday Context
+                      {'example' in currentLangData && currentLangData.example ? (
+                        <div className="bg-white p-3 rounded-xl border border-[#E2E8F0]">
+                          <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#E67E22] mb-1">
+                            <Sparkles className="w-3.5 h-3.5" /> Everyday Context
+                          </div>
+                          <p className="text-xs text-gray-600 italic">“{currentLangData.example}”</p>
                         </div>
-                        <p className="text-xs text-gray-600 italic">“{currentLangData.example}”</p>
-                      </div>
+                      ) : selectedLanguage === 'isixhosa' ? (
+                        <div className="bg-white p-3 rounded-xl border border-amber-200">
+                          <p className="text-[11px] text-amber-800">Local isiXhosa everyday example is still under review. The verified terminology and definition are already available.</p>
+                        </div>
+                      ) : null}
+                      {selectedLanguage === 'isixhosa' && termItem.isixhosa && (
+                        <p className="text-[10px] text-gray-500">Source: {termItem.isixhosa.source} · {termItem.isixhosa.sourceLicense}</p>
+                      )}
                     </>
                   ) : (
                     <div className="bg-white p-3 rounded-xl border border-amber-200">
                       <p className="text-xs font-bold text-[#2D3E50]">{termItem.term}</p>
-                      <p className="text-xs text-gray-600 mt-1">The isiXhosa definition and local example are awaiting human language review before publication.</p>
+                      <p className="text-xs text-gray-600 mt-1">The isiXhosa definition and local example are awaiting a verified terminology source or human language review before publication.</p>
                     </div>
                   )}
 
@@ -152,6 +170,9 @@ export function Glossary() {
                       )}
                       {selectedLanguage !== 'afrikaans' && (
                         <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">Afrikaans</span><span className="font-bold text-gray-800">{termItem.afrikaans.term}</span></div>
+                      )}
+                      {selectedLanguage !== 'isixhosa' && termItem.isixhosa && (
+                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">isiXhosa</span><span className="font-bold text-gray-800">{termItem.isixhosa.term}</span></div>
                       )}
                       {selectedLanguage !== 'isizulu' && (
                         <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">isiZulu</span><span className="font-bold text-gray-800">{termItem.isizulu.term}</span></div>
