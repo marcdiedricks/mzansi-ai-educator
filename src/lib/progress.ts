@@ -8,6 +8,7 @@ export interface UserProgress {
 }
 
 const PROGRESS_STORAGE_KEY = 'mzansi_ai_user_progress';
+const LEVEL2_TEST_PREVIEW_KEY = 'mzansi_ai_level2_test_preview';
 
 const emptyProgress = (): UserProgress => ({
   completedLessons: [],
@@ -40,6 +41,24 @@ export function saveUserProgress(progress: UserProgress) {
     window.dispatchEvent(new Event('mzansi_progress_updated'));
   } catch (e) {
     console.error('Failed to save progress', e);
+  }
+}
+
+export function isLevel2TestPreviewEnabled(): boolean {
+  try {
+    return localStorage.getItem(LEVEL2_TEST_PREVIEW_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+export function setLevel2TestPreview(enabled: boolean) {
+  try {
+    if (enabled) localStorage.setItem(LEVEL2_TEST_PREVIEW_KEY, 'true');
+    else localStorage.removeItem(LEVEL2_TEST_PREVIEW_KEY);
+    window.dispatchEvent(new Event('mzansi_progress_updated'));
+  } catch (e) {
+    console.error('Failed to update Level 2 test preview', e);
   }
 }
 
