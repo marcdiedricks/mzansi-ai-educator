@@ -30,7 +30,7 @@ export const LEVEL_TWO_MODULES: ProgrammeModuleShell[] = [
   { id: 'MZAIE-P2-M02', code: '2.2', title: 'AI for Writing & Communication', description: 'Use AI to improve emails, reports, applications, presentations and everyday communication.', lessonId: 'MZAIE-P2-M02-L01' },
   { id: 'MZAIE-P2-M03', code: '2.3', title: 'Advanced Prompting with CREO', description: 'Build stronger multi-step prompts using Context, Request, Examples and Output.', lessonId: 'MZAIE-P2-M03-L01' },
   { id: 'MZAIE-P2-M04', code: '2.4', title: 'AI Research & Source Verification', description: 'Research with AI, compare sources, check evidence and verify important claims before using them.', lessonId: 'MZAIE-P2-M04-L01' },
-  { id: 'MZAIE-P2-M05', code: '2.5', title: 'AI for Mathematics, Data & Problem Solving', description: 'Use AI to support calculations, tables, data interpretation and structured problem-solving.' },
+  { id: 'MZAIE-P2-M05', code: '2.5', title: 'AI for Mathematics, Data & Problem Solving', description: 'Use AI to support calculations, tables, data interpretation and structured problem-solving.', lessonId: 'MZAIE-P2-M05-L01' },
   { id: 'MZAIE-P2-M06', code: '2.6', title: 'AI for Work & Productivity', description: 'Apply AI to planning, administration, task breakdowns, workplace communication and practical workflows.' },
   { id: 'MZAIE-P2-M07', code: '2.7', title: 'AI for Creativity & Content', description: 'Use AI responsibly for ideas, stories, visual concepts, presentations and creative development.' },
   { id: 'MZAIE-P2-M08', code: '2.8', title: 'AI in South African Communities', description: 'Apply AI thinking to real needs in schools, TVET colleges, NGOs, churches, small businesses and communities.' },
