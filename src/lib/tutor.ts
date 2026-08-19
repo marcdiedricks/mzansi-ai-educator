@@ -48,19 +48,13 @@ function normalize(value: string) {
 function glossaryAnswer(question: string): string | undefined {
   const q = normalize(question);
   const item = TERMINOLOGY_DATA.find((term) => {
-    const candidates = [term.term, term.afrikaans.term, term.isizulu.term, term.sesotho.term, term.isixhosa?.term].filter(Boolean) as string[];
+    const candidates = [term.term, term.afrikaans.term, term.isizulu.term, term.sesotho.term];
     return candidates.some((candidate) => q.includes(normalize(candidate))) || q.includes(normalize(term.id.replace(/-/g, ' ')));
   });
 
   if (!item) return undefined;
 
-  const parts = [
-    `${item.term}: ${item.english.definition}`,
-    `Everyday example: ${item.english.example}`,
-  ];
-
-  if (item.isixhosa) parts.push(`Verified isiXhosa term: ${item.isixhosa.term}.`);
-  return parts.join('\n\n');
+  return `${item.term}: ${item.english.definition}\n\nEveryday example: ${item.english.example}`;
 }
 
 function curriculumAnswer(question: string): string | undefined {
@@ -113,7 +107,6 @@ function studySupport(question: string): string | undefined {
 
 export function answerLocally(question: string): TutorAnswer {
   const normalized = normalize(question);
-
   const direct = LOCAL_RESPONSES.find((item) => item.keywords.some((keyword) => normalized.includes(keyword)));
   const answer = direct?.answer || glossaryAnswer(question) || curriculumAnswer(question) || studySupport(question);
 
