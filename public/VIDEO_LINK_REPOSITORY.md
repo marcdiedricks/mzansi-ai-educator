@@ -82,5 +82,31 @@ https://www.unesco.org/en/artificial-intelligence/recommendation-ethics
 24. 3.8 Build a South African AI Prototype — UNESCO, AI Competency Framework for Students: responsible AI co-creation
 https://www.unesco.org/en/articles/ai-competency-framework-students
 
+## Level 4 · Lead & Solve
+
+25. 4.1 Solving Real Community Problems — UNESCO, Ethics of AI: practical cases and community impact
+https://www.unesco.org/en/artificial-intelligence/recommendation-ethics/cases
+
+26. 4.2 Human-Centred AI Design — UNESCO, AI Competency Framework for Students: human-centred AI creation
+https://www.unesco.org/en/articles/ai-competency-framework-students
+
+27. 4.3 AI for Education, NGOs & Churches — UNESCO, Guidance for generative AI in education and research
+https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research
+
+28. 4.4 Small Business & Entrepreneurship — Google for Nonprofits, Build Smarter Workflows with AI for Nonprofits
+https://help.youtube.com/nonprofits/
+
+29. 4.5 Public Service & Civic Innovation — UNESCO, Recommendation on the Ethics of Artificial Intelligence: public-interest governance
+https://www.unesco.org/en/artificial-intelligence/recommendation-ethics
+
+30. 4.6 Measuring Impact & Evidence — UNESCO, AI Competency Framework for Students: evaluation and responsible use
+https://www.unesco.org/en/articles/ai-competency-framework-students
+
+31. 4.7 Leadership, Ethics & Governance — UNESCO, Recommendation on the Ethics of Artificial Intelligence
+https://www.unesco.org/en/artificial-intelligence/recommendation-ethics
+
+32. 4.8 Capstone: Build & Present a South African AI Solution — UNESCO, AI Competency Framework for Students: responsible AI co-creation
+https://www.unesco.org/en/articles/ai-competency-framework-students
+
 Further trusted resource: UNESCO AI Competency Framework for Students
 https://www.unesco.org/en/articles/ai-competency-framework-students
