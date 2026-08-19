@@ -7,7 +7,8 @@ import { levelTwoMathDataLesson } from './levelTwoMathDataLesson';
 import { levelTwoWorkProductivityLesson } from './levelTwoWorkProductivityLesson';
 import { levelTwoCreativityLesson } from './levelTwoCreativityLesson';
 import { levelTwoCommunitiesLesson } from './levelTwoCommunitiesLesson';
-import { LEVEL_TWO_MODULES } from '../programmeLevels';
+import { levelThreeProblemSolutionLesson } from './levelThreeProblemSolutionLesson';
+import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
 import { enhanceLesson } from './lessonEnhancements';
@@ -30,6 +31,10 @@ const newLevelTwoLessons: Lesson[] = [
   levelTwoCommunitiesLesson,
 ];
 
+const newLevelThreeLessons: Lesson[] = [
+  levelThreeProblemSolutionLesson,
+];
+
 function enhance(lesson: Lesson) {
   return enhanceFactCheckingBiasLesson(
     enhanceProductivityLesson(
@@ -44,8 +49,8 @@ function enhance(lesson: Lesson) {
   );
 }
 
-function getLevelTwoModule(moduleId: string): Module | undefined {
-  const shell = LEVEL_TWO_MODULES.find((module) => module.id === moduleId);
+function getProgrammeModule(moduleId: string): Module | undefined {
+  const shell = [...LEVEL_TWO_MODULES, ...LEVEL_THREE_MODULES].find((module) => module.id === moduleId);
   if (!shell) return undefined;
 
   return {
@@ -59,19 +64,21 @@ function getLevelTwoModule(moduleId: string): Module | undefined {
   };
 }
 
+const extendedLessons = [...newLevelTwoLessons, ...newLevelThreeLessons];
+
 export const api = {
   getProgramme: () => programme,
   getLevel: () => level,
   getModulesForLevel: () => modules,
-  getModule: (moduleId: string) => modules.find((m) => m.id === moduleId) || getLevelTwoModule(moduleId),
+  getModule: (moduleId: string) => modules.find((m) => m.id === moduleId) || getProgrammeModule(moduleId),
   getLesson: (lessonId: string) => {
     const existingLesson = lessons.find((l) => l.id === lessonId);
     if (existingLesson) return enhance(existingLesson);
-    return newLevelTwoLessons.find((l) => l.id === lessonId);
+    return extendedLessons.find((l) => l.id === lessonId);
   },
   getLessonsForModule: (moduleId: string) => {
     const existingLessons = lessons.filter((l) => l.moduleId === moduleId).map(enhance);
     if (existingLessons.length > 0) return existingLessons;
-    return newLevelTwoLessons.filter((l) => l.moduleId === moduleId);
+    return extendedLessons.filter((l) => l.moduleId === moduleId);
   },
 };
