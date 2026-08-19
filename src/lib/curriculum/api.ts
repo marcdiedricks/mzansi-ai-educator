@@ -4,6 +4,7 @@ import { levelTwoWritingLesson } from './levelTwoWritingLesson';
 import { levelTwoAdvancedCreoLesson } from './levelTwoAdvancedCreoLesson';
 import { levelTwoResearchLesson } from './levelTwoResearchLesson';
 import { levelTwoMathDataLesson } from './levelTwoMathDataLesson';
+import { levelTwoWorkProductivityLesson } from './levelTwoWorkProductivityLesson';
 import { LEVEL_TWO_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
@@ -22,6 +23,7 @@ const newLevelTwoLessons: Lesson[] = [
   levelTwoAdvancedCreoLesson,
   levelTwoResearchLesson,
   levelTwoMathDataLesson,
+  levelTwoWorkProductivityLesson,
 ];
 
 function enhance(lesson: Lesson) {
