@@ -2,24 +2,16 @@ export interface MultilingualTerm {
   id: string;
   term: string;
   category: 'Fundamentals' | 'Data & ML' | 'Ethics & Society' | 'Generative AI';
-  english: {
-    definition: string;
-    example: string;
-  };
-  isizulu: {
+  english: { definition: string; example: string };
+  isizulu: { term: string; definition: string; example: string };
+  sesotho: { term: string; definition: string; example: string };
+  afrikaans: { term: string; definition: string; example: string };
+  isixhosa?: {
     term: string;
     definition: string;
-    example: string;
-  };
-  sesotho: {
-    term: string;
-    definition: string;
-    example: string;
-  };
-  afrikaans: {
-    term: string;
-    definition: string;
-    example: string;
+    example?: string;
+    source: 'Google + PanSALB AI Terminologies';
+    sourceLicense: 'CC BY-SA 4.0';
   };
 }
 
@@ -71,6 +63,12 @@ export const TERMINOLOGY_DATA: MultilingualTerm[] = [
       definition: 'Rekenaerstelsels wat take kan verrig wat gewoonlik menslike denke vereis, soos patroonherkenning, taalverwerking en besluitneming.',
       example: 'Voorspellende teks op jou foon wat raai watter woord jy volgende gaan tik.',
     },
+    isixhosa: {
+      term: 'Ubungqondi bekhompyutha (AI)',
+      definition: 'Xa ichazwa ngeyona ndlela igabalala, bubukrelekrele obubonakaliswa ngoomatshini, ingakumbi iinkqubo zekhompyutha. Licandelo lophando kwisayensi yekhompyutha ephuhlisa ize ifunda iindlela nesoftware eyenza ukuba oomatshini babone okuwungqongileyo kwaye usebenzise ukufunda nobukrelekrele ukuthatha iintshukumo ezandisa amathuba awo okufikelela kwiinjongo ezichaziweyo.',
+      source: 'Google + PanSALB AI Terminologies',
+      sourceLicense: 'CC BY-SA 4.0',
+    },
   },
   {
     id: 'machine-learning',
@@ -94,6 +92,12 @@ export const TERMINOLOGY_DATA: MultilingualTerm[] = [
       term: 'Masjienleer (ML)',
       definition: "'n Deel van KI waar rekenaars uit data leer en outomaties verbeter sonder dat elke reël vooraf geprogrammeer is.",
       example: "'n Musiektoepassing wat jou gunstelingliedjies aanleer op grond van wat jy gereeld luister.",
+    },
+    isixhosa: {
+      term: 'IMachine Learning (ML)',
+      definition: 'Icandelo lokufunda ubungqondi bekhompyutha elijongene nophuhliso nokufunda iialgorithim zamanani anokuthi afunde kwidatha kwaye enze ngokubanzi kwidatha engabonakaliyo kwaye ngaloo ndlela enze imisebenzi ngaphandle kwemiyalelo ecacileyo.',
+      source: 'Google + PanSALB AI Terminologies',
+      sourceLicense: 'CC BY-SA 4.0',
     },
   },
   {
@@ -143,6 +147,12 @@ export const TERMINOLOGY_DATA: MultilingualTerm[] = [
       definition: 'Onregverdige sydigheid of foute in KI-uitsprake wat ontstaan omdat die opleidingsdata eensydig was.',
       example: "Spraakherkenning wat Amerikaanse aksente perfek verstaan maar sukkel met Suid-Afrikaanse aksente.",
     },
+    isixhosa: {
+      term: 'Ukuthatha icala kwealgorithm',
+      definition: 'Iimpazamo ezicwangcisiweyo neziphindaphindwayo kwinkqubo yekhompyutha edala iziphumo “ezingalunganga”, ezifana “nokubeka phambili” olunye udidi ngaphezulu kolunye ngeendlela ezahlukileyo kumsebenzi ocetyiweyo wealgorithm.',
+      source: 'Google + PanSALB AI Terminologies',
+      sourceLicense: 'CC BY-SA 4.0',
+    },
   },
   {
     id: 'ubuntu-tech',
@@ -190,6 +200,12 @@ export const TERMINOLOGY_DATA: MultilingualTerm[] = [
       term: 'Gegenereerde KI (GenAI)',
       definition: 'KI-stelsels wat nuwe inhoud (teks, kuns, musiek) kan skep op grond van patrone wat dit aangeleer het.',
       example: "Om 'n versoek in te tik om 'n storie oor die Karoo te skryf en dadelik 'n nuwe vertelling te kry.",
+    },
+    isixhosa: {
+      term: 'I-AI yokuvelisa',
+      definition: 'Ubungqondi bekhompyutha obukwazi ukuvelisa umbhalo, imifanekiso, iividiyo, okanye enye idatha isebenzisa imodeli yokuzivelisela, ehlala iphendula imiyalelo. Iimodeli zeAI Yokuvelisa zifunda iiphatheni nolwakhiwo lwedatha yoqeqesho lwazo zize emva koko zivelise idatha entsha eneempawu ezifanayo.',
+      source: 'Google + PanSALB AI Terminologies',
+      sourceLicense: 'CC BY-SA 4.0',
     },
   },
 ];
