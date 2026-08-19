@@ -1,6 +1,7 @@
 import { TERMINOLOGY_DATA } from './terminology';
 import { SOURCE_BACKED_TERMS } from './terminologyExpansion';
 import { lessons, modules } from './curriculum/data';
+import { api as curriculumApi } from './curriculum/api';
 
 export type TutorMode = 'connected' | 'local';
 
@@ -28,7 +29,7 @@ const LOCAL_RESPONSES = [
   {
     keywords: ['creo'],
     answer:
-      'CREO is a structured prompting framework: Context, Role, Explicit instructions and Output format. It helps you tell an AI system what you need, who it should act as, what it must do, and how the answer should be presented.',
+      'CREO is a practical prompting framework: Context, Request, Examples and Output. Context gives the relevant situation, Request states the task, Examples show what a useful result can look like when needed, and Output specifies the format or result you want.',
   },
   {
     keywords: ['predictive', 'prediction'],
@@ -73,12 +74,13 @@ function glossaryAnswer(question: string): string | undefined {
 function curriculumAnswer(question: string): string | undefined {
   const q = normalize(question);
 
-  const lesson = lessons.find((candidate) =>
+  const baseLesson = lessons.find((candidate) =>
     q.includes(normalize(candidate.title)) ||
     candidate.blocks.some((block) => normalize(block.content).includes(q) || q.includes(normalize(block.content).slice(0, 28)))
   );
 
-  if (lesson) {
+  if (baseLesson) {
+    const lesson = curriculumApi.getLesson(baseLesson.id) || baseLesson;
     const usefulBlocks = lesson.blocks
       .filter((block) => ['explanation', 'keyPoint', 'example', 'summary'].includes(block.type))
       .slice(0, 3)
@@ -108,7 +110,7 @@ function studySupport(question: string): string | undefined {
   }
 
   if (q.includes('improve my prompt') || q.includes('fix my prompt')) {
-    return 'Paste your prompt. I will help you strengthen its Context, Role, Explicit instructions and Output format using CREO, while keeping your original goal.';
+    return 'Paste your prompt. I will help you strengthen its Context, Request, Examples and Output using CREO, while keeping your original goal.';
   }
 
   if (q.includes('fact check') || q.includes('fact-check') || q.includes('is this true')) {
