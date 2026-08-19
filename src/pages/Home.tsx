@@ -8,6 +8,7 @@ import {
   Globe,
   MessageCircle,
   ShieldCheck,
+  Video,
   WifiOff,
 } from 'lucide-react';
 import { getOnboardingData } from '../lib/storage';
@@ -164,6 +165,17 @@ export function Home() {
           <div className="text-xs text-gray-500 mt-1">Learn the proper term, plain meaning and local connection.</div>
         </button>
       </section>
+
+      <button onClick={() => navigate('/video-resources')} className="w-full bg-white border-2 border-[#E2E8F0] rounded-xl p-4 flex items-center gap-3 text-left">
+        <div className="w-10 h-10 rounded-xl bg-orange-50 text-[#E67E22] flex items-center justify-center shrink-0">
+          <Video className="w-5 h-5" />
+        </div>
+        <div className="flex-1">
+          <div className="font-bold text-sm text-[#2D3E50]">Lesson Video Links</div>
+          <div className="text-xs text-gray-500">Optional external videos for all eight DISCOVER lessons. Internet/data required.</div>
+        </div>
+        <ArrowRight className="w-4 h-4 text-gray-400" />
+      </button>
 
       <section className="bg-[#F8F9FA] border-2 border-[#E2E8F0] rounded-2xl p-4">
         <div className="flex gap-3">
