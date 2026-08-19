@@ -12,6 +12,7 @@ import { levelThreeAssistantsWorkflowsLesson } from './levelThreeAssistantsWorkf
 import { levelThreeKnowledgeDataLesson } from './levelThreeKnowledgeDataLesson';
 import { levelThreeNoCodeLowCodeLesson } from './levelThreeNoCodeLowCodeLesson';
 import { levelThreeConversationUxLesson } from './levelThreeConversationUxLesson';
+import { levelThreeTestingBiasLesson } from './levelThreeTestingBiasLesson';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
@@ -41,6 +42,7 @@ const newLevelThreeLessons: Lesson[] = [
   levelThreeKnowledgeDataLesson,
   levelThreeNoCodeLowCodeLesson,
   levelThreeConversationUxLesson,
+  levelThreeTestingBiasLesson,
 ];
 
 function enhance(lesson: Lesson) {
