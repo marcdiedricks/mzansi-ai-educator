@@ -2,7 +2,7 @@
 
 Last reviewed: 2026-08-19
 
-Videos are optional external resources and require internet/data. Core lessons remain available offline.
+Videos and multimedia resources are optional external support and require internet/data. Core lessons remain available offline. External resources never block lesson completion or learner progression.
 
 ## Level 1 · Understand
 
@@ -55,6 +55,32 @@ https://code.org/en-US/resources/videos
 
 16. 2.8 AI in South African Communities — UNESCO, Why is ethics crucial in the development of AI?
 https://www.unesco.org/en/artificial-intelligence/recommendation-ethics/cases
+
+## Level 3 · Create
+
+17. 3.1 From Problem to AI Solution — UNESCO, AI Competency Framework for Students: Create and AI system design
+https://www.unesco.org/en/articles/ai-competency-framework-students
+
+18. 3.2 Designing AI Assistants & Workflows — UNESCO, AI Competency Framework for Students: AI system design
+https://www.unesco.org/en/articles/ai-competency-framework-students
+
+19. 3.3 Knowledge, Data & Source Design — UNESCO, Guidance for generative AI in education and research
+https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research
+
+20. 3.4 Building with No-Code & Low-Code AI — Code.org, Exploring Generative AI video collection
+https://code.org/en-US/resources/videos
+
+21. 3.5 Conversation & User Experience Design — UNESCO, AI Competency Framework for Students: human-centred AI creation
+https://www.unesco.org/en/articles/ai-competency-framework-students
+
+22. 3.6 Testing, Evaluation & Bias Checks — Code.org, Ethics & AI: Equal Access and Algorithmic Bias
+https://www.youtube.com/watch?v=tJQSyzBUAew
+
+23. 3.7 Privacy, Safety & Responsible Deployment — UNESCO, Recommendation on the Ethics of Artificial Intelligence
+https://www.unesco.org/en/artificial-intelligence/recommendation-ethics
+
+24. 3.8 Build a South African AI Prototype — UNESCO, AI Competency Framework for Students: responsible AI co-creation
+https://www.unesco.org/en/articles/ai-competency-framework-students
 
 Further trusted resource: UNESCO AI Competency Framework for Students
 https://www.unesco.org/en/articles/ai-competency-framework-students
