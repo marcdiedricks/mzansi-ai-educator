@@ -23,10 +23,17 @@ export function Home() {
   const completedLevelOne = progress.completedLessons.filter((id) => levelOneIds.has(id));
   const totalLevelOne = levelOneLessons.length;
   const levelOnePercent = Math.round((completedLevelOne.length / Math.max(totalLevelOne, 1)) * 100);
-  const nextLesson = levelOneLessons.find((lesson) => !progress.completedLessons.includes(lesson.id)) || levelOneLessons[0];
+  const levelOneComplete = totalLevelOne > 0 && completedLevelOne.length >= totalLevelOne;
+  const hasStarted = completedLevelOne.length > 0;
+  const nextLesson = levelOneLessons.find((lesson) => !progress.completedLessons.includes(lesson.id)) || levelOneLessons[levelOneLessons.length - 1];
   const nextModule = levelOneModules.find((module) => module.id === nextLesson?.moduleId) || levelOneModules[0];
 
   const languageLabel = onboarding?.language === 'af' ? 'Afrikaans' : onboarding?.language === 'xh' ? 'isiXhosa' : 'English';
+
+  const continueEyebrow = levelOneComplete ? 'Level 1 complete' : hasStarted ? 'Continue learning' : 'Start your learning journey';
+  const continueMeta = levelOneComplete ? 'Level 2 · Apply' : `Level 1 · Module ${Math.min(completedLevelOne.length + 1, totalLevelOne || 1)} of ${totalLevelOne || 8}`;
+  const continueTitle = levelOneComplete ? 'Practical AI Skills' : nextLesson?.title || 'AI Foundations & Responsible Use';
+  const continueButton = levelOneComplete ? 'View Level 2' : hasStarted ? 'Continue learning' : 'Start Level 1';
 
   return (
     <div className="w-full p-4 sm:p-6 pb-24 space-y-5">
@@ -48,23 +55,28 @@ export function Home() {
       </header>
 
       <section className="bg-[#2D3E50] text-white rounded-2xl p-5 shadow-sm">
-        <div className="flex items-center justify-between gap-3 mb-3">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-[#E67E22]">Continue learning · Level 1</p>
-            <h2 className="text-xl font-bold mt-1">{nextLesson?.title || 'AI Foundations'}</h2>
+        <p className="text-[10px] font-bold uppercase tracking-wider text-[#E67E22]">{continueEyebrow}</p>
+        <div className="flex items-start justify-between gap-3 mt-1">
+          <div className="min-w-0 flex-1">
+            <p className="text-sm text-gray-300">{continueMeta}</p>
+            <h2 className="text-xl font-bold mt-1">{continueTitle}</h2>
           </div>
-          <span className="text-xs font-bold text-gray-300">{completedLevelOne.length}/{totalLevelOne}</span>
+          {!levelOneComplete && <span className="text-xs font-bold text-gray-300 shrink-0">{completedLevelOne.length}/{totalLevelOne}</span>}
         </div>
-        <p className="text-sm text-gray-300 mb-4">{nextModule?.title || 'AI Foundations & Responsible Use'}</p>
-        <div className="w-full h-2.5 rounded-full bg-white/20 overflow-hidden">
+
+        <div className="w-full h-2.5 rounded-full bg-white/20 overflow-hidden mt-4">
           <div className="h-full rounded-full bg-[#E67E22] transition-all" style={{ width: `${levelOnePercent}%` }} />
         </div>
         <div className="flex items-center justify-between text-[11px] text-gray-300 mt-2">
-          <span>{levelOnePercent}% of Level 1 complete</span>
-          <span>Understand</span>
+          <span>{levelOneComplete ? 'Level 1 completed' : `${levelOnePercent}% of Level 1 complete`}</span>
+          <span>{levelOneComplete ? 'Next: Apply' : 'Understand'}</span>
         </div>
-        <button onClick={() => nextLesson && nextModule && navigate(`/learn/${nextModule.id}/lesson/${nextLesson.id}`)} className="w-full mt-4 bg-[#E67E22] hover:bg-orange-600 text-white font-bold rounded-xl py-3.5 px-4 flex items-center justify-center gap-2">
-          Continue learning <ArrowRight className="w-4 h-4" />
+
+        <button
+          onClick={() => levelOneComplete ? navigate('/learn') : nextLesson && nextModule && navigate(`/learn/${nextModule.id}/lesson/${nextLesson.id}`)}
+          className="w-full mt-4 bg-[#E67E22] hover:bg-orange-600 text-white font-bold rounded-xl py-3.5 px-4 flex items-center justify-center gap-2"
+        >
+          {continueButton} <ArrowRight className="w-4 h-4" />
         </button>
       </section>
 
