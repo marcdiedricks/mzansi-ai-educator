@@ -3,12 +3,19 @@ import { validateCurriculumData } from './validation';
 import { enhanceLesson } from './lessonEnhancements';
 import { enhanceUbuntuLesson } from './lessonEnhancementsUbuntu';
 import { enhanceGenerativeAiLesson } from './generativeAiEnhancement';
+import { enhancePromptingCreoLesson } from './promptingCreoEnhancement';
 
 // Run validation upon API initialization
 validateCurriculumData();
 
 function enhance(lesson: (typeof lessons)[number]) {
-  return enhanceGenerativeAiLesson(enhanceUbuntuLesson(enhanceLesson(lesson)));
+  return enhancePromptingCreoLesson(
+    enhanceGenerativeAiLesson(
+      enhanceUbuntuLesson(
+        enhanceLesson(lesson)
+      )
+    )
+  );
 }
 
 export const api = {
