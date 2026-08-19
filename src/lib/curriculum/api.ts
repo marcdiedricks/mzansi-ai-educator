@@ -15,6 +15,7 @@ import { levelThreeConversationUxLesson } from './levelThreeConversationUxLesson
 import { levelThreeTestingBiasLesson } from './levelThreeTestingBiasLesson';
 import { levelThreePrivacySafetyLesson } from './levelThreePrivacySafetyLesson';
 import { levelThreeSouthAfricanPrototypeLesson } from './levelThreeSouthAfricanPrototypeLesson';
+import { levelFourCommunityProblemsLesson } from './levelFourCommunityProblemsLesson';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
@@ -49,6 +50,10 @@ const newLevelThreeLessons: Lesson[] = [
   levelThreeSouthAfricanPrototypeLesson,
 ];
 
+const newLevelFourLessons: Lesson[] = [
+  levelFourCommunityProblemsLesson,
+];
+
 function enhance(lesson: Lesson) {
   return enhanceFactCheckingBiasLesson(
     enhanceProductivityLesson(
@@ -78,7 +83,7 @@ function getProgrammeModule(moduleId: string): Module | undefined {
   };
 }
 
-const extendedLessons = [...newLevelTwoLessons, ...newLevelThreeLessons];
+const extendedLessons = [...newLevelTwoLessons, ...newLevelThreeLessons, ...newLevelFourLessons];
 
 export const api = {
   getProgramme: () => programme,
