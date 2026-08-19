@@ -4,15 +4,18 @@ import { enhanceLesson } from './lessonEnhancements';
 import { enhanceUbuntuLesson } from './lessonEnhancementsUbuntu';
 import { enhanceGenerativeAiLesson } from './generativeAiEnhancement';
 import { enhancePromptingCreoLesson } from './promptingCreoEnhancement';
+import { enhanceProductivityLesson } from './productivityEnhancement';
 
 // Run validation upon API initialization
 validateCurriculumData();
 
 function enhance(lesson: (typeof lessons)[number]) {
-  return enhancePromptingCreoLesson(
-    enhanceGenerativeAiLesson(
-      enhanceUbuntuLesson(
-        enhanceLesson(lesson)
+  return enhanceProductivityLesson(
+    enhancePromptingCreoLesson(
+      enhanceGenerativeAiLesson(
+        enhanceUbuntuLesson(
+          enhanceLesson(lesson)
+        )
       )
     )
   );
