@@ -35,3 +35,14 @@ export const LEVEL_TWO_MODULES: ProgrammeModuleShell[] = [
   { id: 'MZAIE-P2-M07', code: '2.7', title: 'AI for Creativity & Content', description: 'Use AI responsibly for ideas, stories, visual concepts, presentations and creative development.', lessonId: 'MZAIE-P2-M07-L01' },
   { id: 'MZAIE-P2-M08', code: '2.8', title: 'AI in South African Communities', description: 'Apply AI thinking to real needs in schools, TVET colleges, NGOs, churches, small businesses and communities.', lessonId: 'MZAIE-P2-M08-L01' },
 ];
+
+export const LEVEL_THREE_MODULES: ProgrammeModuleShell[] = [
+  { id: 'MZAIE-P3-M01', code: '3.1', title: 'From Problem to AI Solution', description: 'Define a real problem, identify who it affects and decide whether AI is actually useful.' },
+  { id: 'MZAIE-P3-M02', code: '3.2', title: 'Designing AI Assistants & Workflows', description: 'Map a useful assistant or workflow with clear inputs, steps, outputs and human checkpoints.' },
+  { id: 'MZAIE-P3-M03', code: '3.3', title: 'Knowledge, Data & Source Design', description: 'Choose trustworthy knowledge and data, organise sources and set boundaries for what the solution may use.' },
+  { id: 'MZAIE-P3-M04', code: '3.4', title: 'Building with No-Code & Low-Code AI', description: 'Turn a design into a simple working prototype using accessible tools and reusable building blocks.' },
+  { id: 'MZAIE-P3-M05', code: '3.5', title: 'Conversation & User Experience Design', description: 'Design clear prompts, screens, instructions and feedback for people using the AI solution.' },
+  { id: 'MZAIE-P3-M06', code: '3.6', title: 'Testing, Evaluation & Bias Checks', description: 'Test accuracy, usefulness, failure cases and unfair outcomes before trusting the prototype.' },
+  { id: 'MZAIE-P3-M07', code: '3.7', title: 'Privacy, Safety & Responsible Deployment', description: 'Protect personal information, reduce risk and define human oversight before real-world use.' },
+  { id: 'MZAIE-P3-M08', code: '3.8', title: 'Build a South African AI Prototype', description: 'Combine the Level 3 skills into a small responsible prototype for a genuine South African need.' },
+];
