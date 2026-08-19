@@ -84,7 +84,7 @@ export function Tutor() {
           <div className="flex items-end gap-2">
             <label className="flex-1">
               <span className="sr-only">Ask a question</span>
-              <textarea value={input} onChange={(event) => setInput(event.target.value)} rows={2} placeholder="Ask about AI, a lesson, a prompt, a difficult term, or something you want explained…" className="w-full resize-none rounded-xl border-2 border-[#E2E8F0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D3E50]" />
+              <textarea value={input} onChange={(event) => setInput(event.target.value)} rows={2} placeholder="Ask about AI, a lesson, a prompt, a difficult term, or something you want explained…" className="w-full resize-none rounded-xl border-2 border-[#E2E8F0] bg-white px-3 py-2.5 text-sm text-[#1A202C] caret-[#1A202C] placeholder:text-gray-400 focus:outline-none focus:border-[#2D3E50]" />
             </label>
             <button type="submit" disabled={busy || !input.trim()} className="w-11 h-11 rounded-xl bg-[#E67E22] disabled:opacity-50 text-white flex items-center justify-center shrink-0" aria-label="Send question">
               {busy ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
