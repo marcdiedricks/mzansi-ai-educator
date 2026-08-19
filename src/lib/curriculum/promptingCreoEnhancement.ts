@@ -25,7 +25,7 @@ const quiz: NonNullable<Lesson['quiz']> = [
 ];
 
 export function enhancePromptingCreoLesson(lesson: Lesson): Lesson {
-  if (lesson.id !== 'MZAIE-L1-M06-L01') return lesson;
+  if (lesson.id !== 'MZAIE-L2-M01-L01') return lesson;
   return {
     ...lesson,
     estimatedMinutes: 20,
