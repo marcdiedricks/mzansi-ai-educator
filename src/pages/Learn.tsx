@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { api } from '../lib/curriculum/api';
 import { lessons } from '../lib/curriculum/data';
 import { getUserProgress, getLevel2TestProgress, isLevel2TestPreviewEnabled, setLevel2TestPreview } from '../lib/progress';
-import { LEVEL_TWO_MODULES, PROGRAMME_LEVELS } from '../lib/programmeLevels';
+import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, PROGRAMME_LEVELS } from '../lib/programmeLevels';
 
 export function Learn() {
   const navigate = useNavigate();
@@ -28,7 +28,9 @@ export function Learn() {
   const level2Ids = LEVEL_TWO_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level2Progress = testPreview && !level1Complete ? testProgress : progress;
   const level2Complete = level2Ids.length === LEVEL_TWO_MODULES.length && level2Ids.every((id) => level2Progress.completedLessons.includes(id));
+  const level2RealComplete = level1Complete && level2Ids.length === LEVEL_TWO_MODULES.length && level2Ids.every((id) => progress.completedLessons.includes(id));
   const level2Accessible = level1Complete || testPreview;
+  const level3Accessible = level2RealComplete;
 
   const openModule = (moduleId: string, lessonIds: string[]) => {
     if (lessonIds.length === 1) {
@@ -58,7 +60,7 @@ export function Learn() {
 
       <section className="space-y-3">
         {PROGRAMME_LEVELS.map((level) => {
-          const unlocked = level.id === 1 || (level.id === 2 && level2Accessible);
+          const unlocked = level.id === 1 || (level.id === 2 && level2Accessible) || (level.id === 3 && level3Accessible);
           const completed = (level.id === 1 && level1Complete) || (level.id === 2 && level2Complete);
           return (
             <div key={level.id} className={`rounded-2xl border-2 p-4 ${unlocked ? 'bg-white border-[#2D3E50]' : 'bg-[#F8F9FA] border-[#E2E8F0]'}`}>
@@ -132,6 +134,33 @@ export function Learn() {
               </button>
             );
           })}
+        </div>
+      </section>
+
+      <section className={`border-2 rounded-2xl overflow-hidden ${level3Accessible ? 'bg-white border-[#2D3E50]' : 'bg-white border-[#E2E8F0]'}`}>
+        <div className={`${level3Accessible ? 'bg-[#2D3E50] text-white' : 'bg-[#F8F9FA] text-[#1A202C]'} p-5 border-b-2 border-[#E2E8F0]`}>
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <div className="text-[#E67E22] font-bold text-[10px] uppercase tracking-wider mb-1">Level 3 · Create</div>
+              <h2 className="text-xl font-bold">AI Creator & Builder</h2>
+              <p className={`text-xs mt-1 ${level3Accessible ? 'text-gray-300' : 'text-gray-600'}`}>{level3Accessible ? 'Level 3 is unlocked. Lesson content will be added one module at a time.' : 'Complete Levels 1 and 2 as a learner to unlock Level 3.'}</p>
+            </div>
+            {level3Accessible ? <BookOpen className="w-5 h-5 text-amber-300 shrink-0 mt-1" /> : <Lock className="w-5 h-5 text-gray-400 shrink-0 mt-1" />}
+          </div>
+        </div>
+        <div className="divide-y-2 divide-[#E2E8F0]">
+          {LEVEL_THREE_MODULES.map((mod, index) => (
+            <button key={mod.id} disabled={!level3Accessible || !mod.lessonId} onClick={() => mod.lessonId && navigate(`/learn/${mod.id}/lesson/${mod.lessonId}`)} className="w-full flex items-start p-5 bg-white text-left hover:bg-[#F8F9FA] disabled:opacity-60 disabled:cursor-not-allowed">
+              <div className="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold mr-4 shrink-0">{index + 1}</div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[#E67E22]">Module {mod.code}</p>
+                <h3 className="font-bold text-[#1A202C] mt-0.5">{mod.title}</h3>
+                <p className="text-xs text-gray-500 mt-1 leading-relaxed">{mod.description}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider mt-2 text-gray-400">{level3Accessible ? 'Shell ready · lesson content next' : 'Mapped · unlocks after Level 2'}</p>
+              </div>
+              {level3Accessible ? <BookOpen className="w-4 h-4 text-[#E67E22] shrink-0 ml-3 mt-1" /> : <Lock className="w-4 h-4 text-gray-300 shrink-0 ml-3 mt-1" />}
+            </button>
+          ))}
         </div>
       </section>
     </div>
