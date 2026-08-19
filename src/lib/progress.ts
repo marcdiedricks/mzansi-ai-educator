@@ -10,7 +10,10 @@ export interface UserProgress {
 const PROGRESS_STORAGE_KEY = 'mzansi_ai_user_progress';
 const LEVEL2_TEST_PREVIEW_KEY = 'mzansi_ai_level2_test_preview';
 const LEVEL2_TEST_PROGRESS_KEY = 'mzansi_ai_level2_test_progress';
+const LEVEL3_TEST_PREVIEW_KEY = 'mzansi_ai_level3_test_preview';
+const LEVEL3_TEST_PROGRESS_KEY = 'mzansi_ai_level3_test_progress';
 const LEVEL2_LESSON_PREFIX = 'MZAIE-P2-';
+const LEVEL3_LESSON_PREFIX = 'MZAIE-P3-';
 
 const emptyProgress = (): UserProgress => ({
   completedLessons: [],
@@ -28,6 +31,7 @@ const normaliseProgress = (parsed: Partial<UserProgress>): UserProgress => ({
 });
 
 const isLevel2Lesson = (lessonId: string) => lessonId.startsWith(LEVEL2_LESSON_PREFIX);
+const isLevel3Lesson = (lessonId: string) => lessonId.startsWith(LEVEL3_LESSON_PREFIX);
 
 function readProgress(key: string): UserProgress {
   try {
@@ -44,37 +48,41 @@ function writeProgress(key: string, progress: UserProgress) {
 }
 
 function migratePreviewContamination() {
-  if (!isLevel2TestPreviewEnabled()) return;
-
   try {
     const learner = readProgress(PROGRESS_STORAGE_KEY);
-    const contaminatedLessons = learner.completedLessons.filter(isLevel2Lesson);
-    const contaminatedScores = Object.entries(learner.quizScores).filter(([id]) => isLevel2Lesson(id));
-    const contaminatedLastVisited = learner.lastVisitedLessonId && isLevel2Lesson(learner.lastVisitedLessonId)
-      ? learner.lastVisitedLessonId
-      : undefined;
+    let cleanLearner = learner;
 
-    if (!contaminatedLessons.length && !contaminatedScores.length && !contaminatedLastVisited) return;
+    const migrate = (enabled: boolean, isPreviewLesson: (id: string) => boolean, previewKey: string) => {
+      if (!enabled) return;
+      const contaminatedLessons = cleanLearner.completedLessons.filter(isPreviewLesson);
+      const contaminatedScores = Object.entries(cleanLearner.quizScores).filter(([id]) => isPreviewLesson(id));
+      const contaminatedLastVisited = cleanLearner.lastVisitedLessonId && isPreviewLesson(cleanLearner.lastVisitedLessonId)
+        ? cleanLearner.lastVisitedLessonId
+        : undefined;
+      if (!contaminatedLessons.length && !contaminatedScores.length && !contaminatedLastVisited) return;
 
-    const preview = readProgress(LEVEL2_TEST_PROGRESS_KEY);
-    const mergedPreview: UserProgress = {
-      ...preview,
-      completedLessons: Array.from(new Set([...preview.completedLessons, ...contaminatedLessons])),
-      quizScores: { ...preview.quizScores, ...Object.fromEntries(contaminatedScores) },
-      lastVisitedLessonId: contaminatedLastVisited || preview.lastVisitedLessonId,
+      const preview = readProgress(previewKey);
+      writeProgress(previewKey, {
+        ...preview,
+        completedLessons: Array.from(new Set([...preview.completedLessons, ...contaminatedLessons])),
+        quizScores: { ...preview.quizScores, ...Object.fromEntries(contaminatedScores) },
+        lastVisitedLessonId: contaminatedLastVisited || preview.lastVisitedLessonId,
+      });
+
+      cleanLearner = {
+        ...cleanLearner,
+        completedLessons: cleanLearner.completedLessons.filter((id) => !isPreviewLesson(id)),
+        quizScores: Object.fromEntries(Object.entries(cleanLearner.quizScores).filter(([id]) => !isPreviewLesson(id))),
+        lastVisitedLessonId: contaminatedLastVisited ? undefined : cleanLearner.lastVisitedLessonId,
+      };
     };
 
-    const cleanLearner: UserProgress = {
-      ...learner,
-      completedLessons: learner.completedLessons.filter((id) => !isLevel2Lesson(id)),
-      quizScores: Object.fromEntries(Object.entries(learner.quizScores).filter(([id]) => !isLevel2Lesson(id))),
-      lastVisitedLessonId: contaminatedLastVisited ? undefined : learner.lastVisitedLessonId,
-    };
+    migrate(isLevel2TestPreviewEnabled(), isLevel2Lesson, LEVEL2_TEST_PROGRESS_KEY);
+    migrate(isLevel3TestPreviewEnabled(), isLevel3Lesson, LEVEL3_TEST_PROGRESS_KEY);
 
-    writeProgress(LEVEL2_TEST_PROGRESS_KEY, mergedPreview);
-    writeProgress(PROGRESS_STORAGE_KEY, cleanLearner);
+    if (cleanLearner !== learner) writeProgress(PROGRESS_STORAGE_KEY, cleanLearner);
   } catch (e) {
-    console.error('Failed to migrate Level 2 preview progress', e);
+    console.error('Failed to migrate preview progress', e);
   }
 }
 
@@ -86,6 +94,11 @@ export function getUserProgress(): UserProgress {
 export function getLevel2TestProgress(): UserProgress {
   migratePreviewContamination();
   return readProgress(LEVEL2_TEST_PROGRESS_KEY);
+}
+
+export function getLevel3TestProgress(): UserProgress {
+  migratePreviewContamination();
+  return readProgress(LEVEL3_TEST_PROGRESS_KEY);
 }
 
 export function saveUserProgress(progress: UserProgress) {
@@ -103,6 +116,15 @@ function saveLevel2TestProgress(progress: UserProgress) {
     window.dispatchEvent(new Event('mzansi_progress_updated'));
   } catch (e) {
     console.error('Failed to save Level 2 test progress', e);
+  }
+}
+
+function saveLevel3TestProgress(progress: UserProgress) {
+  try {
+    writeProgress(LEVEL3_TEST_PROGRESS_KEY, progress);
+    window.dispatchEvent(new Event('mzansi_progress_updated'));
+  } catch (e) {
+    console.error('Failed to save Level 3 test progress', e);
   }
 }
 
@@ -124,47 +146,72 @@ export function setLevel2TestPreview(enabled: boolean) {
   }
 }
 
-function usePreviewStore(lessonId: string) {
-  return isLevel2TestPreviewEnabled() && isLevel2Lesson(lessonId);
+export function isLevel3TestPreviewEnabled(): boolean {
+  try {
+    return localStorage.getItem(LEVEL3_TEST_PREVIEW_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+export function setLevel3TestPreview(enabled: boolean) {
+  try {
+    if (enabled) localStorage.setItem(LEVEL3_TEST_PREVIEW_KEY, 'true');
+    else localStorage.removeItem(LEVEL3_TEST_PREVIEW_KEY);
+    window.dispatchEvent(new Event('mzansi_progress_updated'));
+  } catch (e) {
+    console.error('Failed to update Level 3 test preview', e);
+  }
+}
+
+function previewStoreForLesson(lessonId: string): 'level2' | 'level3' | null {
+  if (isLevel2TestPreviewEnabled() && isLevel2Lesson(lessonId)) return 'level2';
+  if (isLevel3TestPreviewEnabled() && isLevel3Lesson(lessonId)) return 'level3';
+  return null;
+}
+
+function getProgressForLesson(lessonId: string) {
+  const preview = previewStoreForLesson(lessonId);
+  if (preview === 'level2') return getLevel2TestProgress();
+  if (preview === 'level3') return getLevel3TestProgress();
+  return getUserProgress();
+}
+
+function saveProgressForLesson(lessonId: string, progress: UserProgress) {
+  const preview = previewStoreForLesson(lessonId);
+  if (preview === 'level2') saveLevel2TestProgress(progress);
+  else if (preview === 'level3') saveLevel3TestProgress(progress);
+  else saveUserProgress(progress);
 }
 
 export function toggleLessonCompletion(lessonId: string): boolean {
-  const previewMode = usePreviewStore(lessonId);
-  const current = previewMode ? getLevel2TestProgress() : getUserProgress();
+  const current = getProgressForLesson(lessonId);
   const isDone = current.completedLessons.includes(lessonId);
   const updatedLessons = isDone
     ? current.completedLessons.filter((id) => id !== lessonId)
     : [...current.completedLessons, lessonId];
 
-  const updated = {
+  saveProgressForLesson(lessonId, {
     ...current,
     completedLessons: updatedLessons,
     lastVisitedLessonId: lessonId,
-  };
-
-  if (previewMode) saveLevel2TestProgress(updated);
-  else saveUserProgress(updated);
+  });
 
   return !isDone;
 }
 
 export function isLessonCompleted(lessonId: string): boolean {
-  const current = usePreviewStore(lessonId) ? getLevel2TestProgress() : getUserProgress();
-  return current.completedLessons.includes(lessonId);
+  return getProgressForLesson(lessonId).completedLessons.includes(lessonId);
 }
 
 export function recordQuizScore(lessonId: string, score: number) {
-  const previewMode = usePreviewStore(lessonId);
-  const current = previewMode ? getLevel2TestProgress() : getUserProgress();
+  const current = getProgressForLesson(lessonId);
   const safeScore = Math.max(0, Math.min(100, Math.round(score)));
-  const updated = {
+  saveProgressForLesson(lessonId, {
     ...current,
     quizScores: { ...current.quizScores, [lessonId]: safeScore },
     lastVisitedLessonId: lessonId,
-  };
-
-  if (previewMode) saveLevel2TestProgress(updated);
-  else saveUserProgress(updated);
+  });
 }
 
 export function recordLabCompletion(labId: string) {
