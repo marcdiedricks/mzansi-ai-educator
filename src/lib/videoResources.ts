@@ -24,6 +24,15 @@ export const videoResources: VideoResource[] = [
   { id:'video-m06-01', lessonId:'MZAIE-L1-M06-L01', title:'Exploring Generative AI', provider:'Code.org', language:'English', url:'https://code.org/en-US/resources/videos', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
   { id:'video-m07-01', lessonId:'MZAIE-L1-M07-L01', title:'Artificial intelligence and the Futures of Learning', provider:'UNESCO', language:'English', url:'https://www.unesco.org/en/digital-education/ai-future-learning', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
   { id:'video-m08-01', lessonId:'MZAIE-L1-M08-L01', title:'Ethics & AI: Equal Access and Algorithmic Bias', provider:'Code.org', language:'English', url:'https://www.youtube.com/watch?v=tJQSyzBUAew', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
+
+  { id:'video-p2m01-01', lessonId:'MZAIE-P2-M01-L01', title:'Artificial intelligence and the Futures of Learning', provider:'UNESCO', language:'English', url:'https://www.unesco.org/en/digital-education/ai-future-learning', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
+  { id:'video-p2m02-01', lessonId:'MZAIE-P2-M02-L01', title:'Exploring Generative AI: inputs, outputs and responsible creation', provider:'Code.org', language:'English', url:'https://code.org/en-US/resources/videos', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
+  { id:'video-p2m03-01', lessonId:'MZAIE-P2-M03-L01', title:'Exploring Generative AI: how prompts shape outputs', provider:'Code.org', language:'English', url:'https://code.org/en-US/resources/videos', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
+  { id:'video-p2m04-01', lessonId:'MZAIE-P2-M04-L01', title:'Ethics & AI: Equal Access and Algorithmic Bias', provider:'Code.org', language:'English', url:'https://www.youtube.com/watch?v=tJQSyzBUAew', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
+  { id:'video-p2m05-01', lessonId:'MZAIE-P2-M05-L01', title:'What is Machine Learning? Data, patterns and prediction', provider:'Code.org', language:'English', url:'https://www.youtube.com/watch?v=KHbwOetbmbs', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
+  { id:'video-p2m06-01', lessonId:'MZAIE-P2-M06-L01', title:'Build Smarter Workflows with AI for Nonprofits', provider:'Google for Nonprofits', language:'English', url:'https://help.youtube.com/nonprofits/', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
+  { id:'video-p2m07-01', lessonId:'MZAIE-P2-M07-L01', title:'Exploring Generative AI: creativity and content', provider:'Code.org', language:'English', url:'https://code.org/en-US/resources/videos', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
+  { id:'video-p2m08-01', lessonId:'MZAIE-P2-M08-L01', title:'Why is ethics crucial in the development of AI?', provider:'UNESCO', language:'English', url:'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics/cases', dataWarning:warning, lastChecked:'2026-08-19', status:'ACTIVE' },
 ];
 
 export function getActiveVideoResourcesForLesson(lessonId: string) {
