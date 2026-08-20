@@ -12,8 +12,11 @@ const LEVEL2_TEST_PREVIEW_KEY = 'mzansi_ai_level2_test_preview';
 const LEVEL2_TEST_PROGRESS_KEY = 'mzansi_ai_level2_test_progress';
 const LEVEL3_TEST_PREVIEW_KEY = 'mzansi_ai_level3_test_preview';
 const LEVEL3_TEST_PROGRESS_KEY = 'mzansi_ai_level3_test_progress';
+const LEVEL4_TEST_PREVIEW_KEY = 'mzansi_ai_level4_test_preview';
+const LEVEL4_TEST_PROGRESS_KEY = 'mzansi_ai_level4_test_progress';
 const LEVEL2_LESSON_PREFIX = 'MZAIE-P2-';
 const LEVEL3_LESSON_PREFIX = 'MZAIE-P3-';
+const LEVEL4_LESSON_PREFIX = 'MZAIE-P4-';
 
 const emptyProgress = (): UserProgress => ({
   completedLessons: [],
@@ -32,6 +35,7 @@ const normaliseProgress = (parsed: Partial<UserProgress>): UserProgress => ({
 
 const isLevel2Lesson = (lessonId: string) => lessonId.startsWith(LEVEL2_LESSON_PREFIX);
 const isLevel3Lesson = (lessonId: string) => lessonId.startsWith(LEVEL3_LESSON_PREFIX);
+const isLevel4Lesson = (lessonId: string) => lessonId.startsWith(LEVEL4_LESSON_PREFIX);
 
 function readProgress(key: string): UserProgress {
   try {
@@ -79,6 +83,7 @@ function migratePreviewContamination() {
 
     migrate(isLevel2TestPreviewEnabled(), isLevel2Lesson, LEVEL2_TEST_PROGRESS_KEY);
     migrate(isLevel3TestPreviewEnabled(), isLevel3Lesson, LEVEL3_TEST_PROGRESS_KEY);
+    migrate(isLevel4TestPreviewEnabled(), isLevel4Lesson, LEVEL4_TEST_PROGRESS_KEY);
 
     if (cleanLearner !== learner) writeProgress(PROGRESS_STORAGE_KEY, cleanLearner);
   } catch (e) {
@@ -99,6 +104,11 @@ export function getLevel2TestProgress(): UserProgress {
 export function getLevel3TestProgress(): UserProgress {
   migratePreviewContamination();
   return readProgress(LEVEL3_TEST_PROGRESS_KEY);
+}
+
+export function getLevel4TestProgress(): UserProgress {
+  migratePreviewContamination();
+  return readProgress(LEVEL4_TEST_PROGRESS_KEY);
 }
 
 export function saveUserProgress(progress: UserProgress) {
@@ -125,6 +135,15 @@ function saveLevel3TestProgress(progress: UserProgress) {
     window.dispatchEvent(new Event('mzansi_progress_updated'));
   } catch (e) {
     console.error('Failed to save Level 3 test progress', e);
+  }
+}
+
+function saveLevel4TestProgress(progress: UserProgress) {
+  try {
+    writeProgress(LEVEL4_TEST_PROGRESS_KEY, progress);
+    window.dispatchEvent(new Event('mzansi_progress_updated'));
+  } catch (e) {
+    console.error('Failed to save Level 4 test progress', e);
   }
 }
 
@@ -164,9 +183,28 @@ export function setLevel3TestPreview(enabled: boolean) {
   }
 }
 
-function previewStoreForLesson(lessonId: string): 'level2' | 'level3' | null {
+export function isLevel4TestPreviewEnabled(): boolean {
+  try {
+    return localStorage.getItem(LEVEL4_TEST_PREVIEW_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+export function setLevel4TestPreview(enabled: boolean) {
+  try {
+    if (enabled) localStorage.setItem(LEVEL4_TEST_PREVIEW_KEY, 'true');
+    else localStorage.removeItem(LEVEL4_TEST_PREVIEW_KEY);
+    window.dispatchEvent(new Event('mzansi_progress_updated'));
+  } catch (e) {
+    console.error('Failed to update Level 4 test preview', e);
+  }
+}
+
+function previewStoreForLesson(lessonId: string): 'level2' | 'level3' | 'level4' | null {
   if (isLevel2TestPreviewEnabled() && isLevel2Lesson(lessonId)) return 'level2';
   if (isLevel3TestPreviewEnabled() && isLevel3Lesson(lessonId)) return 'level3';
+  if (isLevel4TestPreviewEnabled() && isLevel4Lesson(lessonId)) return 'level4';
   return null;
 }
 
@@ -174,6 +212,7 @@ function getProgressForLesson(lessonId: string) {
   const preview = previewStoreForLesson(lessonId);
   if (preview === 'level2') return getLevel2TestProgress();
   if (preview === 'level3') return getLevel3TestProgress();
+  if (preview === 'level4') return getLevel4TestProgress();
   return getUserProgress();
 }
 
@@ -181,6 +220,7 @@ function saveProgressForLesson(lessonId: string, progress: UserProgress) {
   const preview = previewStoreForLesson(lessonId);
   if (preview === 'level2') saveLevel2TestProgress(progress);
   else if (preview === 'level3') saveLevel3TestProgress(progress);
+  else if (preview === 'level4') saveLevel4TestProgress(progress);
   else saveUserProgress(progress);
 }
 
