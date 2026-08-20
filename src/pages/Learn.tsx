@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { BookOpen, CheckCircle2, Lock, Eye } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../lib/curriculum/api';
-import { lessons } from '../lib/curriculum/data';
 import { getUserProgress, getLevel2TestProgress, getLevel3TestProgress, isLevel2TestPreviewEnabled, isLevel3TestPreviewEnabled, setLevel2TestPreview, setLevel3TestPreview } from '../lib/progress';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES, PROGRAMME_LEVELS } from '../lib/programmeLevels';
 
@@ -27,7 +26,7 @@ export function Learn() {
     return () => window.removeEventListener('mzansi_progress_updated', handleUpdate);
   }, []);
 
-  const level1Ids = lessons.filter((lesson) => lesson.levelId === 'MZAIE-L1').map((lesson) => lesson.id);
+  const level1Ids = modules.flatMap((module) => module.lessonIds);
   const level1Complete = level1Ids.length > 0 && level1Ids.every((id) => progress.completedLessons.includes(id));
   const level2Ids = LEVEL_TWO_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level2Progress = level2Preview && !level1Complete ? level2TestProgress : progress;
