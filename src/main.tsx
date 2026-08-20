@@ -32,6 +32,14 @@ async function refreshIfNewBuildExists() {
 
 void refreshIfNewBuildExists();
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {
+      // The app remains usable if service worker registration is unavailable.
+    });
+  });
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
