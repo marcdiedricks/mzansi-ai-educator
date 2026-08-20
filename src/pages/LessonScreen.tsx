@@ -28,6 +28,7 @@ export function LessonScreen() {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [quizScore, setQuizScore] = useState<number | null>(null);
+  const [quizNotice, setQuizNotice] = useState<string | null>(null);
 
   useEffect(() => {
     if (lessonId) {
@@ -35,6 +36,7 @@ export function LessonScreen() {
       setSelectedAnswers({});
       setQuizSubmitted(false);
       setQuizScore(null);
+      setQuizNotice(null);
     }
   }, [lessonId]);
 
@@ -56,14 +58,23 @@ export function LessonScreen() {
 
   const handleSubmitQuiz = () => {
     if (!lesson.quiz?.length || !lessonId) return;
+
+    const unanswered = lesson.quiz
+      .map((q, index) => selectedAnswers[q.id] === undefined ? index + 1 : null)
+      .filter((questionNumber): questionNumber is number => questionNumber !== null);
+
+    if (unanswered.length > 0) {
+      setQuizNotice(`Please answer question ${unanswered.join(', ')} before submitting.`);
+      return;
+    }
+
     const correctCount = lesson.quiz.reduce((count, q) => count + (selectedAnswers[q.id] === q.correctIndex ? 1 : 0), 0);
     const scorePct = Math.round((correctCount / lesson.quiz.length) * 100);
     recordQuizScore(lessonId, scorePct);
     setQuizScore(scorePct);
     setQuizSubmitted(true);
+    setQuizNotice(null);
   };
-
-  const allQuestionsAnswered = lesson.quiz ? lesson.quiz.every((q) => selectedAnswers[q.id] !== undefined) : true;
 
   return <div className="flex flex-col min-h-screen bg-white pb-24">
     <header className="flex items-center justify-between p-4 border-b-2 border-[#E2E8F0] bg-white sticky top-0 z-20">
@@ -94,9 +105,10 @@ export function LessonScreen() {
           if (quizSubmitted && correct) style = 'border-emerald-500 bg-emerald-50 text-emerald-900 font-bold';
           else if (quizSubmitted && selected && !correct) style = 'border-rose-400 bg-rose-50 text-rose-800';
           else if (selected) style = 'border-[#2D3E50] bg-slate-100 text-[#2D3E50] font-bold';
-          return <button key={optIdx} disabled={quizSubmitted} onClick={() => setSelectedAnswers((prev) => ({ ...prev, [q.id]: optIdx }))} className={`w-full p-3 rounded-xl border-2 text-left text-xs ${style}`}><span className="font-bold mr-2">{String.fromCharCode(65 + optIdx)}.</span>{opt}</button>;
+          return <button key={optIdx} disabled={quizSubmitted} onClick={() => { setSelectedAnswers((prev) => ({ ...prev, [q.id]: optIdx })); setQuizNotice(null); }} className={`w-full p-3 rounded-xl border-2 text-left text-xs ${style}`}><span className="font-bold mr-2">{String.fromCharCode(65 + optIdx)}.</span>{opt}</button>;
         })}</div>{quizSubmitted && <div className="p-3 bg-white border border-gray-200 rounded-xl text-xs"><div className="font-bold text-[#2D3E50]">Explanation</div><p className="text-gray-600 leading-relaxed">{q.explanation}</p></div>}</div>)}</div>
-        {!quizSubmitted ? <button disabled={!allQuestionsAnswered} onClick={handleSubmitQuiz} className="w-full bg-[#2D3E50] disabled:opacity-50 text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Submit Answers & Check Feedback</button> : <div className="p-3.5 bg-emerald-50 border-2 border-emerald-200 rounded-2xl text-center"><div className="text-emerald-800 font-bold text-sm">Quiz score: {quizScore}%</div><p className="text-[11px] text-emerald-700 mt-1">Score saved. Mark the lesson complete when you have finished reviewing the content.</p></div>}
+        {quizNotice && <div className="p-3 bg-amber-50 border-2 border-amber-200 rounded-xl text-xs font-bold text-amber-900">{quizNotice}</div>}
+        {!quizSubmitted ? <button onClick={handleSubmitQuiz} className="w-full bg-[#2D3E50] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Submit Answers & Check Feedback</button> : <div className="p-3.5 bg-emerald-50 border-2 border-emerald-200 rounded-2xl text-center"><div className="text-emerald-800 font-bold text-sm">Quiz score: {quizScore}%</div><p className="text-[11px] text-emerald-700 mt-1">Score saved. Mark the lesson complete when you have finished reviewing the content.</p></div>}
       </section>}
 
       <div className="pt-6 border-t-2 border-[#E2E8F0] flex flex-col gap-2.5">
