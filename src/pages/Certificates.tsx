@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Award, CheckCircle2, Star, BookOpen, Lock } from 'lucide-react';
 import { getUserProgress } from '../lib/progress';
 import { getOnboardingData } from '../lib/storage';
-import { lessons } from '../lib/curriculum/data';
+import { modules } from '../lib/curriculum/data';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES } from '../lib/programmeLevels';
 
 export function Certificates() {
@@ -17,7 +17,7 @@ export function Certificates() {
     return () => window.removeEventListener('mzansi_progress_updated', handleUpdate);
   }, []);
 
-  const level1Ids = lessons.filter((lesson) => lesson.levelId === 'MZAIE-L1').map((lesson) => lesson.id);
+  const level1Ids = modules.flatMap((module) => module.lessonIds);
   const level2Ids = LEVEL_TWO_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level3Ids = LEVEL_THREE_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level4Ids = LEVEL_FOUR_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
