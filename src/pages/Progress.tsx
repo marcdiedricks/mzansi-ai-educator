@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Award, Target, BookOpen, Star, Eye } from 'lucide-react';
 import { getUserProgress, getLevel2TestProgress, getLevel3TestProgress, isLevel2TestPreviewEnabled, isLevel3TestPreviewEnabled } from '../lib/progress';
-import { lessons } from '../lib/curriculum/data';
+import { modules } from '../lib/curriculum/data';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES } from '../lib/programmeLevels';
 
 export function Progress() {
@@ -23,7 +23,7 @@ export function Progress() {
     return () => window.removeEventListener('mzansi_progress_updated', handleUpdate);
   }, []);
 
-  const level1Ids = lessons.filter((lesson) => lesson.levelId === 'MZAIE-L1').map((lesson) => lesson.id);
+  const level1Ids = modules.flatMap((module) => module.lessonIds);
   const level2Ids = LEVEL_TWO_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level3Ids = LEVEL_THREE_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level4Ids = LEVEL_FOUR_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
