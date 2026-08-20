@@ -16,6 +16,7 @@ import { levelThreeTestingBiasLesson } from './levelThreeTestingBiasLesson';
 import { levelThreePrivacySafetyLesson } from './levelThreePrivacySafetyLesson';
 import { levelThreeSouthAfricanPrototypeLesson } from './levelThreeSouthAfricanPrototypeLesson';
 import { levelFourCommunityProblemsLesson } from './levelFourCommunityProblemsLesson';
+import { levelFourHumanCentredDesignLesson } from './levelFourHumanCentredDesignLesson';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
@@ -52,6 +53,7 @@ const newLevelThreeLessons: Lesson[] = [
 
 const newLevelFourLessons: Lesson[] = [
   levelFourCommunityProblemsLesson,
+  levelFourHumanCentredDesignLesson,
 ];
 
 function enhance(lesson: Lesson) {
