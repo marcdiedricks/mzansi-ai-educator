@@ -139,24 +139,26 @@ export function Learn() {
             <div>
               <div className="text-[#E67E22] font-bold text-[10px] uppercase tracking-wider mb-1">Level 4 · Lead & Solve</div>
               <h2 className="text-xl font-bold">AI Innovation & Problem-Solving</h2>
-              <p className={`text-xs mt-1 ${level4Accessible ? 'text-gray-300' : 'text-gray-600'}`}>{level4Accessible ? 'Level 4 is unlocked. Module lessons will be added one at a time.' : 'Complete Levels 1, 2 and 3 as a learner to unlock Level 4.'}</p>
+              <p className={`text-xs mt-1 ${level4Accessible ? 'text-gray-300' : 'text-gray-600'}`}>{level4Accessible ? 'Level 4 is unlocked. Complete the eight leadership and problem-solving modules.' : 'Complete Levels 1, 2 and 3 as a learner to unlock Level 4.'}</p>
             </div>
             {level4Accessible ? <BookOpen className="w-5 h-5 text-amber-300 shrink-0 mt-1" /> : <Lock className="w-5 h-5 text-gray-400 shrink-0 mt-1" />}
           </div>
         </div>
         <div className="divide-y-2 divide-[#E2E8F0]">
-          {LEVEL_FOUR_MODULES.map((mod, index) => (
+          {LEVEL_FOUR_MODULES.map((mod, index) => {
+            const done = Boolean(mod.lessonId && progress.completedLessons.includes(mod.lessonId));
+            return (
             <button key={mod.id} disabled={!level4Accessible || !mod.lessonId} onClick={() => mod.lessonId && navigate(`/learn/${mod.id}/lesson/${mod.lessonId}`)} className="w-full flex items-start p-5 bg-white text-left hover:bg-[#F8F9FA] disabled:opacity-60 disabled:cursor-not-allowed">
-              <div className="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center font-bold mr-4 shrink-0">{index + 1}</div>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold mr-4 shrink-0 ${done ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-600'}`}>{done ? <CheckCircle2 className="w-4 h-4" /> : index + 1}</div>
               <div className="flex-1 min-w-0">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#E67E22]">Module {mod.code}</p>
                 <h3 className="font-bold text-[#1A202C] mt-0.5">{mod.title}</h3>
                 <p className="text-xs text-gray-500 mt-1 leading-relaxed">{mod.description}</p>
-                <p className="text-[10px] font-bold uppercase tracking-wider mt-2 text-gray-400">Mapped · unlocks after Level 3</p>
+                <p className={`text-[10px] font-bold uppercase tracking-wider mt-2 ${done ? 'text-emerald-700' : level4Accessible ? 'text-[#2D3E50]' : 'text-gray-400'}`}>{done ? 'Completed' : level4Accessible ? '20 min lesson · Tap to open' : 'Mapped · unlocks after Level 3'}</p>
               </div>
-              <Lock className="w-4 h-4 text-gray-300 shrink-0 ml-3 mt-1" />
+              {level4Accessible ? <BookOpen className="w-4 h-4 text-[#E67E22] shrink-0 ml-3 mt-1" /> : <Lock className="w-4 h-4 text-gray-300 shrink-0 ml-3 mt-1" />}
             </button>
-          ))}
+          );})}
         </div>
       </section>
     </div>
