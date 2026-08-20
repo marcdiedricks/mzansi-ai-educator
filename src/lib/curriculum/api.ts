@@ -18,6 +18,7 @@ import { levelThreeSouthAfricanPrototypeLesson } from './levelThreeSouthAfricanP
 import { levelFourCommunityProblemsLesson } from './levelFourCommunityProblemsLesson';
 import { levelFourHumanCentredDesignLesson } from './levelFourHumanCentredDesignLesson';
 import { levelFourEducationNgosChurchesLesson } from './levelFourEducationNgosChurchesLesson';
+import { levelFourSmallBusinessEntrepreneurshipLesson } from './levelFourSmallBusinessEntrepreneurshipLesson';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES } from '../programmeLevels';
 import { Lesson, Module } from './types';
 import { validateCurriculumData } from './validation';
@@ -56,6 +57,7 @@ const newLevelFourLessons: Lesson[] = [
   levelFourCommunityProblemsLesson,
   levelFourHumanCentredDesignLesson,
   levelFourEducationNgosChurchesLesson,
+  levelFourSmallBusinessEntrepreneurshipLesson,
 ];
 
 function enhance(lesson: Lesson) {
