@@ -18,7 +18,7 @@ export function Home() {
   }, []);
 
   const level1Lessons = lessons.filter((lesson) => lesson.levelId === 'MZAIE-L1');
-  const level1Ids = level1Lessons.map((lesson) => lesson.id);
+  const level1Ids = modules.flatMap((module) => module.lessonIds);
   const level1Modules = modules.filter((module) => module.lessonIds.some((lessonId) => level1Ids.includes(lessonId)));
   const completedLevel1 = level1Ids.filter((id) => progress.completedLessons.includes(id));
   const level1Percent = Math.round((completedLevel1.length / Math.max(level1Ids.length, 1)) * 100);
