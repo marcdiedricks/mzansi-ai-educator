@@ -89,7 +89,7 @@ export function LessonScreen() {
 
       {videoResources.length > 0 && <section className="mt-8 pt-6 border-t-2 border-[#E2E8F0] space-y-3">
         <div className="flex items-center gap-2"><PlayCircle className="w-5 h-5 text-[#E67E22]" /><h2 className="text-base font-bold text-[#2D3E50]">Watch & Learn</h2></div>
-        <p className="text-xs text-gray-500">Optional external videos. Internet and mobile data may be required. The lesson itself does not depend on these links.</p>
+        <p className="text-xs text-gray-500">Optional external videos and references. Internet and mobile data may be required. The lesson itself does not depend on these links.</p>
         <div className="space-y-2.5">{videoResources.map((resource) => <a key={resource.id} href={resource.url} target="_blank" rel="noreferrer" className="block bg-white border-2 border-[#E2E8F0] rounded-2xl p-4 hover:border-[#2D3E50] transition-colors">
           <div className="flex items-start gap-3"><div className="w-10 h-10 rounded-xl bg-orange-50 text-[#E67E22] flex items-center justify-center shrink-0"><PlayCircle className="w-5 h-5" /></div><div className="flex-1 min-w-0"><div className="flex items-start justify-between gap-2"><h3 className="font-bold text-sm text-[#1A202C]">{resource.title}</h3><ExternalLink className="w-4 h-4 text-gray-400 shrink-0" /></div><p className="text-xs text-gray-500 mt-1">{resource.provider} · {resource.language}{resource.durationMinutes ? ` · ${resource.durationMinutes} min` : ''}</p><p className="text-[11px] text-amber-700 mt-2">{resource.dataWarning}</p></div></div>
         </a>)}</div>
