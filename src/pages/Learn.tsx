@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BookOpen, CheckCircle2, Lock, Eye } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../lib/curriculum/api';
-import { getUserProgress, getLevel2TestProgress, getLevel3TestProgress, isLevel2TestPreviewEnabled, isLevel3TestPreviewEnabled, setLevel2TestPreview, setLevel3TestPreview } from '../lib/progress';
+import { getUserProgress, getLevel2TestProgress, getLevel3TestProgress, getLevel4TestProgress, isLevel2TestPreviewEnabled, isLevel3TestPreviewEnabled, isLevel4TestPreviewEnabled, setLevel2TestPreview, setLevel3TestPreview, setLevel4TestPreview } from '../lib/progress';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES, PROGRAMME_LEVELS } from '../lib/programmeLevels';
 
 export function Learn() {
@@ -11,16 +11,20 @@ export function Learn() {
   const [progress, setProgress] = useState(getUserProgress());
   const [level2TestProgress, setLevel2TestProgress] = useState(getLevel2TestProgress());
   const [level3TestProgress, setLevel3TestProgress] = useState(getLevel3TestProgress());
+  const [level4TestProgress, setLevel4TestProgress] = useState(getLevel4TestProgress());
   const [level2Preview, setLevel2Preview] = useState(isLevel2TestPreviewEnabled());
   const [level3Preview, setLevel3Preview] = useState(isLevel3TestPreviewEnabled());
+  const [level4Preview, setLevel4Preview] = useState(isLevel4TestPreviewEnabled());
 
   useEffect(() => {
     const handleUpdate = () => {
       setProgress(getUserProgress());
       setLevel2TestProgress(getLevel2TestProgress());
       setLevel3TestProgress(getLevel3TestProgress());
+      setLevel4TestProgress(getLevel4TestProgress());
       setLevel2Preview(isLevel2TestPreviewEnabled());
       setLevel3Preview(isLevel3TestPreviewEnabled());
+      setLevel4Preview(isLevel4TestPreviewEnabled());
     };
     window.addEventListener('mzansi_progress_updated', handleUpdate);
     return () => window.removeEventListener('mzansi_progress_updated', handleUpdate);
@@ -39,7 +43,8 @@ export function Learn() {
   const level3Complete = level3Ids.length === LEVEL_THREE_MODULES.length && level3Ids.every((id) => level3Progress.completedLessons.includes(id));
   const level3RealComplete = level2RealComplete && level3Ids.length === LEVEL_THREE_MODULES.length && level3Ids.every((id) => progress.completedLessons.includes(id));
   const level3Accessible = level2RealComplete || level3Preview;
-  const level4Accessible = level3RealComplete;
+  const level4Progress = level4Preview && !level3RealComplete ? level4TestProgress : progress;
+  const level4Accessible = level3RealComplete || level4Preview;
 
   const openModule = (moduleId: string, lessonIds: string[]) => {
     if (lessonIds.length === 1) {
@@ -50,13 +55,27 @@ export function Learn() {
   };
 
   const toggleLevel2Preview = () => {
-    if (!level2Preview) setLevel3TestPreview(false);
+    if (!level2Preview) {
+      setLevel3TestPreview(false);
+      setLevel4TestPreview(false);
+    }
     setLevel2TestPreview(!level2Preview);
   };
 
   const toggleLevel3Preview = () => {
-    if (!level3Preview) setLevel2TestPreview(false);
+    if (!level3Preview) {
+      setLevel2TestPreview(false);
+      setLevel4TestPreview(false);
+    }
     setLevel3TestPreview(!level3Preview);
+  };
+
+  const toggleLevel4Preview = () => {
+    if (!level4Preview) {
+      setLevel2TestPreview(false);
+      setLevel3TestPreview(false);
+    }
+    setLevel4TestPreview(!level4Preview);
   };
 
   return (
@@ -77,12 +96,18 @@ export function Learn() {
           <strong>LEVEL 3 TEST PREVIEW ACTIVE.</strong> Level 3 is open for build verification only. Test completions and quiz scores are isolated. Level 4 remains locked.
         </div>
       )}
+      {level4Preview && !level3RealComplete && (
+        <div className="bg-amber-50 border-2 border-amber-300 rounded-xl p-3 text-xs text-amber-900">
+          <strong>LEVEL 4 TEST PREVIEW ACTIVE.</strong> Level 4 is open for build verification only. Test completions and quiz scores are isolated from learner progress.
+        </div>
+      )}
 
       <section className="space-y-3">
         {PROGRAMME_LEVELS.map((level) => {
           const unlocked = level.id === 1 || (level.id === 2 && level2Accessible) || (level.id === 3 && level3Accessible) || (level.id === 4 && level4Accessible);
-          const completed = (level.id === 1 && level1Complete) || (level.id === 2 && level2Complete) || (level.id === 3 && level3Complete);
-          const previewComplete = (level.id === 2 && level2Preview && !level1Complete) || (level.id === 3 && level3Preview && !level2RealComplete);
+          const level4Complete = level.id === 4 && LEVEL_FOUR_MODULES.every((module) => module.lessonId && level4Progress.completedLessons.includes(module.lessonId));
+          const completed = (level.id === 1 && level1Complete) || (level.id === 2 && level2Complete) || (level.id === 3 && level3Complete) || level4Complete;
+          const previewComplete = (level.id === 2 && level2Preview && !level1Complete) || (level.id === 3 && level3Preview && !level2RealComplete) || (level.id === 4 && level4Preview && !level3RealComplete);
           return (
             <div key={level.id} className={`rounded-2xl border-2 p-4 ${unlocked ? 'bg-white border-[#2D3E50]' : 'bg-[#F8F9FA] border-[#E2E8F0]'}`}>
               <div className="flex items-start gap-3">
@@ -138,14 +163,15 @@ export function Learn() {
             <div>
               <div className="text-[#E67E22] font-bold text-[10px] uppercase tracking-wider mb-1">Level 4 · Lead & Solve</div>
               <h2 className="text-xl font-bold">AI Innovation & Problem-Solving</h2>
-              <p className={`text-xs mt-1 ${level4Accessible ? 'text-gray-300' : 'text-gray-600'}`}>{level4Accessible ? 'Level 4 is unlocked. Complete the eight leadership and problem-solving modules.' : 'Complete Levels 1, 2 and 3 as a learner to unlock Level 4.'}</p>
+              <p className={`text-xs mt-1 ${level4Accessible ? 'text-gray-300' : 'text-gray-600'}`}>{level3RealComplete ? 'Level 4 is unlocked. Complete the eight leadership and problem-solving modules.' : level4Preview ? 'Build preview is active. Level 4 test records are isolated from learner progress.' : 'Complete Levels 1, 2 and 3 as a learner to unlock Level 4.'}</p>
             </div>
-            {level4Accessible ? <BookOpen className="w-5 h-5 text-amber-300 shrink-0 mt-1" /> : <Lock className="w-5 h-5 text-gray-400 shrink-0 mt-1" />}
+            {level4Accessible ? <Eye className="w-5 h-5 text-amber-300 shrink-0 mt-1" /> : <Lock className="w-5 h-5 text-gray-400 shrink-0 mt-1" />}
           </div>
+          {!level3RealComplete && <button onClick={toggleLevel4Preview} className={`mt-4 w-full rounded-xl px-4 py-3 text-xs font-bold ${level4Preview ? 'bg-amber-100 text-amber-900' : 'bg-white text-[#2D3E50]'}`}>{level4Preview ? 'Exit Level 4 Test Preview' : 'Open Level 4 Test Preview'}</button>}
         </div>
         <div className="divide-y-2 divide-[#E2E8F0]">
           {LEVEL_FOUR_MODULES.map((mod, index) => {
-            const done = Boolean(mod.lessonId && progress.completedLessons.includes(mod.lessonId));
+            const done = Boolean(mod.lessonId && level4Progress.completedLessons.includes(mod.lessonId));
             return (
             <button key={mod.id} disabled={!level4Accessible || !mod.lessonId} onClick={() => mod.lessonId && navigate(`/learn/${mod.id}/lesson/${mod.lessonId}`)} className="w-full flex items-start p-5 bg-white text-left hover:bg-[#F8F9FA] disabled:opacity-60 disabled:cursor-not-allowed">
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold mr-4 shrink-0 ${done ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-600'}`}>{done ? <CheckCircle2 className="w-4 h-4" /> : index + 1}</div>
@@ -153,7 +179,7 @@ export function Learn() {
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#E67E22]">Module {mod.code}</p>
                 <h3 className="font-bold text-[#1A202C] mt-0.5">{mod.title}</h3>
                 <p className="text-xs text-gray-500 mt-1 leading-relaxed">{mod.description}</p>
-                <p className={`text-[10px] font-bold uppercase tracking-wider mt-2 ${done ? 'text-emerald-700' : level4Accessible ? 'text-[#2D3E50]' : 'text-gray-400'}`}>{done ? 'Completed' : level4Accessible ? '20 min lesson · Tap to open' : 'Mapped · unlocks after Level 3'}</p>
+                <p className={`text-[10px] font-bold uppercase tracking-wider mt-2 ${done ? 'text-emerald-700' : level4Accessible ? 'text-[#2D3E50]' : 'text-gray-400'}`}>{done ? (level4Preview && !level3RealComplete ? 'Test completed' : 'Completed') : level4Accessible ? '20 min lesson · Tap to open' : 'Mapped · unlocks after Level 3'}</p>
               </div>
               {level4Accessible ? <BookOpen className="w-4 h-4 text-[#E67E22] shrink-0 ml-3 mt-1" /> : <Lock className="w-4 h-4 text-gray-300 shrink-0 ml-3 mt-1" />}
             </button>
