@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Book, Globe, ChevronDown, ChevronUp, Sparkles, ShieldCheck } from 'lucide-react';
+import { Search, Book, Globe, ChevronDown, ChevronUp, Sparkles, ShieldCheck, ExternalLink } from 'lucide-react';
 import { TERMINOLOGY_DATA } from '../lib/terminology';
 import { SOURCE_BACKED_TERMS } from '../lib/terminologyExpansion';
 
@@ -139,6 +139,32 @@ export function Glossary() {
           </p>
         </div>
       )}
+
+
+      <section className="bg-white border-2 border-[#E2E8F0] rounded-2xl p-4 space-y-3">
+        <div>
+          <h2 className="text-sm font-bold text-[#2D3E50]">Trusted Glossary & Context Sources</h2>
+          <p className="text-[11px] text-gray-500 mt-1 leading-relaxed">
+            This glossary stays simple for offline learning. Use these trusted sources for deeper AI terminology and South African or African responsible AI context when you have internet access.
+          </p>
+        </div>
+        <div className="space-y-2">
+          {[
+            { title: 'Google + PanSALB AI glossary for African languages', provider: 'Google Africa', url: 'https://blog.google/intl/en-africa/google-launches-ai-glossary-for-african-languages/' },
+            { title: 'AI Competency Framework for Students', provider: 'UNESCO', url: 'https://www.unesco.org/en/articles/ai-competency-framework-students' },
+            { title: 'South Africa responsible AI country profile', provider: 'UNESCO Global AI Ethics Observatory', url: 'https://www.unesco.org/ethics-ai/en/southafrica' },
+            { title: 'Artificial Intelligence and Education Systems in Africa', provider: 'UNESCO IICBA', url: 'https://www.iicba.unesco.org/en/artificial-intelligence-and-education-systems' },
+          ].map((source) => (
+            <a key={source.url} href={source.url} target="_blank" rel="noreferrer" className="flex items-start justify-between gap-3 rounded-xl border border-[#E2E8F0] bg-[#F8F9FA] p-3">
+              <div>
+                <p className="text-xs font-bold text-[#1A202C]">{source.title}</p>
+                <p className="text-[10px] text-gray-500 mt-0.5">{source.provider} · External reference</p>
+              </div>
+              <ExternalLink className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
+            </a>
+          ))}
+        </div>
+      </section>
 
       <div className="flex flex-col gap-3 w-full">
         {filteredTerms.map((termItem) => {
