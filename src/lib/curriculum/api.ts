@@ -16,6 +16,7 @@ import { translateLevelOneLesson06 } from './levelOneLesson06Translations';
 import { levelOneLesson07 } from './levelOneLesson07';
 import { translateLevelOneLesson07 } from './levelOneLesson07Translations';
 import { levelOneLesson08 } from './levelOneLesson08';
+import { translateLevelOneLesson08 } from './levelOneLesson08Translations';
 import { levelTwoLessons } from './levelTwoLessons';
 import { levelTwoWritingLesson } from './levelTwoWritingLesson';
 import { levelTwoAdvancedCreoLesson } from './levelTwoAdvancedCreoLesson';
@@ -133,6 +134,7 @@ export const api = {
       if (canonicalLevelOneLesson.id === levelOneLesson05.id) return translateLevelOneLesson05(canonicalLevelOneLesson, language);
       if (canonicalLevelOneLesson.id === levelOneLesson06.id) return translateLevelOneLesson06(canonicalLevelOneLesson, language);
       if (canonicalLevelOneLesson.id === levelOneLesson07.id) return translateLevelOneLesson07(canonicalLevelOneLesson, language);
+      if (canonicalLevelOneLesson.id === levelOneLesson08.id) return translateLevelOneLesson08(canonicalLevelOneLesson, language);
       return canonicalLevelOneLesson;
     }
     const existingLesson = lessons.find((l) => l.id === lessonId);
