@@ -2,7 +2,7 @@ import { Lesson } from './types';
 
 export const levelThreeSouthAfricanPrototypeLesson: Lesson = {
   id: 'MZAIE-P3-M08-L01',
-  title: 'Build a South African AI Prototype',
+  title: 'Build and Test a South African AI Idea',
   levelId: 'MZAIE-P3',
   moduleId: 'MZAIE-P3-M08',
   locale: 'en-ZA',
@@ -21,11 +21,11 @@ export const levelThreeSouthAfricanPrototypeLesson: Lesson = {
   offlineEligible: true,
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
-    { id:'p3m8_b1', type:'objective', variant:'standard', content:'This capstone brings Level 3 together. Your goal is not to build the biggest AI product. Your goal is to build the smallest responsible prototype that solves one clear problem for one defined group of people.' },
+    { id:'p3m8_b1', type:'objective', variant:'standard', content:'This final Level 3 activity brings your learning together. Your goal is not to build the biggest AI product. Build the smallest responsible working test that helps with one clear problem for one defined group of people. This kind of early working version is often called a prototype.' },
     { id:'p3m8_b2', type:'keyPoint', variant:'standard', content:'Start with the problem, not the tool. Write one sentence: Who is struggling, with what task, in which setting, and what better outcome would matter?' },
     { id:'p3m8_b3', type:'example', variant:'SouthAfricanContext', content:'Example: A community skills centre wants to help first-time job seekers understand vacancies written in difficult English. A small prototype could explain one vacancy in plain language, identify required documents and generate a simple checklist. It does not need to become a full recruitment platform.' },
     { id:'p3m8_b4', type:'application', variant:'plain', content:'Use the BUILD-8 capstone sequence: 1) Problem and user. 2) Intended outcome. 3) Minimum inputs. 4) Trusted knowledge or sources. 5) Smallest useful workflow. 6) Simple user experience. 7) Test and safety gates. 8) Evidence and next decision.' },
-    { id:'p3m8_b5', type:'explanation', variant:'standard', content:'Freeze the minimum viable prototype before building. Choose one primary user, one core task and one useful output. Remove anything that is not required to test the central value proposition.' },
+    { id:'p3m8_b5', type:'explanation', variant:'standard', content:'Before building, decide what the smallest useful version must do. Choose one main user, one main task and one useful result. Remove anything that is not needed to test whether the idea actually helps.' },
     { id:'p3m8_b6', type:'keyPoint', variant:'standard', content:'Design for the real environment. Consider ordinary Android phones, limited data, intermittent connectivity, shared devices, plain language, local terminology, accessibility and whether the core experience can still make sense when an external AI or video service is unavailable.' },
     { id:'p3m8_b7', type:'explanation', variant:'standard', content:'Apply the knowledge and data rules from Module 3.3. Record what the prototype is allowed to use, which sources are trusted, how freshness is checked, what personal or sensitive information is excluded, and what the system must say when it is uncertain.' },
     { id:'p3m8_b8', type:'explanation', variant:'standard', content:'Apply the workflow and UX rules from Modules 3.2 and 3.5. Keep the user journey short. Each screen or conversation step should have a clear purpose, a clear next action, understandable feedback and a safe way to recover from an error.' },
