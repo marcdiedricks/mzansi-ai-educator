@@ -21,7 +21,9 @@ export function More() {
     { label: 'About Mzansi AI Educator', icon: Info },
   ];
 
-  const Section = ({ title, items }: { title: string, items: typeof links }) => (
+  type MenuItem = { label: string; icon: typeof Book; path?: string };
+
+  const Section = ({ title, items }: { title: string; items: MenuItem[] }) => (
     <div className="mb-6">
       <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 px-1">{title}</h3>
       <div className="bg-white border-2 border-[#E2E8F0] rounded-2xl overflow-hidden">
