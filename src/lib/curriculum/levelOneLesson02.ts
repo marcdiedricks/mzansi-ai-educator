@@ -1,9 +1,9 @@
 import { Lesson } from './types';
 export const levelOneLesson02: Lesson = {
-id:'MZAIE-P1-M02-L01',title:'Algorithms and Patterns',levelId:'MZAIE-L1',moduleId:'MZAIE-P1-M02',locale:'en-ZA',version:'2.0',estimatedMinutes:20,objectives:['Explain algorithms, patterns, prediction and classification.'],competencyIds:['AI_UNDERSTANDING','CRITICAL_QUESTIONING'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
+id:'MZAIE-P1-M02-L01',title:'Steps, Patterns and Predictions',levelId:'MZAIE-L1',moduleId:'MZAIE-P1-M02',locale:'en-ZA',version:'2.0',estimatedMinutes:20,objectives:['Understand how clear steps and patterns can be used to sort things or make predictions.'],competencyIds:['AI_UNDERSTANDING','CRITICAL_QUESTIONING'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
 blocks:[
-{id:'o',type:'objective',variant:'standard',content:'Explain algorithms, patterns, prediction and classification.'},
-{id:'e',type:'explanation',variant:'standard',content:'An algorithm is a set of steps or rules. A pattern is a recurring relationship. Prediction estimates a likely outcome; classification places something into a category.'},
+{id:'o',type:'objective',variant:'standard',content:'Understand how clear steps and patterns can be used to sort things or make predictions.'},
+{id:'e',type:'explanation',variant:'standard',content:'Many computer tasks follow a set of steps or rules. This is sometimes called an algorithm. AI can also learn patterns from examples. It can use those patterns to predict what may happen or sort something into a group.'},
 {id:'t',type:'activity',variant:'standard',content:'THINK — T: Try independently. Write four steps for a familiar task.'},
 {id:'h',type:'explanation',variant:'plain',content:'THINK — H: Hunt for understanding. Identify which parts are steps, patterns, predictions or classifications.'},
 {id:'i',type:'verification',variant:'standard',content:'THINK — I: Investigate. Test whether another person could follow your steps.'},
