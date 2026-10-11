@@ -2,7 +2,7 @@ import { Lesson } from './types';
 
 export const levelFourHumanCentredDesignLesson: Lesson = {
   id: 'MZAIE-P4-M02-L01',
-  title: 'Human-Centred AI Design',
+  title: 'Design AI Around People',
   levelId: 'MZAIE-P4',
   moduleId: 'MZAIE-P4-M02',
   locale: 'en-ZA',
@@ -22,7 +22,7 @@ export const levelFourHumanCentredDesignLesson: Lesson = {
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
     { id:'p4m2_b1', type:'objective', variant:'standard', content:'Lead the design of an AI-supported service by starting with the people who must use it, the setting where it will operate, and the dignity, safety and access needs that must be protected.' },
-    { id:'p4m2_b2', type:'explanation', variant:'standard', content:'Human-centred AI design means the technology is shaped around people, not the other way around. A good design considers language, literacy, disability access, device quality, data cost, trust, cultural context, staff capacity and what happens when the system is wrong.' },
+    { id:'p4m2_b2', type:'explanation', variant:'standard', content:'Start with people, not the technology. This is often called human-centred AI design. Consider language, reading ability, disability access, device quality, data cost, trust, culture, available staff support and what happens when the system is wrong.' },
     { id:'p4m2_b3', type:'keyPoint', variant:'standard', content:'A solution is not human-centred because it has a friendly interface. It is human-centred when real people can understand it, use it, question it, recover from errors and still receive fair treatment.' },
     { id:'p4m2_b4', type:'application', variant:'plain', content:'Use the PEOPLE design loop: People affected. Existing journey. Obstacles and risks. Plain-language need. Low-data access. Evidence to test. Oversight and escalation. This keeps design grounded before features are added.' },
     { id:'p4m2_b5', type:'example', variant:'SouthAfricanContext', content:'A school wants an AI homework helper. A human-centred design checks whether learners share phones, whether instructions are in plain language, whether the tool supports the curriculum, whether it explains instead of doing the work, and whether a teacher or adult can intervene when advice is confusing.' },
