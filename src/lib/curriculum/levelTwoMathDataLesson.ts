@@ -2,7 +2,7 @@ import { Lesson } from './types';
 
 export const levelTwoMathDataLesson: Lesson = {
   id: 'MZAIE-P2-M05-L01',
-  title: 'AI for Mathematics, Data & Problem Solving',
+  title: 'AI for Numbers and Problem Solving',
   levelId: 'MZAIE-P2',
   moduleId: 'MZAIE-P2-M05',
   locale: 'en-ZA',
@@ -10,7 +10,7 @@ export const levelTwoMathDataLesson: Lesson = {
   estimatedMinutes: 20,
   objectives: [
     'Use AI to support calculations and structured problem-solving without giving up your own reasoning.',
-    'Interpret tables, percentages, averages and simple datasets with appropriate checks.',
+    'Understand tables, percentages, averages and small sets of numbers, and check the results.',
     'Spot impossible, inconsistent or weak AI-generated numerical answers.',
     'Use a repeatable process for solving and verifying practical maths and data tasks.'
   ],
@@ -21,7 +21,7 @@ export const levelTwoMathDataLesson: Lesson = {
   offlineEligible: true,
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
-    { id:'p2m5_b1', type:'objective', variant:'standard', content:'Learn to use AI as a maths and data assistant that helps you understand a problem, check a method and interpret results while you remain responsible for the reasoning and final answer.' },
+    { id:'p2m5_b1', type:'objective', variant:'standard', content:'Learn to use AI to help with numbers and problems while you still understand the steps, check the result and remain responsible for the final answer.' },
     { id:'p2m5_b2', type:'explanation', variant:'standard', content:'AI can help break a problem into steps, explain a formula, organise numbers into a table, calculate percentages, compare values or suggest another method. But it can still make arithmetic, logic or interpretation errors.' },
     { id:'p2m5_b3', type:'keyPoint', variant:'standard', content:'A numerical answer is not trustworthy merely because it looks precise. Always ask whether the answer is reasonable, whether the units are correct and whether the calculation matches the question.' },
     { id:'p2m5_b4', type:'application', variant:'plain', content:'Use the SOLVE routine: State the problem. Organise the known information. Lay out the method. Verify the calculation. Explain what the answer means.' },
