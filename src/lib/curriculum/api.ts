@@ -116,6 +116,18 @@ function getProgrammeModule(moduleId: string): Module | undefined {
 }
 
 const canonicalLevelOneLessons = [levelOneLesson01, levelOneLesson02, levelOneLesson03, levelOneLesson04, levelOneLesson05, levelOneLesson06, levelOneLesson07, levelOneLesson08];
+function translateCanonicalLevelOneLesson(lesson: Lesson): Lesson {
+  const language = getOnboardingData()?.language || 'en';
+  if (lesson.id === levelOneLesson01.id) return translateLevelOneLesson01(lesson, language);
+  if (lesson.id === levelOneLesson02.id) return translateLevelOneLesson02(lesson, language);
+  if (lesson.id === levelOneLesson03.id) return translateLevelOneLesson03(lesson, language);
+  if (lesson.id === levelOneLesson04.id) return translateLevelOneLesson04(lesson, language);
+  if (lesson.id === levelOneLesson05.id) return translateLevelOneLesson05(lesson, language);
+  if (lesson.id === levelOneLesson06.id) return translateLevelOneLesson06(lesson, language);
+  if (lesson.id === levelOneLesson07.id) return translateLevelOneLesson07(lesson, language);
+  if (lesson.id === levelOneLesson08.id) return translateLevelOneLesson08(lesson, language);
+  return lesson;
+}
 const extendedLessons = [...newLevelTwoLessons, ...newLevelThreeLessons, ...newLevelFourLessons];
 
 export const api = {
@@ -125,25 +137,14 @@ export const api = {
   getModule: (moduleId: string) => LEVEL_ONE_MODULES.find((m) => m.id === moduleId) || modules.find((m) => m.id === moduleId) || getProgrammeModule(moduleId),
   getLesson: (lessonId: string) => {
     const canonicalLevelOneLesson = canonicalLevelOneLessons.find((l) => l.id === lessonId);
-    if (canonicalLevelOneLesson) {
-      const language = getOnboardingData()?.language || 'en';
-      if (canonicalLevelOneLesson.id === levelOneLesson01.id) return translateLevelOneLesson01(canonicalLevelOneLesson, language);
-      if (canonicalLevelOneLesson.id === levelOneLesson02.id) return translateLevelOneLesson02(canonicalLevelOneLesson, language);
-      if (canonicalLevelOneLesson.id === levelOneLesson03.id) return translateLevelOneLesson03(canonicalLevelOneLesson, language);
-      if (canonicalLevelOneLesson.id === levelOneLesson04.id) return translateLevelOneLesson04(canonicalLevelOneLesson, language);
-      if (canonicalLevelOneLesson.id === levelOneLesson05.id) return translateLevelOneLesson05(canonicalLevelOneLesson, language);
-      if (canonicalLevelOneLesson.id === levelOneLesson06.id) return translateLevelOneLesson06(canonicalLevelOneLesson, language);
-      if (canonicalLevelOneLesson.id === levelOneLesson07.id) return translateLevelOneLesson07(canonicalLevelOneLesson, language);
-      if (canonicalLevelOneLesson.id === levelOneLesson08.id) return translateLevelOneLesson08(canonicalLevelOneLesson, language);
-      return canonicalLevelOneLesson;
-    }
+    if (canonicalLevelOneLesson) return translateCanonicalLevelOneLesson(canonicalLevelOneLesson);
     const existingLesson = lessons.find((l) => l.id === lessonId);
     if (existingLesson) return enhance(existingLesson);
     return extendedLessons.find((l) => l.id === lessonId);
   },
   getLessonsForModule: (moduleId: string) => {
     const canonicalLevelOne = canonicalLevelOneLessons.filter((l) => l.moduleId === moduleId);
-    if (canonicalLevelOne.length > 0) return canonicalLevelOne;
+    if (canonicalLevelOne.length > 0) return canonicalLevelOne.map(translateCanonicalLevelOneLesson);
     const existingLessons = lessons.filter((l) => l.moduleId === moduleId).map(enhance);
     if (existingLessons.length > 0) return existingLessons;
     return extendedLessons.filter((l) => l.moduleId === moduleId);
