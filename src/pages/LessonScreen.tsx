@@ -4,6 +4,7 @@ import { api } from '../lib/curriculum/api';
 import { ArrowLeft, Clock, CheckCircle2, Info, Lightbulb, MessageSquare, Bookmark, HelpCircle, CheckSquare, Square, ExternalLink, PlayCircle } from 'lucide-react';
 import { LessonBlock } from '../lib/curriculum/types';
 import { isLessonCompleted, toggleLessonCompletion, recordQuizScore } from '../lib/progress';
+import { getLessonEvidence, saveLessonEvidence } from '../lib/evidence';
 import { getActiveVideoResourcesForLesson } from '../lib/videoResources';
 
 function renderBlock(block: LessonBlock) {
@@ -29,6 +30,9 @@ export function LessonScreen() {
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [quizScore, setQuizScore] = useState<number | null>(null);
   const [quizNotice, setQuizNotice] = useState<string | null>(null);
+  const [activityResponse, setActivityResponse] = useState('');
+  const [reflectionResponse, setReflectionResponse] = useState('');
+  const [evidenceSaved, setEvidenceSaved] = useState(false);
 
   useEffect(() => {
     if (lessonId) {
@@ -37,6 +41,10 @@ export function LessonScreen() {
       setQuizSubmitted(false);
       setQuizScore(null);
       setQuizNotice(null);
+      const evidence = getLessonEvidence(lessonId);
+      setActivityResponse(evidence.activityResponse);
+      setReflectionResponse(evidence.reflectionResponse);
+      setEvidenceSaved(false);
     }
   }, [lessonId]);
 
@@ -111,6 +119,23 @@ export function LessonScreen() {
         {quizNotice && <div className="p-3 bg-amber-50 border-2 border-amber-200 rounded-xl text-xs font-bold text-amber-900">{quizNotice}</div>}
         {!quizSubmitted ? <button onClick={handleSubmitQuiz} className="w-full bg-[#2D3E50] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Submit Answers & Check Feedback</button> : <div className="p-3.5 bg-emerald-50 border-2 border-emerald-200 rounded-2xl text-center"><div className="text-emerald-800 font-bold text-sm">Learning check: {quizScore}%</div><p className="text-[11px] text-emerald-700 mt-1">Review the explanations. If you missed something, choose another answer and check again. This is here to help you learn, not to stop you.</p></div>}
       </section>}
+
+      <section className="mt-8 pt-6 border-t-2 border-[#E2E8F0] space-y-4">
+        <div>
+          <h2 className="text-base font-bold text-[#2D3E50]">My Learning Evidence</h2>
+          <p className="text-xs text-gray-500 mt-1">Write in your own words. Your notes are saved only on this device and are not a pass-or-fail test.</p>
+        </div>
+        <label className="block space-y-1.5">
+          <span className="text-xs font-bold text-[#2D3E50]">What did you try or apply?</span>
+          <textarea value={activityResponse} onChange={(event) => { setActivityResponse(event.target.value); setEvidenceSaved(false); }} rows={5} placeholder="Describe what you tried, built, checked or decided." className="w-full p-3 rounded-xl border-2 border-[#E2E8F0] text-sm text-[#1A202C] bg-white focus:outline-none focus:border-[#2D3E50]" />
+        </label>
+        <label className="block space-y-1.5">
+          <span className="text-xs font-bold text-[#2D3E50]">What did you learn?</span>
+          <textarea value={reflectionResponse} onChange={(event) => { setReflectionResponse(event.target.value); setEvidenceSaved(false); }} rows={4} placeholder="Explain what you learned, what changed in your thinking, or what you would do differently." className="w-full p-3 rounded-xl border-2 border-[#E2E8F0] text-sm text-[#1A202C] bg-white focus:outline-none focus:border-[#2D3E50]" />
+        </label>
+        <button onClick={() => { if (!lessonId) return; saveLessonEvidence(lessonId, { activityResponse, reflectionResponse }); setEvidenceSaved(true); }} className="w-full bg-[#2D3E50] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Save My Evidence</button>
+        {evidenceSaved && <p className="text-xs font-bold text-emerald-700 text-center">Saved on this device.</p>}
+      </section>
 
       <div className="pt-6 border-t-2 border-[#E2E8F0] flex flex-col gap-2.5">
         <button onClick={handleToggleCompleted} className={`w-full py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 ${completed ? 'bg-emerald-600 text-white' : 'bg-white border-2 border-[#2D3E50] text-[#2D3E50]'}`}>{completed ? <CheckCircle2 className="w-4 h-4" /> : <Square className="w-4 h-4" />}<span>{completed ? 'Lesson Completed • Mark Incomplete' : 'Mark Lesson as Completed'}</span></button>
