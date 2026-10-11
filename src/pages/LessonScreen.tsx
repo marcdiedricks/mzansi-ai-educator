@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../lib/curriculum/api';
 import { ArrowLeft, Clock, CheckCircle2, Info, Lightbulb, MessageSquare, Bookmark, HelpCircle, CheckSquare, Square, ExternalLink, PlayCircle } from 'lucide-react';
 import { LessonBlock } from '../lib/curriculum/types';
-import { isLessonCompleted, toggleLessonCompletion, recordQuizScore } from '../lib/progress';
+import { isLessonCompleted, toggleLessonCompletion, recordQuizScore, getUserProgress } from '../lib/progress';
 import { getActiveVideoResourcesForLesson } from '../lib/videoResources';
 
 function renderBlock(block: LessonBlock) {
@@ -53,6 +53,17 @@ export function LessonScreen() {
 
   const handleToggleCompleted = () => {
     if (!lessonId) return;
+
+    const isCanonicalLevelOne = lessonId.startsWith('MZAIE-P1-');
+    if (isCanonicalLevelOne && !completed) {
+      const savedScore = getUserProgress().quizScores[lessonId];
+      const effectiveScore = quizSubmitted && quizScore !== null ? quizScore : savedScore;
+      if (effectiveScore === undefined || effectiveScore < 70) {
+        setQuizNotice('Complete the knowledge check and score at least 70% before marking this Level 1 lesson complete.');
+        return;
+      }
+    }
+
     setCompleted(toggleLessonCompletion(lessonId));
   };
 
