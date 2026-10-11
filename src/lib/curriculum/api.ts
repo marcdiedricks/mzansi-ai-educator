@@ -1,6 +1,8 @@
 import { modules, lessons, level, programme } from './data';
 import { LEVEL_ONE_MODULES } from './levelOneCanonical';
 import { levelOneLesson01 } from './levelOneLesson01';
+import { translateLevelOneLesson01 } from './levelOneLesson01Translations';
+import { getOnboardingData } from '../storage';
 import { levelOneLesson02 } from './levelOneLesson02';
 import { levelOneLesson03 } from './levelOneLesson03';
 import { levelOneLesson04 } from './levelOneLesson04';
@@ -116,7 +118,10 @@ export const api = {
   getModule: (moduleId: string) => LEVEL_ONE_MODULES.find((m) => m.id === moduleId) || modules.find((m) => m.id === moduleId) || getProgrammeModule(moduleId),
   getLesson: (lessonId: string) => {
     const canonicalLevelOneLesson = canonicalLevelOneLessons.find((l) => l.id === lessonId);
-    if (canonicalLevelOneLesson) return canonicalLevelOneLesson;
+    if (canonicalLevelOneLesson) {
+      const language = getOnboardingData()?.language || 'en';
+      return canonicalLevelOneLesson.id === levelOneLesson01.id ? translateLevelOneLesson01(canonicalLevelOneLesson, language) : canonicalLevelOneLesson;
+    }
     const existingLesson = lessons.find((l) => l.id === lessonId);
     if (existingLesson) return enhance(existingLesson);
     return extendedLessons.find((l) => l.id === lessonId);
