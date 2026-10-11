@@ -1,10 +1,10 @@
 import { Lesson } from './types';
 export const levelOneLesson07: Lesson = {
- id:'MZAIE-P1-M07-L01',title:'Ubuntu, Ethics and Responsible AI',levelId:'MZAIE-L1',moduleId:'MZAIE-P1-M07',locale:'en-ZA',version:'2.0',estimatedMinutes:20,
- objectives:['Use dignity, community impact, accountability and oversight to reason about responsible AI.'],competencyIds:['UBUNTU_TECHNOLOGY_AWARENESS','RESPONSIBLE_AI_USE'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
+ id:'MZAIE-P1-M07-L01',title:'Ubuntu and Using AI Responsibly',levelId:'MZAIE-L1',moduleId:'MZAIE-P1-M07',locale:'en-ZA',version:'2.0',estimatedMinutes:20,
+ objectives:['Think about how AI affects people and communities, and use it in a fair, safe and responsible way.'],competencyIds:['UBUNTU_TECHNOLOGY_AWARENESS','RESPONSIBLE_AI_USE'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
  blocks:[
- {id:'o',type:'objective',variant:'standard',content:'Use dignity, community impact, accountability and oversight to reason about responsible AI.'},
- {id:'e',type:'explanation',variant:'standard',content:'Ubuntu-informed AI asks how technology affects people and relationships, not only whether it is technically possible. Responsible use considers dignity, inclusion, fairness, safety and accountability.'},
+ {id:'o',type:'objective',variant:'standard',content:'Think about how AI affects people and communities, and use it in a fair, safe and responsible way.'},
+ {id:'e',type:'explanation',variant:'standard',content:'Ubuntu reminds us that people and relationships matter. When we use AI, we should ask whether it respects people, whether anyone is being left out, whether it is fair and safe, and who remains responsible.'},
  {id:'t',type:'activity',variant:'standard',content:'THINK — T: Try independently. Choose a community problem and list two non-AI ways to address it before considering technology.'},
  {id:'h',type:'explanation',variant:'plain',content:'THINK — H: Hunt for understanding. Ask for an explanation or hint about a concept you do not understand, rather than asking for the final answer.'},
  {id:'i',type:'verification',variant:'standard',content:'THINK — I: Investigate. Identify an important claim or assumption and decide how you would check it.'},
