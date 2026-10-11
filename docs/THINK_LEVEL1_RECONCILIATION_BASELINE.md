@@ -19,6 +19,15 @@ Use plain language before technical terminology. Explain the idea first and intr
 
 Design first for real South African access conditions, including underserved, marginalised and rural communities, ordinary or older Android phones, expensive or unreliable data, weak or absent connectivity, shared devices and multilingual needs. Offline and low-data usefulness, simple navigation and accessibility are programme requirements, not optional extras.
 
+## Multilingual architecture lock
+The existing onboarding already records one learner language as `en`, `af` or `xh`. Preserve that choice and use it as the language selector for curriculum presentation.
+
+Do not duplicate lesson IDs, module IDs, progress records, THINK evidence or assessments by language. English, Afrikaans and isiXhosa are presentation layers over the same canonical learning object. A learner who changes language remains in the same lesson and keeps the same progress.
+
+Translation must preserve meaning, South African context, answer correctness and the plain-language-first rule. Technical terms may be retained where useful, but they must be explained naturally in the selected language. Translation must not create a second curriculum architecture.
+
+Implementation sequence: prove the language layer on one canonical Level 1 lesson first; validate rendering, quiz correctness, offline behaviour and unchanged progress; then extend only after that pilot passes.
+
 ## Human thinking and responsibility
 AI assists; it does not replace human reasoning, judgement, creativity or responsibility. Learning activities should make the learner think, try, check, explain and apply rather than passively copy AI output.
 
