@@ -56,13 +56,13 @@ export function Certificates() {
       <CompletionCard level={3} title="AI Creator & Builder" completed={level3Complete} total={level3Ids.length} completedCount={completed3} percent={percent3} unlocked={level2Complete} lockedMessage="Complete Levels 1 and 2 as a learner to unlock the Level 3 completion record. Test Preview does not count." />
       <CompletionCard level={4} title="AI Innovation & Problem-Solving" completed={level4Complete} total={level4Ids.length} completedCount={completed4} percent={percent4} unlocked={level3Complete} lockedMessage="Complete Levels 1, 2 and 3 as a learner to unlock the Level 4 completion record. Test Preview does not count." />
 
-      <section className="space-y-3"><h3 className="text-sm font-bold text-[#2D3E50]">Competency Badges</h3><div className="grid grid-cols-1 sm:grid-cols-2 gap-3">{[
-        { id: 'b_ai', name: 'AI Foundations', desc: 'Understanding core AI concepts and patterns', earned: completed1 >= 1 },
-        { id: 'b_ubuntu', name: 'Ubuntu Tech Ethics', desc: 'Human-first, community-centred AI', earned: completed1 >= 4 },
-        { id: 'b_apply', name: 'Practical AI User', desc: 'Applied AI skills across Level 2', earned: level1Complete && completed2 >= 4 },
-        { id: 'b_create', name: 'Responsible AI Builder', desc: 'Creator and prototype skills across Level 3', earned: level2Complete && completed3 >= 4 },
-        { id: 'b_lead', name: 'Community AI Problem Solver', desc: 'Leadership and impact skills across Level 4', earned: level3Complete && completed4 >= 4 },
-        { id: 'b_lab', name: 'Unplugged Experimenter', desc: 'Completed an interactive offline lab activity', earned: progress.completedLabs.length >= 1 },
+      <section className="space-y-3"><h3 className="text-sm font-bold text-[#2D3E50]">Learning Milestone Badges</h3><div className="grid grid-cols-1 sm:grid-cols-2 gap-3">{[
+        { id: 'b_ai', name: 'AI Foundations Started', desc: 'Started the Level 1 AI foundations learning pathway', earned: completed1 >= 1 },
+        { id: 'b_ubuntu', name: 'Responsible AI Learning', desc: 'Reached the responsible and community-centred part of Level 1', earned: completed1 >= 4 },
+        { id: 'b_apply', name: 'Practical AI Learning', desc: 'Completed at least half of the Level 2 practical AI lessons', earned: level1Complete && completed2 >= 4 },
+        { id: 'b_create', name: 'AI Creator Learning', desc: 'Completed at least half of the Level 3 creator and prototype lessons', earned: level2Complete && completed3 >= 4 },
+        { id: 'b_lead', name: 'AI Leadership Learning', desc: 'Completed at least half of the Level 4 leadership and impact lessons', earned: level3Complete && completed4 >= 4 },
+        { id: 'b_lab', name: 'Unplugged Activity', desc: 'Completed at least one recorded interactive offline lab activity', earned: progress.completedLabs.length >= 1 },
       ].map((badge) => <div key={badge.id} className={`p-4 rounded-2xl border-2 transition-all flex items-start gap-3 ${badge.earned ? 'bg-white border-[#E2E8F0] shadow-sm' : 'bg-gray-50 border-gray-200 opacity-60'}`}><div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${badge.earned ? 'bg-orange-50 text-[#E67E22]' : 'bg-gray-200 text-gray-400'}`}><Star className="w-5 h-5 fill-current" /></div><div><div className="flex items-center gap-1.5"><h4 className="font-bold text-xs text-[#1A202C]">{badge.name}</h4>{badge.earned && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}</div><p className="text-[11px] text-gray-500 mt-0.5">{badge.desc}</p></div></div>)}</div></section>
     </div>
   );
