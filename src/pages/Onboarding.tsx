@@ -101,7 +101,7 @@ export function Onboarding() {
 
         {step === 4 && (
           <div className="space-y-6 flex-1">
-            <div><h2 className="text-2xl font-bold text-[#2D3E50] mb-2">Data mode</h2><p className="text-gray-500 font-medium">Choose how the app uses your mobile data. You can change this later.</p></div>
+            <div><h2 className="text-2xl font-bold text-[#2D3E50] mb-2">Data mode</h2><p className="text-gray-500 font-medium">Choose the learning mode that best matches your usual connectivity.</p></div>
             <div className="space-y-4">
               {[
                 ['Low Data', 'Uses as little mobile data as possible.'],
