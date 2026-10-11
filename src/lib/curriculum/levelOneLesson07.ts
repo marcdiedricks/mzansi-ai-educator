@@ -1,7 +1,7 @@
 import { Lesson } from './types';
 export const levelOneLesson07: Lesson = {
  id:'MZAIE-P1-M07-L01',title:'Ubuntu, Ethics and Responsible AI',levelId:'MZAIE-L1',moduleId:'MZAIE-P1-M07',locale:'en-ZA',version:'2.0',estimatedMinutes:20,
- objectives:['Use dignity, community impact, accountability and oversight to reason about responsible AI.'],competencyIds:['AI_UNDERSTANDING','CRITICAL_QUESTIONING'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
+ objectives:['Use dignity, community impact, accountability and oversight to reason about responsible AI.'],competencyIds:['UBUNTU_TECHNOLOGY_AWARENESS','RESPONSIBLE_AI_USE'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
  blocks:[
  {id:'o',type:'objective',variant:'standard',content:'Use dignity, community impact, accountability and oversight to reason about responsible AI.'},
  {id:'e',type:'explanation',variant:'standard',content:'Ubuntu-informed AI asks how technology affects people and relationships, not only whether it is technically possible. Responsible use considers dignity, inclusion, fairness, safety and accountability.'},
