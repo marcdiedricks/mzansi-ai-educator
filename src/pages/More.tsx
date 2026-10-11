@@ -1,4 +1,4 @@
-import { Book, Download, Users, Accessibility, Database, Shield, Info, Settings2, Video } from 'lucide-react';
+import { Book, Download, Users, Shield, Info, Video } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export function More() {
@@ -11,14 +11,11 @@ export function More() {
   ];
 
   const settings = [
-    { label: 'Accessibility', icon: Accessibility },
-    { label: 'Data Settings', icon: Database },
     { label: 'Privacy & Data', icon: Shield, path: '/privacy' },
-    { label: 'Standard / Plain Language', icon: Settings2 },
   ];
 
   const about = [
-    { label: 'About Mzansi AI Educator', icon: Info },
+    { label: 'About Mzansi AI Educator', icon: Info, path: '/about' },
   ];
 
   type MenuItem = { label: string; icon: typeof Book; path?: string };
