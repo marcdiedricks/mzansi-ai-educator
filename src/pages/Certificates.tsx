@@ -49,7 +49,7 @@ export function Certificates() {
 
   return (
     <div className="p-4 sm:p-6 space-y-5 pb-24">
-      <header><div className="flex items-center gap-2 text-[#E67E22] mb-1"><Award className="w-5 h-5" /><span className="text-[10px] font-bold uppercase tracking-wider">Learning Milestones</span></div><h1 className="text-2xl font-bold text-[#2D3E50] mb-1">Certificates & Badges</h1><p className="text-xs font-medium text-gray-500">Track completion milestones earned inside Mzansi AI Educator.</p></header>
+      <header><div className="flex items-center gap-2 text-[#E67E22] mb-1"><Award className="w-5 h-5" /><span className="text-[10px] font-bold uppercase tracking-wider">Learning Milestones</span></div><h1 className="text-2xl font-bold text-[#2D3E50] mb-1">Completion Records & Milestones</h1><p className="text-xs font-medium text-gray-500">Track learning completion recorded inside Mzansi AI Educator. These records are not externally accredited qualifications.</p></header>
 
       <CompletionCard level={1} title="AI Foundations" completed={level1Complete} total={level1Ids.length} completedCount={completed1} percent={percent1} unlocked={true} lockedMessage="" />
       <CompletionCard level={2} title="Practical AI Skills" completed={level2Complete} total={level2Ids.length} completedCount={completed2} percent={percent2} unlocked={level1Complete} lockedMessage="Complete Level 1 as a learner to unlock the Level 2 completion record. Test Preview does not count." />
