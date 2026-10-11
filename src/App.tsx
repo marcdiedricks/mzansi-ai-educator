@@ -14,6 +14,7 @@ import { PracticeChallenge } from './pages/PracticeChallenge';
 import { Glossary } from './pages/Glossary';
 import { Certificates } from './pages/Certificates';
 import { More } from './pages/More';
+import { FacilitatorGuide } from './pages/FacilitatorGuide';
 import { VideoResources } from './pages/VideoResources';
 import { Progress } from './pages/Progress';
 import { Tutor } from './pages/Tutor';
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/glossary" element={<Glossary />} />
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/more" element={<More />} />
+          <Route path="/facilitator" element={<FacilitatorGuide />} />
           <Route path="/video-resources" element={<VideoResources />} />
           <Route path="/progress" element={<Progress />} />
         </Route>
