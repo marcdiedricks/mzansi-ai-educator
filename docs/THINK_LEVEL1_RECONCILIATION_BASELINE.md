@@ -7,6 +7,39 @@ Deployment: NOT AUTHORISED
 ## Purpose
 Reconcile the beginner pathway before code changes while preserving the existing four-level, 32-module programme and learner progress.
 
+## Frozen programme philosophy
+Mzansi AI Educator is an adaptable, inclusive AI education and training programme that teaches people to use AI effectively without surrendering their own thinking, judgement, creativity or responsibility.
+
+One core programme must support multiple delivery contexts: self-study, NGOs and community programmes, schools, colleges, workplace training, structured institutional delivery and independent learning. Adapt examples, facilitator support, pace, language, activities and evidence requirements to the setting; do not create separate curricula or duplicate apps for each audience.
+
+## Beginner-first and South Africa-first design
+Design from the beginner outward, not from the expert downward. A learner must not need prior AI, coding, mathematics or advanced digital knowledge to begin Level 1.
+
+Use plain language before technical terminology. Explain the idea first and introduce the professional term afterwards where it is useful. Learner-facing wording must not make ordinary first-time users feel that AI is only for experts.
+
+Design first for real South African access conditions, including underserved, marginalised and rural communities, ordinary or older Android phones, expensive or unreliable data, weak or absent connectivity, shared devices and multilingual needs. Offline and low-data usefulness, simple navigation and accessibility are programme requirements, not optional extras.
+
+## Human thinking and responsibility
+AI assists; it does not replace human reasoning, judgement, creativity or responsibility. Learning activities should make the learner think, try, check, explain and apply rather than passively copy AI output.
+
+Use THINK in learner-friendly behaviour:
+**Try it yourself → Ask to understand → Check the answer → Try again on your own → Say what you learned.**
+
+Professional terminology may be taught progressively, but understanding must come before jargon.
+
+## Assessment philosophy
+Beginner assessment is formative. Use the pattern:
+**LEARN → CHECK → EXPLAIN → TRY AGAIN → CONTINUE.**
+
+Knowledge checks may record scores for learner feedback, programme evaluation or institutional evidence, but a percentage must not become an arbitrary barrier that excludes a beginner from continuing. Wrong answers should produce useful feedback and another attempt.
+
+Applied work, independent explanation, checking and demonstrated reasoning are stronger evidence of learning than a quiz percentage alone.
+
+## Adaptable institutional use
+The same educational core may be supported by facilitator guidance, assessments, progress records and reporting for formal or structured settings. Those delivery layers must not change the core philosophy or create a separate programme.
+
+Suitability for schools, colleges, NGOs or structured training does not imply accreditation, qualification status or endorsement. Any accreditation or formal alignment claim requires separate evidence and approval.
+
 ## Canonical programme boundary
 - Level 1: eight beginner modules only.
 - Level 2: eight Practical AI Skills modules.
