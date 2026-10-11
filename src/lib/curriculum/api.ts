@@ -4,7 +4,9 @@ import { levelOneLesson01 } from './levelOneLesson01';
 import { translateLevelOneLesson01 } from './levelOneLesson01Translations';
 import { getOnboardingData } from '../storage';
 import { levelOneLesson02 } from './levelOneLesson02';
+import { translateLevelOneLesson02 } from './levelOneLesson02Translations';
 import { levelOneLesson03 } from './levelOneLesson03';
+import { translateLevelOneLesson03 } from './levelOneLesson03Translations';
 import { levelOneLesson04 } from './levelOneLesson04';
 import { levelOneLesson05 } from './levelOneLesson05';
 import { levelOneLesson06 } from './levelOneLesson06';
@@ -120,7 +122,10 @@ export const api = {
     const canonicalLevelOneLesson = canonicalLevelOneLessons.find((l) => l.id === lessonId);
     if (canonicalLevelOneLesson) {
       const language = getOnboardingData()?.language || 'en';
-      return canonicalLevelOneLesson.id === levelOneLesson01.id ? translateLevelOneLesson01(canonicalLevelOneLesson, language) : canonicalLevelOneLesson;
+      if (canonicalLevelOneLesson.id === levelOneLesson01.id) return translateLevelOneLesson01(canonicalLevelOneLesson, language);
+      if (canonicalLevelOneLesson.id === levelOneLesson02.id) return translateLevelOneLesson02(canonicalLevelOneLesson, language);
+      if (canonicalLevelOneLesson.id === levelOneLesson03.id) return translateLevelOneLesson03(canonicalLevelOneLesson, language);
+      return canonicalLevelOneLesson;
     }
     const existingLesson = lessons.find((l) => l.id === lessonId);
     if (existingLesson) return enhance(existingLesson);
