@@ -25,6 +25,12 @@ export function LessonScreen() {
   const lesson = lessonId ? api.getLesson(lessonId) : undefined;
   const moduleData = moduleId ? api.getModule(moduleId) : undefined;
   const videoResources = lessonId ? getActiveVideoResourcesForLesson(lessonId) : [];
+  const activityGuidance = lesson.blocks
+    .filter((block) => block.type === 'activity' || block.type === 'application')
+    .map((block) => block.content);
+  const reflectionGuidance = lesson.blocks
+    .filter((block) => block.type === 'reflection')
+    .map((block) => block.content);
   const [completed, setCompleted] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
@@ -127,10 +133,12 @@ export function LessonScreen() {
         </div>
         <label className="block space-y-1.5">
           <span className="text-xs font-bold text-[#2D3E50]">What did you try or apply?</span>
+          {activityGuidance.length > 0 && <div className="space-y-1">{activityGuidance.map((guidance, index) => <p key={index} className="text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-lg p-2.5">{guidance}</p>)}</div>}
           <textarea value={activityResponse} onChange={(event) => { setActivityResponse(event.target.value); setEvidenceSaved(false); }} rows={5} placeholder="Describe what you tried, built, checked or decided." className="w-full p-3 rounded-xl border-2 border-[#E2E8F0] text-sm text-[#1A202C] bg-white focus:outline-none focus:border-[#2D3E50]" />
         </label>
         <label className="block space-y-1.5">
           <span className="text-xs font-bold text-[#2D3E50]">What did you learn?</span>
+          {reflectionGuidance.length > 0 && <div className="space-y-1">{reflectionGuidance.map((guidance, index) => <p key={index} className="text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-lg p-2.5">{guidance}</p>)}</div>}
           <textarea value={reflectionResponse} onChange={(event) => { setReflectionResponse(event.target.value); setEvidenceSaved(false); }} rows={4} placeholder="Explain what you learned, what changed in your thinking, or what you would do differently." className="w-full p-3 rounded-xl border-2 border-[#E2E8F0] text-sm text-[#1A202C] bg-white focus:outline-none focus:border-[#2D3E50]" />
         </label>
         <button onClick={() => { if (!lessonId) return; saveLessonEvidence(lessonId, { activityResponse, reflectionResponse }); setEvidenceSaved(true); }} className="w-full bg-[#2D3E50] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Save My Evidence</button>
