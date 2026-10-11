@@ -7,7 +7,7 @@ export function More() {
     { label: 'Glossary', icon: Book, path: '/glossary' },
     { label: 'Lesson Video Links', icon: Video, path: '/video-resources' },
     { label: 'Downloads', icon: Download, path: '/video-resources' },
-    { label: 'Facilitator Mode', icon: Users },
+    { label: 'Facilitator Guide', icon: Users, path: '/facilitator' },
   ];
 
   const settings = [
