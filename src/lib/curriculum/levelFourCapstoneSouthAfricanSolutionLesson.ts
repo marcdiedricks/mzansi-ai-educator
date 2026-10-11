@@ -2,7 +2,7 @@ import { Lesson } from './types';
 
 export const levelFourCapstoneSouthAfricanSolutionLesson: Lesson = {
   id: 'MZAIE-P4-M08-L01',
-  title: 'Capstone: Build & Present a South African AI Solution',
+  title: 'Final Challenge: Present a South African AI Solution',
   levelId: 'MZAIE-P4',
   moduleId: 'MZAIE-P4-M08',
   locale: 'en-ZA',
@@ -22,7 +22,7 @@ export const levelFourCapstoneSouthAfricanSolutionLesson: Lesson = {
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
     { id:'p4m8_b1', type:'objective', variant:'standard', content:'Complete the learning pathway by building and presenting a small, responsible AI-supported solution proposal for a genuine South African need.' },
-    { id:'p4m8_b2', type:'explanation', variant:'standard', content:'A capstone is not a fantasy pitch. It is a disciplined proposal that shows the problem, people affected, evidence, practical workflow, offline access, risks, human oversight, governance and how impact will be measured.' },
+    { id:'p4m8_b2', type:'explanation', variant:'standard', content:'This final challenge is sometimes called a capstone. It is not a fantasy pitch. It is a practical proposal showing the problem, the people affected, the evidence, the steps, offline access, risks, who remains responsible and how you will check whether the solution really helps.' },
     { id:'p4m8_b3', type:'keyPoint', variant:'standard', content:'A strong AI solution is useful, limited, explainable, testable and accountable. It does not pretend to solve everything.' },
     { id:'p4m8_b4', type:'application', variant:'plain', content:'Use the SOLUTION canvas: Situation. Outcome. Learners or users. Useful workflow. Technology role. Information sources. Oversight. Needs and constraints.' },
     { id:'p4m8_b5', type:'example', variant:'SouthAfricanContext', content:'A community learning centre proposes an offline-first AI study guide for Grade 9 learners. The proposal explains the reading problem, shared-phone reality, plain-language lessons, teacher review, no private learner data, offline access and a small pilot with five learners.' },
@@ -34,7 +34,7 @@ export const levelFourCapstoneSouthAfricanSolutionLesson: Lesson = {
     { id:'p4m8_b11', type:'application', variant:'SouthAfricanContext', content:'Your first pilot should be small: one setting, one user group, one workflow, one responsible person, one feedback route and one clear decision about what success or failure means.' },
     { id:'p4m8_b12', type:'activity', variant:'standard', content:'Create your capstone proposal with these headings: 1) problem, 2) people affected, 3) evidence, 4) proposed workflow, 5) AI role, 6) non-AI/offline fallback, 7) privacy and safety limits, 8) human oversight, 9) impact measures, 10) pilot plan, and 11) decision: test, revise or stop.' },
     { id:'p4m8_b13', type:'reflection', variant:'standard', content:'Would you be willing to test this solution with real people and accept their evidence even if it proves your first idea is wrong?' },
-    { id:'p4m8_b14', type:'summary', variant:'standard', content:'The capstone brings the programme together. A responsible South African AI solution begins with a real need, serves real users, works within local constraints, protects dignity and privacy, keeps human oversight, measures impact and starts with a small honest pilot.' },
+    { id:'p4m8_b14', type:'summary', variant:'standard', content:'The final challenge brings the programme together. A responsible South African AI solution begins with a real need, serves real users, works in local conditions, protects dignity and privacy, keeps people responsible for important decisions, checks whether it really helps and starts with a small honest pilot.' },
   ],
   quiz: [
     { id:'p4m8_q1', question:'What should a capstone AI solution proposal prove?', options:['That the idea sounds impressive.','That it addresses a real need with evidence, oversight, limits and measurable improvement.','That AI can replace everyone involved.','That no testing is needed.'], correctIndex:1, explanation:'A capstone must show usefulness, responsibility and testability.' },
