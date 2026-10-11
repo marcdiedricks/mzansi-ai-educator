@@ -2,7 +2,7 @@ import { Lesson } from './types';
 
 export const levelTwoResearchLesson: Lesson = {
   id: 'MZAIE-P2-M04-L01',
-  title: 'AI Research & Source Verification',
+  title: 'Research with AI and Check the Facts',
   levelId: 'MZAIE-P2',
   moduleId: 'MZAIE-P2-M04',
   locale: 'en-ZA',
@@ -10,7 +10,7 @@ export const levelTwoResearchLesson: Lesson = {
   estimatedMinutes: 20,
   objectives: [
     'Use AI to support research without treating AI output as evidence.',
-    'Distinguish primary, secondary and weak sources and choose the strongest source available.',
+    'Tell the difference between an original or official source and weaker second-hand information.',
     'Cross-check important claims, dates, statistics and quotations before using them.',
     'Keep evidence separate from AI summaries, interpretation and opinion.'
   ],
@@ -20,7 +20,7 @@ export const levelTwoResearchLesson: Lesson = {
     { id:'p2m4_b1', type:'objective', variant:'standard', content:'Learn to use AI as a research assistant while keeping source selection, verification and final judgement in human hands.' },
     { id:'p2m4_b2', type:'explanation', variant:'standard', content:'AI can help you generate search terms, identify questions, compare explanations and organise notes. But an AI answer is not itself proof. Research becomes trustworthy only when claims can be traced to reliable evidence.' },
     { id:'p2m4_b3', type:'keyPoint', variant:'standard', content:'Use the SOURCE routine: Specify the question, Obtain candidate sources, Rank their strength, Check the claim, Use more than one source when needed, Explain what the evidence actually supports.' },
-    { id:'p2m4_b4', type:'explanation', variant:'standard', content:'Primary sources are closest to the original evidence or authority, such as legislation, official statistics, original research or an organisation’s own published policy. Secondary sources interpret or report on primary material. Both can be useful, but high-stakes claims should usually be checked against the strongest available primary source.' },
+    { id:'p2m4_b4', type:'explanation', variant:'standard', content:'Try to get as close as possible to the original or official information. For example, use the actual law, official statistics, original research or an organisation’s own published rules. Other sources may explain these, but important claims should be checked against the strongest original or official source you can find.' },
     { id:'p2m4_b5', type:'example', variant:'SouthAfricanContext', content:'If researching a South African bursary, use AI to identify the questions you need answered, then verify eligibility, dates and application rules on the official bursary or institution website rather than relying on a social-media post or AI summary.' },
     { id:'p2m4_b6', type:'explanation', variant:'standard', content:'Recency matters. A source can be reliable but outdated. For changing information such as laws, fees, deadlines, office-holders, software features or statistics, check the publication date and whether a newer official source exists.' },
     { id:'p2m4_b7', type:'verification', variant:'standard', content:'For an important claim, ask: Who published this? What evidence is provided? When was it published? Can I find the original source? Does another independent reliable source agree? Does the source actually support the exact statement I want to make?' },
