@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../lib/curriculum/api';
 import { ArrowLeft, Clock, CheckCircle2, Info, Lightbulb, MessageSquare, Bookmark, HelpCircle, CheckSquare, Square, ExternalLink, PlayCircle } from 'lucide-react';
 import { LessonBlock } from '../lib/curriculum/types';
-import { isLessonCompleted, toggleLessonCompletion, recordQuizScore, getUserProgress } from '../lib/progress';
+import { isLessonCompleted, toggleLessonCompletion, recordQuizScore } from '../lib/progress';
 import { getActiveVideoResourcesForLesson } from '../lib/videoResources';
 
 function renderBlock(block: LessonBlock) {
@@ -54,16 +54,6 @@ export function LessonScreen() {
   const handleToggleCompleted = () => {
     if (!lessonId) return;
 
-    const isCanonicalLevelOne = lessonId.startsWith('MZAIE-P1-');
-    if (isCanonicalLevelOne && !completed) {
-      const savedScore = getUserProgress().quizScores[lessonId];
-      const effectiveScore = quizSubmitted && quizScore !== null ? quizScore : savedScore;
-      if (effectiveScore === undefined || effectiveScore < 70) {
-        setQuizNotice('Complete the knowledge check and score at least 70% before marking this Level 1 lesson complete.');
-        return;
-      }
-    }
-
     setCompleted(toggleLessonCompletion(lessonId));
   };
 
@@ -108,7 +98,7 @@ export function LessonScreen() {
 
       {lesson.quiz && lesson.quiz.length > 0 && <section className="mt-8 pt-6 border-t-2 border-[#E2E8F0] space-y-4">
         <div className="flex items-center gap-2"><HelpCircle className="w-5 h-5 text-[#E67E22]" /><h2 className="text-base font-bold text-[#2D3E50]">Quick Knowledge Check</h2></div>
-        <p className="text-xs text-gray-500">Answer every question. Your score is saved on this device.</p>
+        <p className="text-xs text-gray-500">This is a learning check, not a pass-or-fail test. Try every question, read the feedback and try again if you need to. Your latest score is saved on this device.</p>
         <div className="space-y-4">{lesson.quiz.map((q, qIndex) => <div key={q.id} className="bg-[#F8F9FA] border-2 border-[#E2E8F0] p-4 rounded-2xl space-y-3"><div className="text-xs font-bold text-[#1A202C]"><span className="text-[#E67E22] mr-1.5">Q{qIndex + 1}.</span>{q.question}</div><div className="space-y-2">{q.options.map((opt, optIdx) => {
           const selected = selectedAnswers[q.id] === optIdx;
           const correct = optIdx === q.correctIndex;
@@ -116,10 +106,10 @@ export function LessonScreen() {
           if (quizSubmitted && correct) style = 'border-emerald-500 bg-emerald-50 text-emerald-900 font-bold';
           else if (quizSubmitted && selected && !correct) style = 'border-rose-400 bg-rose-50 text-rose-800';
           else if (selected) style = 'border-[#2D3E50] bg-slate-100 text-[#2D3E50] font-bold';
-          return <button key={optIdx} disabled={quizSubmitted} onClick={() => { setSelectedAnswers((prev) => ({ ...prev, [q.id]: optIdx })); setQuizNotice(null); }} className={`w-full p-3 rounded-xl border-2 text-left text-xs ${style}`}><span className="font-bold mr-2">{String.fromCharCode(65 + optIdx)}.</span>{opt}</button>;
+          return <button key={optIdx} onClick={() => { setSelectedAnswers((prev) => ({ ...prev, [q.id]: optIdx })); setQuizSubmitted(false); setQuizScore(null); setQuizNotice(null); }} className={`w-full p-3 rounded-xl border-2 text-left text-xs ${style}`}><span className="font-bold mr-2">{String.fromCharCode(65 + optIdx)}.</span>{opt}</button>;
         })}</div>{quizSubmitted && <div className="p-3 bg-white border border-gray-200 rounded-xl text-xs"><div className="font-bold text-[#2D3E50]">Explanation</div><p className="text-gray-600 leading-relaxed">{q.explanation}</p></div>}</div>)}</div>
         {quizNotice && <div className="p-3 bg-amber-50 border-2 border-amber-200 rounded-xl text-xs font-bold text-amber-900">{quizNotice}</div>}
-        {!quizSubmitted ? <button onClick={handleSubmitQuiz} className="w-full bg-[#2D3E50] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Submit Answers & Check Feedback</button> : <div className="p-3.5 bg-emerald-50 border-2 border-emerald-200 rounded-2xl text-center"><div className="text-emerald-800 font-bold text-sm">Quiz score: {quizScore}%</div><p className="text-[11px] text-emerald-700 mt-1">Score saved. Mark the lesson complete when you have finished reviewing the content.</p></div>}
+        {!quizSubmitted ? <button onClick={handleSubmitQuiz} className="w-full bg-[#2D3E50] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Submit Answers & Check Feedback</button> : <div className="p-3.5 bg-emerald-50 border-2 border-emerald-200 rounded-2xl text-center"><div className="text-emerald-800 font-bold text-sm">Learning check: {quizScore}%</div><p className="text-[11px] text-emerald-700 mt-1">Review the explanations. If you missed something, choose another answer and check again. This is here to help you learn, not to stop you.</p></div>}
       </section>}
 
       <div className="pt-6 border-t-2 border-[#E2E8F0] flex flex-col gap-2.5">
