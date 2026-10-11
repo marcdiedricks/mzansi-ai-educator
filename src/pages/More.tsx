@@ -13,7 +13,7 @@ export function More() {
   const settings = [
     { label: 'Accessibility', icon: Accessibility },
     { label: 'Data Settings', icon: Database },
-    { label: 'Privacy', icon: Shield },
+    { label: 'Privacy & Data', icon: Shield, path: '/privacy' },
     { label: 'Standard / Plain Language', icon: Settings2 },
   ];
 
