@@ -2,14 +2,14 @@ import { Lesson } from './types';
 
 export const levelTwoAdvancedCreoLesson: Lesson = {
   id: 'MZAIE-P2-M03-L01',
-  title: 'Advanced Prompting with CREO',
+  title: 'Ask AI Better Questions',
   levelId: 'MZAIE-P2',
   moduleId: 'MZAIE-P2-M03',
   locale: 'en-ZA',
   version: '1.0',
   estimatedMinutes: 20,
   objectives: [
-    'Extend CREO with constraints, examples, quality criteria and structured outputs.',
+    'Make your AI instructions clearer by adding useful limits, examples and a simple check for the result.',
     'Break complex tasks into clear stages instead of asking for everything in one prompt.',
     'Diagnose weak AI responses and improve them with targeted follow-up prompts.',
     'Use prompting to improve usefulness while still protecting privacy and verifying important claims.',
@@ -25,25 +25,25 @@ export const levelTwoAdvancedCreoLesson: Lesson = {
       id: 'p2m3_b1',
       type: 'objective',
       variant: 'standard',
-      content: 'Move beyond basic CREO by controlling the task more precisely, testing the result against clear criteria and improving only what is weak.',
+      content: 'Build on CREO by giving clearer instructions, setting useful limits and checking whether the answer does what you asked.',
     },
     {
       id: 'p2m3_b2',
       type: 'explanation',
       variant: 'standard',
-      content: 'At Level 1 you learned CREO: Context, Request, Examples and Output. At Level 2 the same framework becomes more powerful when you add boundaries, quality criteria and a sequence for complex work. The goal is not to make prompts longer. The goal is to remove ambiguity.',
+      content: 'CREO means Context, Request, Examples and Output. At Level 2 you use the same simple method and add clear limits and a check for the answer. The goal is not a longer prompt. The goal is to make your request easier to understand.',
     },
     {
       id: 'p2m3_b3',
       type: 'keyPoint',
       variant: 'standard',
-      content: 'Advanced prompting is controlled prompting. State what the AI should do, what it should not do, what information it may use, what quality standard matters and what the final result must look like.',
+      content: 'A good AI instruction says what you want, what you do not want, what information may be used and what the final answer should look like.',
     },
     {
       id: 'p2m3_b4',
       type: 'application',
       variant: 'plain',
-      content: 'Use CREO+: Context, Request, Examples, Output, plus Constraints and Check. Constraints define limits such as length, audience, source boundaries or excluded content. Check tells the AI what criteria the draft must satisfy before you accept it.',
+      content: 'Use CREO+: Context, Request, Examples and Output, plus Limits and Check. Limits can cover length, audience, sources or things to leave out. Check tells the AI what the answer should do before you accept it.',
     },
     {
       id: 'p2m3_b5',
