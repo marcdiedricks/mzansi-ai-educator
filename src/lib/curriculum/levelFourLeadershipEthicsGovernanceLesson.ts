@@ -2,14 +2,14 @@ import { Lesson } from './types';
 
 export const levelFourLeadershipEthicsGovernanceLesson: Lesson = {
   id: 'MZAIE-P4-M07-L01',
-  title: 'Leadership, Ethics & Governance',
+  title: 'Lead Responsible AI Use',
   levelId: 'MZAIE-P4',
   moduleId: 'MZAIE-P4-M07',
   locale: 'en-ZA',
   version: '1.0',
   estimatedMinutes: 20,
   objectives: [
-    'Define governance rules for responsible AI use in teams, organisations and communities.',
+    'Set clear rules for responsible AI use in teams, organisations and communities. These rules are often called governance.',
     'Set clear accountability, human oversight, escalation and review points for AI-supported work.',
     'Identify ethical risks before deploying AI in real services or decisions.',
     'Create a simple AI use policy that protects people, evidence, privacy and dignity.',
@@ -22,8 +22,8 @@ export const levelFourLeadershipEthicsGovernanceLesson: Lesson = {
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
     { id:'p4m7_b1', type:'objective', variant:'standard', content:'Lead AI use responsibly by setting rules for who may use AI, what it may be used for, what must be checked, and who remains accountable when something goes wrong.' },
-    { id:'p4m7_b2', type:'explanation', variant:'standard', content:'AI governance is not paperwork for large companies only. A school, NGO, church, small business or community project also needs clear rules when AI affects people, information, services or trust.' },
-    { id:'p4m7_b3', type:'keyPoint', variant:'standard', content:'Accountability cannot be outsourced to AI. A named person, team or institution must remain responsible for decisions, corrections and harm prevention.' },
+    { id:'p4m7_b2', type:'explanation', variant:'standard', content:'Any group using AI needs clear rules about what is allowed, who checks important work and who is responsible when something goes wrong. These rules are often called AI governance. They matter in a school, NGO, church, small business or community project too.' },
+    { id:'p4m7_b3', type:'keyPoint', variant:'standard', content:'AI cannot carry responsibility for a real-world decision. A named person, team or organisation must remain responsible for decisions, corrections and preventing harm. This responsibility is often called accountability.' },
     { id:'p4m7_b4', type:'application', variant:'plain', content:'Use the GOVERN loop: Goal. Oversight. Verification. Evidence. Risk limits. Names of responsible people. This turns good intentions into practical control.' },
     { id:'p4m7_b5', type:'example', variant:'SouthAfricanContext', content:'A TVET college uses AI to support student enquiries. Governance rules should say which answers may be automated, which must be checked by staff, how outdated information is corrected, and where students go if the tool gives confusing advice.' },
     { id:'p4m7_b6', type:'explanation', variant:'standard', content:'Ethical leadership asks practical questions: Is the source reliable? Is personal data protected? Can users challenge the answer? Could the tool exclude people? Are staff trained enough to supervise it?' },
