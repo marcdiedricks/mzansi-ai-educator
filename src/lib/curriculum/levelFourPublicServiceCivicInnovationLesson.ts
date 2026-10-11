@@ -2,14 +2,14 @@ import { Lesson } from './types';
 
 export const levelFourPublicServiceCivicInnovationLesson: Lesson = {
   id: 'MZAIE-P4-M05-L01',
-  title: 'Public Service & Civic Innovation',
+  title: 'AI for Public and Community Services',
   levelId: 'MZAIE-P4',
   moduleId: 'MZAIE-P4-M05',
   locale: 'en-ZA',
   version: '1.0',
   estimatedMinutes: 20,
   objectives: [
-    'Identify public-service and civic-access problems where AI may improve clarity, reach or responsiveness.',
+    'Identify problems in public and community services where AI may make information clearer or easier to access.',
     'Design AI-supported civic tools that protect rights, fairness, privacy and human accountability.',
     'Separate public information support from official decisions, legal advice or rights-affecting actions.',
     'Plan low-data and offline-friendly civic support that can be tested safely with real users.',
@@ -21,7 +21,7 @@ export const levelFourPublicServiceCivicInnovationLesson: Lesson = {
   offlineEligible: true,
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
-    { id:'p4m5_b1', type:'objective', variant:'standard', content:'Use AI responsibly to improve access to public information, civic participation and community-facing services without replacing official accountability or people’s rights.' },
+    { id:'p4m5_b1', type:'objective', variant:'standard', content:'Use AI responsibly to make public information and community services easier to understand and access, without replacing official responsibility or people’s rights. Improving public access in new ways is sometimes called civic innovation.' },
     { id:'p4m5_b2', type:'explanation', variant:'standard', content:'Public-service innovation must be handled carefully because it can affect rights, access, fairness and trust. AI can simplify information and guide next steps, but it must not secretly make official decisions or invent policy requirements.' },
     { id:'p4m5_b3', type:'keyPoint', variant:'standard', content:'In civic settings, AI should make verified information easier to understand. It should not become an unaccountable gatekeeper between people and the services they need.' },
     { id:'p4m5_b4', type:'application', variant:'plain', content:'Use the CIVIC loop: Check the official source. Identify the user need. Verify the rule or process. Improve plain-language access. Clarify limits. Keep human escalation available.' },
