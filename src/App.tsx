@@ -16,6 +16,7 @@ import { Certificates } from './pages/Certificates';
 import { More } from './pages/More';
 import { FacilitatorGuide } from './pages/FacilitatorGuide';
 import { Privacy } from './pages/Privacy';
+import { About } from './pages/About';
 import { VideoResources } from './pages/VideoResources';
 import { Progress } from './pages/Progress';
 import { Tutor } from './pages/Tutor';
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/more" element={<More />} />
           <Route path="/facilitator" element={<FacilitatorGuide />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/about" element={<About />} />
           <Route path="/video-resources" element={<VideoResources />} />
           <Route path="/progress" element={<Progress />} />
         </Route>
