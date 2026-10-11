@@ -1,10 +1,10 @@
 import { Lesson } from './types';
 export const levelOneLesson08: Lesson = {
- id:'MZAIE-P1-M08-L01',title:'Level 1 Applied Challenge',levelId:'MZAIE-L1',moduleId:'MZAIE-P1-M08',locale:'en-ZA',version:'2.0',estimatedMinutes:25,
- objectives:['Demonstrate Level 1 understanding by analysing an everyday AI system independently.'],competencyIds:['AI_UNDERSTANDING','CRITICAL_QUESTIONING','HUMAN_JUDGEMENT'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
+ id:'MZAIE-P1-M08-L01',title:'Level 1: Show What You Have Learned',levelId:'MZAIE-L1',moduleId:'MZAIE-P1-M08',locale:'en-ZA',version:'2.0',estimatedMinutes:25,
+ objectives:['Show what you have learned by looking at an everyday AI tool and explaining it in your own words.'],competencyIds:['AI_UNDERSTANDING','CRITICAL_QUESTIONING','HUMAN_JUDGEMENT'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
  blocks:[
- {id:'o',type:'objective',variant:'standard',content:'Demonstrate Level 1 understanding by analysing an everyday AI system independently.'},
- {id:'e',type:'explanation',variant:'standard',content:'Choose an everyday AI system and explain its task, relevant data, AI concept, possible risk and necessary human oversight. The goal is to demonstrate your own reasoning.'},
+ {id:'o',type:'objective',variant:'standard',content:'Show what you have learned by looking at an everyday AI tool and explaining it in your own words.'},
+ {id:'e',type:'explanation',variant:'standard',content:'Choose an everyday AI tool. Explain what it does, what information it may use, how AI is involved, what could go wrong, and where a person should stay in control. The goal is to show your own thinking.'},
  {id:'t',type:'activity',variant:'standard',content:'THINK — T: Try independently. Complete a five-part analysis before asking for a hint: task, data, concept, risk and human oversight.'},
  {id:'h',type:'explanation',variant:'plain',content:'THINK — H: Hunt for understanding. Use assistance only for an explanation or hint about a concept you do not understand.'},
  {id:'i',type:'verification',variant:'standard',content:'THINK — I: Investigate. Check at least one assumption and separate what you know from what still needs verification.'},
