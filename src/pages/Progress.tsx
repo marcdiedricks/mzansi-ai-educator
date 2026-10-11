@@ -55,12 +55,12 @@ export function Progress() {
   const level4QuizScores = Object.entries(level4Progress.quizScores).filter(([id]) => level4Ids.includes(id));
   const average = (scores: Array<[string, number]>) => scores.length ? Math.round(scores.reduce((sum, [, score]) => sum + score, 0) / scores.length) : 0;
 
-  const competencies = [
-    { name: 'AI Fundamentals', earned: completed1 >= 1 },
-    { name: 'Ethical AI Use', earned: completed1 >= 3 },
-    { name: 'Prompt Engineering', earned: completed1 >= 4 || (level1Complete && completed2 >= 3) },
-    { name: 'Practical AI Application', earned: level1Complete && completed2 >= 1 },
-    { name: 'AI Solution Leadership', earned: level3RealComplete && completed4 >= 1 },
+  const learningMilestones = [
+    { name: 'AI Foundations Learning', reached: completed1 >= 1 },
+    { name: 'Responsible AI Learning', reached: completed1 >= 3 },
+    { name: 'Asking AI Better Questions', reached: completed1 >= 4 || (level1Complete && completed2 >= 3) },
+    { name: 'Practical AI Learning', reached: level1Complete && completed2 >= 1 },
+    { name: 'AI Leadership Learning', reached: level3RealComplete && completed4 >= 1 },
   ];
 
   return (
@@ -99,7 +99,7 @@ export function Progress() {
 
       <div className="bg-white border-2 border-[#E2E8F0] rounded-xl p-5 space-y-3"><div><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Level 1 Average Quiz Score</div><div className="text-xl font-bold text-[#1A202C]">{average(level1QuizScores as Array<[string, number]>)}%</div></div><div className="border-t border-gray-200 pt-3"><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Level 2 Average Quiz Score</div><div className="text-xl font-bold text-[#1A202C]">{level2Visible ? `${average(level2QuizScores as Array<[string, number]>)}%` : 'Locked'}</div></div><div className="border-t border-gray-200 pt-3"><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{level3Preview && !level2RealComplete ? 'Level 3 Test Quiz Average' : 'Level 3 Average Quiz Score'}</div><div className="text-xl font-bold text-[#1A202C]">{level3Visible ? `${average(level3QuizScores as Array<[string, number]>)}%` : 'Locked'}</div></div><div className="border-t border-gray-200 pt-3"><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{level4Preview && !level3RealComplete ? 'Level 4 Test Quiz Average' : 'Level 4 Average Quiz Score'}</div><div className="text-xl font-bold text-[#1A202C]">{level4Visible ? `${average(level4QuizScores as Array<[string, number]>)}%` : 'Locked'}</div></div></div>
 
-      <section><h3 className="font-bold text-[#2D3E50] mb-3">Competencies</h3><div className="space-y-2">{competencies.map((skill) => <div key={skill.name} className={`flex items-center p-4 bg-white border-2 border-[#E2E8F0] rounded-xl ${skill.earned ? '' : 'opacity-60'}`}><Star className={`w-4 h-4 mr-3 ${skill.earned ? 'text-[#E67E22]' : 'text-gray-400'}`} /><span className="font-bold text-[#1A202C]">{skill.name}</span></div>)}</div></section>
+      <section><h3 className="font-bold text-[#2D3E50] mb-1">Learning Milestones</h3><p className="text-xs text-gray-500 mb-3">These milestones show recorded learning progress on this device. They are not proof of professional competence or an accredited qualification.</p><div className="space-y-2">{learningMilestones.map((milestone) => <div key={milestone.name} className={`flex items-center p-4 bg-white border-2 border-[#E2E8F0] rounded-xl ${milestone.reached ? '' : 'opacity-60'}`}><Star className={`w-4 h-4 mr-3 ${milestone.reached ? 'text-[#E67E22]' : 'text-gray-400'}`} /><span className="font-bold text-[#1A202C]">{milestone.name}</span></div>)}</div></section>
     </div>
   );
 }
