@@ -1,4 +1,13 @@
 import { modules, lessons, level, programme } from './data';
+import { LEVEL_ONE_MODULES } from './levelOneCanonical';
+import { levelOneLesson01 } from './levelOneLesson01';
+import { levelOneLesson02 } from './levelOneLesson02';
+import { levelOneLesson03 } from './levelOneLesson03';
+import { levelOneLesson04 } from './levelOneLesson04';
+import { levelOneLesson05 } from './levelOneLesson05';
+import { levelOneLesson06 } from './levelOneLesson06';
+import { levelOneLesson07 } from './levelOneLesson07';
+import { levelOneLesson08 } from './levelOneLesson08';
 import { levelTwoLessons } from './levelTwoLessons';
 import { levelTwoWritingLesson } from './levelTwoWritingLesson';
 import { levelTwoAdvancedCreoLesson } from './levelTwoAdvancedCreoLesson';
@@ -97,19 +106,24 @@ function getProgrammeModule(moduleId: string): Module | undefined {
   };
 }
 
+const canonicalLevelOneLessons = [levelOneLesson01, levelOneLesson02, levelOneLesson03, levelOneLesson04, levelOneLesson05, levelOneLesson06, levelOneLesson07, levelOneLesson08];
 const extendedLessons = [...newLevelTwoLessons, ...newLevelThreeLessons, ...newLevelFourLessons];
 
 export const api = {
   getProgramme: () => programme,
   getLevel: () => level,
-  getModulesForLevel: () => modules,
-  getModule: (moduleId: string) => modules.find((m) => m.id === moduleId) || getProgrammeModule(moduleId),
+  getModulesForLevel: () => LEVEL_ONE_MODULES,
+  getModule: (moduleId: string) => LEVEL_ONE_MODULES.find((m) => m.id === moduleId) || modules.find((m) => m.id === moduleId) || getProgrammeModule(moduleId),
   getLesson: (lessonId: string) => {
+    const canonicalLevelOneLesson = canonicalLevelOneLessons.find((l) => l.id === lessonId);
+    if (canonicalLevelOneLesson) return canonicalLevelOneLesson;
     const existingLesson = lessons.find((l) => l.id === lessonId);
     if (existingLesson) return enhance(existingLesson);
     return extendedLessons.find((l) => l.id === lessonId);
   },
   getLessonsForModule: (moduleId: string) => {
+    const canonicalLevelOne = canonicalLevelOneLessons.filter((l) => l.moduleId === moduleId);
+    if (canonicalLevelOne.length > 0) return canonicalLevelOne;
     const existingLessons = lessons.filter((l) => l.moduleId === moduleId).map(enhance);
     if (existingLessons.length > 0) return existingLessons;
     return extendedLessons.filter((l) => l.moduleId === moduleId);
