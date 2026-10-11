@@ -2,7 +2,7 @@ import { Lesson } from './types';
 
 export const levelThreePrivacySafetyLesson: Lesson = {
   id: 'MZAIE-P3-M07-L01',
-  title: 'Privacy, Safety & Responsible Deployment',
+  title: 'Keep People Safe Before Real-World Use',
   levelId: 'MZAIE-P3',
   moduleId: 'MZAIE-P3-M07',
   locale: 'en-ZA',
@@ -10,7 +10,7 @@ export const levelThreePrivacySafetyLesson: Lesson = {
   estimatedMinutes: 20,
   objectives: [
     'Reduce privacy and safety risks before an AI prototype reaches real users.',
-    'Apply data minimisation, consent, access control and human oversight.',
+    'Collect only the information truly needed, ask permission where required, control who has access and keep people responsible for important decisions.',
     'Plan safe pilot boundaries, fallback, revocation and recovery.',
     'Decide whether a prototype is responsible enough to deploy.',
   ],
@@ -21,8 +21,8 @@ export const levelThreePrivacySafetyLesson: Lesson = {
   offlineEligible: true,
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
-    { id:'p3m7_b1', type:'objective', variant:'standard', content:'A prototype that works technically can still be unsafe. Responsible deployment means protecting people, limiting data, controlling access and preparing for failure before real users depend on the system.' },
-    { id:'p3m7_b2', type:'explanation', variant:'standard', content:'Start with data minimisation: collect, store and share only what the task genuinely requires. Names, identity numbers, contact details, health information, school records and other personal information should never be collected simply because the technology allows it.' },
+    { id:'p3m7_b1', type:'objective', variant:'standard', content:'A small working test can work technically and still be unsafe. Before real people depend on it, protect people, collect only what is needed, control who has access and plan what to do if something goes wrong. Putting a tool into real-world use is often called deployment.' },
+    { id:'p3m7_b2', type:'explanation', variant:'standard', content:'Start by collecting, storing and sharing only what the task truly needs. This is sometimes called data minimisation. Names, identity numbers, contact details, health information, school records and other personal information should never be collected simply because the technology allows it.' },
     { id:'p3m7_b3', type:'keyPoint', variant:'standard', content:'Ask four questions about every data field: Why do we need it? Who can see it? Where is it stored? When can it be deleted? If the first answer is weak, do not collect the data.' },
     { id:'p3m7_b4', type:'application', variant:'plain', content:'Use the SAFE deployment check: Scope the pilot. Ask for informed consent where needed. Fence access and sensitive data. Establish human oversight, fallback and an exit plan.' },
     { id:'p3m7_b5', type:'example', variant:'SouthAfricanContext', content:'A community learning assistant can help learners practise without storing their full names, ID numbers or home addresses. A simple local learner nickname may be enough. The safest useful dataset is often smaller than the easiest dataset to collect.' },
