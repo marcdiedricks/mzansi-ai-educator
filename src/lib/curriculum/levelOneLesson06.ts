@@ -1,7 +1,7 @@
 import { Lesson } from './types';
 export const levelOneLesson06: Lesson = {
  id:'MZAIE-P1-M06-L01',title:'Privacy, Safety and Human Agency',levelId:'MZAIE-L1',moduleId:'MZAIE-P1-M06',locale:'en-ZA',version:'2.0',estimatedMinutes:20,
- objectives:['Use safer data habits and recognise when human oversight is necessary.'],competencyIds:['AI_UNDERSTANDING','CRITICAL_QUESTIONING'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
+ objectives:['Use safer data habits and recognise when human oversight is necessary.'],competencyIds:['BASIC_PRIVACY','RESPONSIBLE_AI_USE'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
  blocks:[
  {id:'o',type:'objective',variant:'standard',content:'Use safer data habits and recognise when human oversight is necessary.'},
  {id:'e',type:'explanation',variant:'standard',content:'Personal information requires care. POPIA is South Africa’s central data-protection law. Human agency means people remain able and responsible to question, decide and intervene.'},
