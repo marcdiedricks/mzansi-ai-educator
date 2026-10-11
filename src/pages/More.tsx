@@ -1,4 +1,4 @@
-import { Book, Download, Users, Shield, Info, Video } from 'lucide-react';
+import { Book, Users, Shield, Info, Video } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export function More() {
@@ -6,7 +6,6 @@ export function More() {
   const links = [
     { label: 'Glossary', icon: Book, path: '/glossary' },
     { label: 'Lesson Video Links', icon: Video, path: '/video-resources' },
-    { label: 'Downloads', icon: Download, path: '/video-resources' },
     { label: 'Facilitator Guide', icon: Users, path: '/facilitator' },
   ];
 
