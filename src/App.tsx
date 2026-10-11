@@ -28,7 +28,7 @@ import { MonsterMapping } from './pages/labs/MonsterMapping';
 
 export default function App() {
   return (
-    <BrowserRouter basename="/mzansi-ai-educator">
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<LaunchScreen />} />
         <Route path="/onboarding" element={<Onboarding />} />
