@@ -2,14 +2,14 @@ import { Lesson } from './types';
 
 export const levelThreeAssistantsWorkflowsLesson: Lesson = {
   id: 'MZAIE-P3-M02-L01',
-  title: 'Designing AI Assistants & Workflows',
+  title: 'Plan an AI Helper Step by Step',
   levelId: 'MZAIE-P3',
   moduleId: 'MZAIE-P3-M02',
   locale: 'en-ZA',
   version: '1.0',
   estimatedMinutes: 20,
   objectives: [
-    'Map an AI assistant or workflow with clear inputs, steps, outputs and human checkpoints.',
+    'Plan an AI helper by showing what information goes in, what steps happen, what comes out and where a person must check or decide.',
     'Separate what the AI may do from what must remain a human responsibility.',
     'Design a workflow that still makes sense on ordinary phones and under weak connectivity.',
     'Test whether the proposed assistant reduces effort without creating new privacy, accuracy or access risks.',
@@ -22,8 +22,8 @@ export const levelThreeAssistantsWorkflowsLesson: Lesson = {
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
     { id:'p3m2_b1', type:'objective', variant:'standard', content:'Turn a defined problem into a practical assistant or workflow by deciding what information goes in, what steps happen, what comes out and where a human must check or decide.' },
-    { id:'p3m2_b2', type:'explanation', variant:'standard', content:'An AI assistant is not just a chat box. It is a designed process. A useful design names the user, the trigger, the inputs, the sequence of tasks, the expected output, the limits and the point where a human reviews the result.' },
-    { id:'p3m2_b3', type:'keyPoint', variant:'standard', content:'A workflow is only as strong as its hand-offs. Define exactly when the AI acts, when a person acts, what evidence is checked, and what happens when the AI is uncertain or offline.' },
+    { id:'p3m2_b2', type:'explanation', variant:'standard', content:'An AI helper is not just a chat box. It follows a planned set of steps. This is often called a workflow. A useful plan shows who will use it, what starts the task, what information goes in, what happens next, what comes out, what the limits are and where a person checks the result.' },
+    { id:'p3m2_b3', type:'keyPoint', variant:'standard', content:'A step-by-step AI process is only useful if it is clear when the AI acts and when a person takes over. Decide what must be checked and what should happen when the AI is unsure or the internet is unavailable.' },
     { id:'p3m2_b4', type:'application', variant:'plain', content:'Use the FLOW loop: Frame the user need. List the inputs. Order the steps. Watch for risk and uncertainty. Output a useful result. Locate the human checkpoint. Test the workflow from start to finish.' },
     { id:'p3m2_b5', type:'example', variant:'SouthAfricanContext', content:'A TVET student support office receives repeated requests for bursary guidance. The workflow could start with a learner choosing a bursary topic, retrieve only verified current information, produce a short plain-language summary, show the official source link, and send unusual cases to a staff member. The AI should not decide whether the learner qualifies.' },
     { id:'p3m2_b6', type:'explanation', variant:'standard', content:'Good inputs are specific and limited. If the assistant needs only a topic and province, do not collect a full identity number, home address or private learner record. Every extra input creates cost, complexity and privacy risk.' },
