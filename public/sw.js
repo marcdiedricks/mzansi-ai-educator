@@ -1,5 +1,5 @@
 // Offline shell pilot. Keep this cache isolated from older deployed builds.
-// Preview-only validation commit; no production deployment or merge.
+// Draft PR #62 preview verification; no production deployment or merge.
 const CACHE_NAME = 'mzansi-ai-educator-shell-v3';
 const BASE_PATH = new URL(self.registration.scope).pathname;
 const SHELL_URLS = [BASE_PATH, `${BASE_PATH}manifest.json`, `${BASE_PATH}icon.svg`];
