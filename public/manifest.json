@@ -1,6 +1,6 @@
 {
   "name": "Mzansi AI Educator",
-  "short_name": "Mzansi AI",
+  "short_name": "Mzansi AI Educator",
   "description": "Learn AI. Use it responsibly. Build for Africa.",
   "start_url": ".",
   "scope": ".",
@@ -9,10 +9,16 @@
   "theme_color": "#0F172A",
   "icons": [
     {
-      "src": "icon.svg",
-      "sizes": "192x192 512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "mzansi-ai-educator-icon-v2-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "mzansi-ai-educator-icon-v2-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
