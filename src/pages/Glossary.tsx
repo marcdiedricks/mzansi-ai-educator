@@ -66,7 +66,7 @@ export function Glossary() {
   });
 
   const selectedLabel = languageLabels.find((item) => item.key === selectedLanguage)?.label || 'English';
-  const verifiedIsiXhosaCount = ALL_TERMS.filter((item) => item.isixhosa).length;
+  const isiXhosaAvailableCount = ALL_TERMS.filter((item) => item.isixhosa).length;
 
   return (
     <div className="p-4 sm:p-6 space-y-4 pb-24">
@@ -123,9 +123,9 @@ export function Glossary() {
         <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex gap-2.5">
           <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
           <div>
-            <p className="text-xs font-bold text-emerald-900">Source-backed isiXhosa terminology</p>
+            <p className="text-xs font-bold text-emerald-900">isiXhosa terminology availability</p>
             <p className="text-[11px] text-emerald-800 mt-0.5 leading-relaxed">
-              {verifiedIsiXhosaCount} of {ALL_TERMS.length} entries now have source-backed isiXhosa terminology. Unsupported entries remain under review rather than being guessed.
+              {isiXhosaAvailableCount} of {ALL_TERMS.length} entries include isiXhosa wording. Source attribution does not replace independent human language review; missing entries remain under review.
             </p>
           </div>
         </div>
@@ -170,7 +170,7 @@ export function Glossary() {
         {filteredTerms.map((termItem) => {
           const isExpanded = expandedTermId === termItem.id;
           const currentLangData = languageData(termItem, selectedLanguage);
-          const verifiedSource = sourceLabel(termItem);
+          const citedSource = sourceLabel(termItem);
 
           return (
             <div key={termItem.id} className="bg-white border-2 border-[#E2E8F0] rounded-2xl overflow-hidden transition-all">
@@ -183,9 +183,9 @@ export function Glossary() {
                     <span className="text-[9px] font-bold uppercase tracking-wider bg-orange-50 text-[#E67E22] px-2 py-0.5 rounded border border-orange-200">
                       {termItem.category}
                     </span>
-                    {verifiedSource && (
+                    {citedSource && (
                       <span className="text-[9px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">
-                        Verified source
+                        Source cited
                       </span>
                     )}
                   </div>
@@ -218,7 +218,7 @@ export function Glossary() {
                           <p className="text-xs text-gray-600 italic">“{currentLangData.example}”</p>
                         </div>
                       )}
-                      {verifiedSource && <p className="text-[10px] text-gray-500">Source: {verifiedSource}</p>}
+                      {citedSource && <p className="text-[10px] text-gray-500">Source cited: {citedSource}. Human language review may still be required.</p>}
                     </>
                   ) : (
                     <div className="bg-white p-3 rounded-xl border border-amber-200">
@@ -228,22 +228,22 @@ export function Glossary() {
                   )}
 
                   <div className="pt-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Other available Mzansi languages:</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Compare explanations in other available languages:</span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       {selectedLanguage !== 'english' && (
-                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">English</span><span className="font-bold text-gray-800">{termItem.term}</span></div>
+                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">English</span><span className="font-bold text-gray-800">{termItem.term}</span><p className="text-gray-600 mt-1 leading-relaxed">{termItem.english.definition}</p></div>
                       )}
                       {selectedLanguage !== 'afrikaans' && termItem.afrikaans && (
-                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">Afrikaans</span><span className="font-bold text-gray-800">{termItem.afrikaans.term}</span></div>
+                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">Afrikaans</span><span className="font-bold text-gray-800">{termItem.afrikaans.term}</span><p className="text-gray-600 mt-1 leading-relaxed">{termItem.afrikaans.definition}</p></div>
                       )}
                       {selectedLanguage !== 'isixhosa' && termItem.isixhosa && (
-                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">isiXhosa</span><span className="font-bold text-gray-800">{termItem.isixhosa.term}</span></div>
+                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">isiXhosa</span><span className="font-bold text-gray-800">{termItem.isixhosa.term}</span><p className="text-gray-600 mt-1 leading-relaxed">{termItem.isixhosa.definition}</p></div>
                       )}
                       {selectedLanguage !== 'isizulu' && termItem.isizulu && (
-                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">isiZulu</span><span className="font-bold text-gray-800">{termItem.isizulu.term}</span></div>
+                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">isiZulu</span><span className="font-bold text-gray-800">{termItem.isizulu.term}</span><p className="text-gray-600 mt-1 leading-relaxed">{termItem.isizulu.definition}</p></div>
                       )}
                       {selectedLanguage !== 'sesotho' && termItem.sesotho && (
-                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">Sesotho</span><span className="font-bold text-gray-800">{termItem.sesotho.term}</span></div>
+                        <div className="bg-white p-2 rounded-lg border border-gray-200"><span className="text-[10px] font-bold text-gray-400 block">Sesotho</span><span className="font-bold text-gray-800">{termItem.sesotho.term}</span><p className="text-gray-600 mt-1 leading-relaxed">{termItem.sesotho.definition}</p></div>
                       )}
                     </div>
                   </div>
