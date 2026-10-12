@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, BookOpen, Brain, CheckCircle2, Globe, Lock, MessageCircle, Video, WifiOff } from 'lucide-react';
-import { getOnboardingData } from '../lib/storage';
+import { getOnboardingData, setOnboardingComplete, type LearnerLanguage } from '../lib/storage';
 import { getUserProgress } from '../lib/progress';
 import { modules, lessons } from '../lib/curriculum/data';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES, PROGRAMME_LEVELS } from '../lib/programmeLevels';
 
 export function Home() {
   const navigate = useNavigate();
-  const onboarding = getOnboardingData();
+  const [onboarding, setOnboarding] = useState(getOnboardingData());
+  const selectedLanguage: LearnerLanguage = onboarding?.language ?? 'en';
+  const changeLanguage = (language: LearnerLanguage) => {
+    const updated = { language, goal: onboarding?.goal ?? '', experience: onboarding?.experience ?? '', dataMode: onboarding?.dataMode ?? '' };
+    setOnboardingComplete(updated);
+    setOnboarding(updated);
+  };
   const [progress, setProgress] = useState(getUserProgress());
 
   useEffect(() => {
@@ -79,7 +85,18 @@ export function Home() {
     <div className="w-full p-4 sm:p-6 pb-24 space-y-5">
       <header className="space-y-2">
         <div className="flex items-start justify-between gap-3"><div><p className="text-xs font-bold uppercase tracking-wider text-[#E67E22]">Mzansi AI Educator</p><h1 className="text-2xl font-bold text-[#2D3E50] mt-1">Your AI learning journey</h1><p className="text-sm text-gray-500 mt-1">Understand. Apply. Create. Solve.</p></div><div className="shrink-0 flex items-center gap-1.5 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-2.5 py-1.5"><WifiOff className="w-3.5 h-3.5" /> Offline ready</div></div>
-        <div className="flex flex-wrap gap-2 text-[11px] font-bold text-gray-600"><span className="px-2.5 py-1 rounded-lg bg-gray-100">Language: {languageLabel}</span><span className="px-2.5 py-1 rounded-lg bg-gray-100">32 modules · 4 levels</span></div>
+        <div className="space-y-2">
+          <div role="group" aria-label="Choose learning language" className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-bold text-gray-600">Learning language:</span>
+            {([{ code: 'en', label: 'English' }, { code: 'af', label: 'Afrikaans' }, { code: 'xh', label: 'isiXhosa' }] as const).map((option) => (
+              <button key={option.code} type="button" onClick={() => changeLanguage(option.code)} aria-pressed={selectedLanguage === option.code} className={`rounded-lg border px-3 py-2 text-xs font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E67E22] ${selectedLanguage === option.code ? 'bg-[#2D3E50] text-white border-[#2D3E50]' : 'bg-white text-[#2D3E50] border-gray-300'}`}>
+                {option.label}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-gray-500">Selected: {languageLabel}. Level 1 offers these learning languages; Levels 2–4 remain English-first.</p>
+          <span className="inline-block px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] font-bold text-gray-600">32 modules · 4 levels</span>
+        </div>
       </header>
 
       <section className="bg-[#2D3E50] text-white rounded-2xl p-5 shadow-sm">
