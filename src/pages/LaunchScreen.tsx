@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isOnboardingComplete } from '../lib/storage';
-import { BookOpen } from 'lucide-react';
 
 export function LaunchScreen() {
   const navigate = useNavigate();
@@ -15,9 +14,7 @@ export function LaunchScreen() {
   return (
     <div className="flex flex-col min-h-screen bg-white text-[#1A202C] w-full max-w-md mx-auto sm:border-x sm:border-[#E2E8F0]">
       <main className="flex-1 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-24 h-24 bg-[#2D3E50] rounded-2xl flex items-center justify-center mb-8 text-white shadow-sm">
-          <BookOpen className="w-12 h-12" />
-        </div>
+        <img src={`${import.meta.env.BASE_URL}mzansi-ai-educator-icon-v2-512.png`} alt="Mzansi AI Educator" className="w-32 h-32 rounded-2xl object-cover mb-8 shadow-sm" />
         
         <h1 className="text-3xl font-bold tracking-tight text-[#2D3E50] mb-4">
           Mzansi AI <span className="text-[#E67E22]">Educator</span>
