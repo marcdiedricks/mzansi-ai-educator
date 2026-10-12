@@ -1,8 +1,8 @@
 // Offline shell pilot. Keep this cache isolated from older deployed builds.
 // Draft PR #62 preview verification; no production deployment or merge.
-const CACHE_NAME = 'mzansi-ai-educator-shell-v3';
+const CACHE_NAME = 'mzansi-ai-educator-shell-v4';
 const BASE_PATH = new URL(self.registration.scope).pathname;
-const SHELL_URLS = [BASE_PATH, `${BASE_PATH}manifest.json`, `${BASE_PATH}icon.svg`];
+const SHELL_URLS = [BASE_PATH, `${BASE_PATH}manifest.json`, `${BASE_PATH}mzansi-ai-educator-icon-v2-192.png`, `${BASE_PATH}mzansi-ai-educator-icon-v2-512.png`];
 
 async function cacheShell() {
   const cache = await caches.open(CACHE_NAME);
