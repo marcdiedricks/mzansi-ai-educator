@@ -1,0 +1,46 @@
+name: Validate isolated contrast fix with Lighthouse
+on:
+  push:
+    branches: [fix/lighthouse-contrast-20261014]
+permissions:
+  contents: read
+jobs:
+  contrast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+      - run: bun run build
+      - name: Start local preview (not production)
+        run: |
+          bunx vite preview --host 127.0.0.1 --port 4173 > /tmp/vite-preview.log 2>&1 &
+          for i in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:4173/mzansi-ai-educator/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/vite-preview.log
+          exit 1
+      - name: Lighthouse mobile on locally built fix
+        run: |
+          npm exec --yes --package=lighthouse -- lighthouse http://127.0.0.1:4173/mzansi-ai-educator/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=360 --screenEmulation.height=740 --screenEmulation.deviceScaleFactor=2 --throttling-method=simulate --output=json --output-path=./lighthouse-fixed.json --quiet
+      - name: Report and enforce contrast fix
+        run: |
+          node - <<'NODE'
+          const r=require('./lighthouse-fixed.json');
+          console.log('AUDITED URL:',r.finalDisplayedUrl||r.finalUrl);
+          for(const [k,v] of Object.entries(r.categories))console.log('SCORE',k,Math.round(v.score*100));
+          const a=r.audits['color-contrast'];
+          console.log('CONTRAST SCORE:',a?.score);
+          for(const i of a?.details?.items||[])console.log('CONTRAST FAILURE:',JSON.stringify({selector:i.node?.selector,explanation:i.node?.explanation}));
+          console.log('CONTRAST FAILURES:',a?.details?.items?.length||0);
+          if(a?.score!==1)process.exitCode=1;
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-contrast-local-preview
+          path: lighthouse-fixed.json
+          retention-days: 7
