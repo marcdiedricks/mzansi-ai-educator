@@ -27,7 +27,10 @@ jobs:
           for group in results:
               for pkg in group.get('packages',[]):
                   issues=pkg.get('vulnerabilities',[])
-                  if issues: print('Vulnerable dependency:',pkg.get('package',{}).get('name','unknown'),'issues:',len(issues))
+                  if issues:
+                      print('Vulnerable dependency:',pkg.get('package',{}).get('name','unknown'),'issues:',len(issues))
+                      for issue in issues:
+                          print('ADVISORY',json.dumps({'package':pkg.get('package',{}).get('name'), 'id':issue.get('id'),'summary':issue.get('summary'),'severity':issue.get('severity'),'affected':issue.get('affected'),'references':issue.get('references')},ensure_ascii=False)[:2500])
           PY
           else
             echo "Scanner did not produce JSON results"
