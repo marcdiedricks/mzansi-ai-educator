@@ -25,6 +25,26 @@ jobs:
           }
           console.log('CORE WEB VITALS',Object.fromEntries(['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift'].map(k=>[k,r.audits[k]?.displayValue])));
           NODE
+      - name: Detail exact failing contrast elements
+        run: |
+          node - <<'NODE'
+          const r=require('./lighthouse-mobile.json');
+          const a=r.audits['color-contrast'];
+          console.log('CONTRAST SUMMARY:',a?.title);
+          for(const item of a?.details?.items||[]){
+            console.log('CONTRAST ELEMENT:',JSON.stringify({
+              selector:item.node?.selector,
+              snippet:item.node?.snippet,
+              explanation:item.node?.explanation,
+              failureSummary:item.node?.failureSummary,
+              foreground:item.fgColor,
+              background:item.bgColor,
+              contrastRatio:item.contrastRatio,
+              expectedContrastRatio:item.expectedContrastRatio
+            }));
+          }
+          console.log('CONTRAST FAILING ELEMENT COUNT:',a?.details?.items?.length||0);
+          NODE
       - uses: actions/upload-artifact@v4
         with:
           name: lighthouse-mobile-readonly-report
