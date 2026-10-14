@@ -1,0 +1,34 @@
+name: R0 OSV dependency scan pilot
+on:
+  push:
+    branches: [audit/osv-r0-pilot-20261014]
+permissions:
+  contents: read
+jobs:
+  dependency-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify supported dependency input
+        run: test -f bun.lock && echo "Found bun.lock"
+      - name: Run read-only OSV-Scanner V2
+        run: |
+          docker run --rm -v "$PWD:/src:ro" ghcr.io/google/osv-scanner:latest scan source --lockfile=/src/bun.lock --format=json > osv-results.json
+      - name: Summarize results
+        if: always()
+        run: |
+          if [ -f osv-results.json ]; then
+            python3 - <<'PY'
+          import json
+          with open('osv-results.json') as f: data=json.load(f)
+          results=data.get('results',[])
+          print('OSV results groups:',len(results))
+          for group in results:
+              for pkg in group.get('packages',[]):
+                  issues=pkg.get('vulnerabilities',[])
+                  if issues: print('Vulnerable dependency:',pkg.get('package',{}).get('name','unknown'),'issues:',len(issues))
+          PY
+          else
+            echo "Scanner did not produce JSON results"
+          fi
