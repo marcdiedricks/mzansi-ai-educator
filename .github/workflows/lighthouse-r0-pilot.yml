@@ -1,0 +1,32 @@
+name: R0 Lighthouse mobile read-only pilot
+on:
+  push:
+    branches: [audit/lighthouse-r0-20261014]
+permissions:
+  contents: read
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit published GitHub Pages site (no app changes)
+        run: |
+          npm exec --yes --package=lighthouse -- lighthouse https://marcdiedricks.github.io/mzansi-ai-educator/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=360 --screenEmulation.height=740 --screenEmulation.deviceScaleFactor=2 --throttling-method=simulate --output=json --output-path=./lighthouse-mobile.json --quiet
+      - name: Summarize audit and actionable findings
+        run: |
+          node - <<'NODE'
+          const r=require('./lighthouse-mobile.json');
+          console.log('AUDITED URL:',r.finalDisplayedUrl||r.finalUrl);
+          console.log('FETCH TIME:',r.fetchTime);
+          for(const [k,v] of Object.entries(r.categories))console.log('SCORE',k,Math.round(v.score*100));
+          for(const [id,a] of Object.entries(r.audits)){
+            if(a.score!==null && a.score<0.9 && a.details?.type!=='opportunity') console.log('FINDING',id,'score',a.score,'title',a.title,'display',a.displayValue||'');
+          }
+          console.log('CORE WEB VITALS',Object.fromEntries(['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift'].map(k=>[k,r.audits[k]?.displayValue])));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-mobile-readonly-report
+          path: lighthouse-mobile.json
+          retention-days: 7
