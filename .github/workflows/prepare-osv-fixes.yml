@@ -1,0 +1,46 @@
+name: Prepare verified dependency remediation PR
+on:
+  push:
+    branches: [audit/osv-remediation-20261014]
+    paths: [.github/workflows/prepare-osv-fixes.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: oven-sh/setup-bun@v2
+      - name: Add three tested security overrides
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p=JSON.parse(fs.readFileSync('package.json','utf8'));
+          p.overrides={...(p.overrides||{}),'proxy-addr':'2.0.8','qs':'6.16.0','source-map-js':'1.2.2'};
+          fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');
+          NODE
+          bun install
+      - name: Verify dependencies, build, and security scan
+        run: |
+          bun -e "const l=require('./bun.lock');for(const [n,v] of Object.entries({'proxy-addr':'2.0.8','qs':'6.16.0','source-map-js':'1.2.2'})){if(l.packages[n]?.[0]!==n+'@'+v)process.exit(1)}"
+          bun run lint
+          bun run build
+          docker run --rm -v "$PWD:/src:ro" ghcr.io/google/osv-scanner:latest scan source --lockfile=/src/bun.lock --format=json > osv-check.json
+          python3 - <<'PY'
+          import json,sys
+          data=json.load(open('osv-check.json'))
+          issues=[(p.get('package',{}).get('name'),v.get('id')) for r in data.get('results',[]) for p in r.get('packages',[]) for v in p.get('vulnerabilities',[])]
+          print('Remaining advisories:',issues)
+          if issues:sys.exit(1)
+          PY
+      - name: Commit only manifest and generated lockfile to audit branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json bun.lock
+          git diff --cached --stat
+          git commit -m "fix: pin three vulnerable transitive dependencies"
+          git push origin HEAD:audit/osv-remediation-20261014
