@@ -20,7 +20,7 @@ export function LaunchScreen() {
         </div>
         
         <h1 className="text-3xl font-bold tracking-tight text-[#2D3E50] mb-4">
-          Mzansi AI <span className="text-[#E67E22]">Educator</span>
+          Mzansi AI <span className="text-[#C65D0E]">Educator</span>
         </h1>
         <p className="text-lg text-gray-600 mb-12 font-medium">
           Learn AI. Use it responsibly. Build for Africa.
@@ -43,7 +43,7 @@ export function LaunchScreen() {
         </div>
       </main>
 
-      <footer className="p-6 flex justify-around text-xs font-bold uppercase tracking-widest text-gray-400">
+      <footer className="p-6 flex justify-around text-xs font-bold uppercase tracking-widest text-gray-600">
         <button className="hover:text-gray-600 focus-visible:outline-none focus-visible:underline">
           Language
         </button>
