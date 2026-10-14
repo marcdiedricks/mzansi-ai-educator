@@ -1,0 +1,57 @@
+name: R0 OSV remediation validation
+on:
+  push:
+    branches: [audit/osv-remediation-20261014]
+permissions:
+  contents: read
+jobs:
+  validate-remediation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Baseline locked dependency versions
+        run: |
+          bun -e "const l=require('./bun.lock'); for(const n of ['proxy-addr','qs','source-map-js']) console.log(n,l.packages[n]?.[0]);"
+      - name: Apply temporary minimum security overrides (no commit)
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p=JSON.parse(fs.readFileSync('package.json','utf8'));
+          p.overrides={...(p.overrides||{}),'proxy-addr':'2.0.8','qs':'6.16.0','source-map-js':'1.2.2'};
+          fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');
+          NODE
+          bun install
+      - name: Confirm resolved versions
+        run: |
+          bun -e "const l=require('./bun.lock'); for(const [n,v] of Object.entries({'proxy-addr':'2.0.8','qs':'6.16.0','source-map-js':'1.2.2'})){const got=l.packages[n]?.[0];console.log(n,got);if(got!==n+'@'+v)process.exitCode=1;}"
+      - name: Type check
+        run: bun run lint
+      - name: Build
+        run: bun run build
+      - name: Re-scan updated dependency lock
+        run: |
+          set +e
+          docker run --rm -v "$PWD:/src:ro" ghcr.io/google/osv-scanner:latest scan source --lockfile=/src/bun.lock --format=json > osv-remediation.json
+          scanner_code=$?
+          set -e
+          python3 - <<'PY'
+          import json,sys
+          data=json.load(open('osv-remediation.json'))
+          vulnerable=[]
+          for group in data.get('results',[]):
+              for pkg in group.get('packages',[]):
+                  for issue in pkg.get('vulnerabilities',[]):
+                      vulnerable.append((pkg.get('package',{}).get('name'),issue.get('id')))
+          print('Remaining findings:',len(vulnerable))
+          for item in vulnerable:print('REMAINING',*item)
+          if vulnerable:sys.exit(1)
+          PY
+          if [ "$scanner_code" -ne 0 ]; then echo "Scanner returned nonzero; inspect above for errors"; exit "$scanner_code"; fi
+      - name: Display isolated changes only
+        if: always()
+        run: |
+          git status --short
+          git diff --stat
+          git diff -- package.json | head -80
