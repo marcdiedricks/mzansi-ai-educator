@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Award, CheckCircle2, Star, BookOpen, Lock } from 'lucide-react';
 import { getUserProgress } from '../lib/progress';
 import { getOnboardingData } from '../lib/storage';
-import { modules } from '../lib/curriculum/data';
+import { LEVEL_ONE_MODULES } from '../lib/curriculum/levelOneCanonical';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES } from '../lib/programmeLevels';
 
 export function Certificates() {
@@ -17,7 +17,7 @@ export function Certificates() {
     return () => window.removeEventListener('mzansi_progress_updated', handleUpdate);
   }, []);
 
-  const level1Ids = modules.flatMap((module) => module.lessonIds);
+  const level1Ids = LEVEL_ONE_MODULES.flatMap((module) => module.lessonIds);
   const level2Ids = LEVEL_TWO_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level3Ids = LEVEL_THREE_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level4Ids = LEVEL_FOUR_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
@@ -49,20 +49,20 @@ export function Certificates() {
 
   return (
     <div className="p-4 sm:p-6 space-y-5 pb-24">
-      <header><div className="flex items-center gap-2 text-[#E67E22] mb-1"><Award className="w-5 h-5" /><span className="text-[10px] font-bold uppercase tracking-wider">Learning Milestones</span></div><h1 className="text-2xl font-bold text-[#2D3E50] mb-1">Certificates & Badges</h1><p className="text-xs font-medium text-gray-500">Track completion milestones earned inside Mzansi AI Educator.</p></header>
+      <header><div className="flex items-center gap-2 text-[#E67E22] mb-1"><Award className="w-5 h-5" /><span className="text-[10px] font-bold uppercase tracking-wider">Learning Milestones</span></div><h1 className="text-2xl font-bold text-[#2D3E50] mb-1">Completion Records & Milestones</h1><p className="text-xs font-medium text-gray-500">Track learning completion recorded inside Mzansi AI Educator. These records are not externally accredited qualifications.</p></header>
 
       <CompletionCard level={1} title="AI Foundations" completed={level1Complete} total={level1Ids.length} completedCount={completed1} percent={percent1} unlocked={true} lockedMessage="" />
       <CompletionCard level={2} title="Practical AI Skills" completed={level2Complete} total={level2Ids.length} completedCount={completed2} percent={percent2} unlocked={level1Complete} lockedMessage="Complete Level 1 as a learner to unlock the Level 2 completion record. Test Preview does not count." />
       <CompletionCard level={3} title="AI Creator & Builder" completed={level3Complete} total={level3Ids.length} completedCount={completed3} percent={percent3} unlocked={level2Complete} lockedMessage="Complete Levels 1 and 2 as a learner to unlock the Level 3 completion record. Test Preview does not count." />
       <CompletionCard level={4} title="AI Innovation & Problem-Solving" completed={level4Complete} total={level4Ids.length} completedCount={completed4} percent={percent4} unlocked={level3Complete} lockedMessage="Complete Levels 1, 2 and 3 as a learner to unlock the Level 4 completion record. Test Preview does not count." />
 
-      <section className="space-y-3"><h3 className="text-sm font-bold text-[#2D3E50]">Competency Badges</h3><div className="grid grid-cols-1 sm:grid-cols-2 gap-3">{[
-        { id: 'b_ai', name: 'AI Foundations', desc: 'Understanding core AI concepts and patterns', earned: completed1 >= 1 },
-        { id: 'b_ubuntu', name: 'Ubuntu Tech Ethics', desc: 'Human-first, community-centred AI', earned: completed1 >= 4 },
-        { id: 'b_apply', name: 'Practical AI User', desc: 'Applied AI skills across Level 2', earned: level1Complete && completed2 >= 4 },
-        { id: 'b_create', name: 'Responsible AI Builder', desc: 'Creator and prototype skills across Level 3', earned: level2Complete && completed3 >= 4 },
-        { id: 'b_lead', name: 'Community AI Problem Solver', desc: 'Leadership and impact skills across Level 4', earned: level3Complete && completed4 >= 4 },
-        { id: 'b_lab', name: 'Unplugged Experimenter', desc: 'Completed an interactive offline lab activity', earned: progress.completedLabs.length >= 1 },
+      <section className="space-y-3"><h3 className="text-sm font-bold text-[#2D3E50]">Learning Milestone Badges</h3><div className="grid grid-cols-1 sm:grid-cols-2 gap-3">{[
+        { id: 'b_ai', name: 'AI Foundations Started', desc: 'Started the Level 1 AI foundations learning pathway', earned: completed1 >= 1 },
+        { id: 'b_ubuntu', name: 'Responsible AI Learning', desc: 'Reached the responsible and community-centred part of Level 1', earned: completed1 >= 4 },
+        { id: 'b_apply', name: 'Practical AI Learning', desc: 'Completed at least half of the Level 2 practical AI lessons', earned: level1Complete && completed2 >= 4 },
+        { id: 'b_create', name: 'AI Creator Learning', desc: 'Completed at least half of the Level 3 creator and prototype lessons', earned: level2Complete && completed3 >= 4 },
+        { id: 'b_lead', name: 'AI Leadership Learning', desc: 'Completed at least half of the Level 4 leadership and impact lessons', earned: level3Complete && completed4 >= 4 },
+        { id: 'b_lab', name: 'Unplugged Activity', desc: 'Completed at least one recorded interactive offline lab activity', earned: progress.completedLabs.length >= 1 },
       ].map((badge) => <div key={badge.id} className={`p-4 rounded-2xl border-2 transition-all flex items-start gap-3 ${badge.earned ? 'bg-white border-[#E2E8F0] shadow-sm' : 'bg-gray-50 border-gray-200 opacity-60'}`}><div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${badge.earned ? 'bg-orange-50 text-[#E67E22]' : 'bg-gray-200 text-gray-400'}`}><Star className="w-5 h-5 fill-current" /></div><div><div className="flex items-center gap-1.5"><h4 className="font-bold text-xs text-[#1A202C]">{badge.name}</h4>{badge.earned && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}</div><p className="text-[11px] text-gray-500 mt-0.5">{badge.desc}</p></div></div>)}</div></section>
     </div>
   );

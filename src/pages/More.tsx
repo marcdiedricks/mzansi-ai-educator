@@ -1,4 +1,4 @@
-import { Book, Download, Users, Accessibility, Database, Shield, Info, Settings2, Video } from 'lucide-react';
+import { Book, Users, Shield, Info, Video } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export function More() {
@@ -6,22 +6,20 @@ export function More() {
   const links = [
     { label: 'Glossary', icon: Book, path: '/glossary' },
     { label: 'Lesson Video Links', icon: Video, path: '/video-resources' },
-    { label: 'Downloads', icon: Download, path: '/video-resources' },
-    { label: 'Facilitator Mode', icon: Users },
+    { label: 'Facilitator Guide', icon: Users, path: '/facilitator' },
   ];
 
   const settings = [
-    { label: 'Accessibility', icon: Accessibility },
-    { label: 'Data Settings', icon: Database },
-    { label: 'Privacy', icon: Shield },
-    { label: 'Standard / Plain Language', icon: Settings2 },
+    { label: 'Privacy & Data', icon: Shield, path: '/privacy' },
   ];
 
   const about = [
-    { label: 'About Mzansi AI Educator', icon: Info },
+    { label: 'About Mzansi AI Educator', icon: Info, path: '/about' },
   ];
 
-  const Section = ({ title, items }: { title: string, items: typeof links }) => (
+  type MenuItem = { label: string; icon: typeof Book; path?: string };
+
+  const Section = ({ title, items }: { title: string; items: MenuItem[] }) => (
     <div className="mb-6">
       <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 px-1">{title}</h3>
       <div className="bg-white border-2 border-[#E2E8F0] rounded-2xl overflow-hidden">

@@ -2,7 +2,7 @@ import { Lesson } from './types';
 
 export const levelThreeConversationUxLesson: Lesson = {
   id: 'MZAIE-P3-M05-L01',
-  title: 'Conversation & User Experience Design',
+  title: 'Make the AI Tool Easy to Use',
   levelId: 'MZAIE-P3',
   moduleId: 'MZAIE-P3-M05',
   locale: 'en-ZA',
@@ -22,7 +22,7 @@ export const levelThreeConversationUxLesson: Lesson = {
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
     { id:'p3m5_b1', type:'objective', variant:'standard', content:'Design an AI experience that feels clear, respectful and usable on an ordinary phone, including what the user sees, what they type, what happens when something goes wrong, and when a human must take over.' },
-    { id:'p3m5_b2', type:'explanation', variant:'standard', content:'User experience is not decoration. It is the complete path a person follows through the solution: understanding the purpose, entering information, receiving a result, correcting mistakes, knowing what to trust and knowing what to do next.' },
+    { id:'p3m5_b2', type:'explanation', variant:'standard', content:'A tool must be easy for real people to understand and use. The full experience—from knowing what the tool does, to entering information, getting a result, fixing mistakes and knowing what to do next—is often called the user experience.' },
     { id:'p3m5_b3', type:'keyPoint', variant:'standard', content:'A powerful AI model can still create a poor product if users cannot understand the instructions, buttons, questions or limitations. Clarity is part of functionality.' },
     { id:'p3m5_b4', type:'application', variant:'plain', content:'Use the CLEAR flow: Clarify the purpose. Lead with one obvious next action. Explain what information is needed. Acknowledge the user input and show progress or feedback. Recover from errors with a useful next step.' },
     { id:'p3m5_b5', type:'example', variant:'SouthAfricanContext', content:'A bursary-help assistant should not begin with “How may I assist?” and leave the learner guessing. It could begin with three plain choices: “Check eligibility”, “See required documents”, or “Find the closing date”. This reduces typing, data use and confusion on a small screen.' },

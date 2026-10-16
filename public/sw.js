@@ -1,8 +1,9 @@
-const CACHE_NAME = 'mzansi-ai-educator-v1';
+const CACHE_NAME = 'mzansi-ai-educator-v2';
+const BASE_PATH = new URL(self.registration.scope).pathname;
 const APP_SHELL = [
-  '/mzansi-ai-educator/',
-  '/mzansi-ai-educator/manifest.json',
-  '/mzansi-ai-educator/icon.svg'
+  BASE_PATH,
+  `${BASE_PATH}manifest.json`,
+  `${BASE_PATH}icon.svg`
 ];
 
 self.addEventListener('install', (event) => {
@@ -33,10 +34,10 @@ self.addEventListener('fetch', (event) => {
       fetch(request)
         .then((response) => {
           const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put('/mzansi-ai-educator/', copy));
+          caches.open(CACHE_NAME).then((cache) => cache.put(BASE_PATH, copy));
           return response;
         })
-        .catch(() => caches.match('/mzansi-ai-educator/'))
+        .catch(() => caches.match(BASE_PATH))
     );
     return;
   }

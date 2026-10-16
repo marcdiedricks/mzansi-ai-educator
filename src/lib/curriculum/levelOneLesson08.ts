@@ -1,0 +1,16 @@
+import { Lesson } from './types';
+export const levelOneLesson08: Lesson = {
+ id:'MZAIE-P1-M08-L01',title:'Level 1: Show What You Have Learned',levelId:'MZAIE-L1',moduleId:'MZAIE-P1-M08',locale:'en-ZA',version:'2.0',estimatedMinutes:25,
+ objectives:['Show what you have learned by looking at an everyday AI tool and explaining it in your own words.'],competencyIds:['AI_UNDERSTANDING','CRITICAL_QUESTIONING','HUMAN_JUDGEMENT'],activityIds:[],assessmentId:null,sourceIds:[],offlineEligible:true,trustState:'VERIFIED_CURRICULUM',
+ blocks:[
+ {id:'o',type:'objective',variant:'standard',content:'Show what you have learned by looking at an everyday AI tool and explaining it in your own words.'},
+ {id:'e',type:'explanation',variant:'standard',content:'Choose an everyday AI tool. Explain what it does, what information it may use, how AI is involved, what could go wrong, and where a person should stay in control. The goal is to show your own thinking.'},
+ {id:'t',type:'activity',variant:'standard',content:'THINK — T: Try independently. Complete a five-part analysis before asking for a hint: task, data, concept, risk and human oversight.'},
+ {id:'h',type:'explanation',variant:'plain',content:'THINK — H: Hunt for understanding. Use assistance only for an explanation or hint about a concept you do not understand.'},
+ {id:'i',type:'verification',variant:'standard',content:'THINK — I: Investigate. Check at least one assumption and separate what you know from what still needs verification.'},
+ {id:'n',type:'application',variant:'standard',content:'THINK — N: Navigate independently. Choose a second system and complete the five-part analysis without assistance.'},
+ {id:'k',type:'reflection',variant:'standard',content:'THINK — K: Know what you learned. State the most important thing you learned in Level 1 and one AI claim you would now know to question.'},
+ {id:'s',type:'summary',variant:'standard',content:'Level 1 competence means connecting the concepts and applying them independently, not only completing screens.'}
+ ],
+ quiz:[{id:'q1',question:'What is the strongest evidence of Level 1 competence?',options:['An independent analysis using task, data, concept, risk and human oversight.','Pressing every completion button.','Copying an AI answer.'],correctIndex:0,explanation:'The applied challenge demonstrates connected understanding and independent reasoning.'},{id:'q2',question:'Why should you identify the data an AI system may rely on?',options:['Data can affect what it learns, produces and who it works well for.','Data has no effect on AI systems.','Only programmers need to think about data.'],correctIndex:0,explanation:'Understanding data helps you reason about performance, bias and risk.'},{id:'q3',question:'What should happen after you identify a possible AI risk?',options:['Consider verification, safeguards and appropriate human oversight.','Ignore it if the output looks professional.','Assume the AI will correct itself.'],correctIndex:0,explanation:'Responsible use requires checking risks and deciding what safeguards or human oversight are needed.'}]
+};

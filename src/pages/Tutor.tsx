@@ -27,7 +27,7 @@ export function Tutor() {
     {
       sender: 'tutor',
       mode: 'local',
-      text: 'Sawubona. I am Ask Mzansi Tutor. Ask me about AI, a difficult term, a lesson, a comparison, a prompt you want improved, or something you want explained in simpler language. When connected AI is available I can answer more broadly. If not, I automatically continue with the local learning layer.',
+      text: 'Sawubona. I am Ask Mzansi Tutor. Ask me about AI, a difficult term, a lesson, a comparison, a prompt you want improved, or something you want explained in simpler language. The built-in tutor works offline using course and glossary knowledge. Some deployments may also provide an optional connected AI service for broader questions. If that service is unavailable, I continue locally.',
     },
   ]);
 
@@ -90,7 +90,7 @@ export function Tutor() {
               {busy ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
             </button>
           </div>
-          <p className="text-[10px] text-gray-500 mt-2">Connected answers may go beyond the course. Local fallback remains available when connectivity or the AI service is unavailable. Important claims should still be checked against trusted sources.</p>
+          <p className="text-[10px] text-gray-500 mt-2">The built-in tutor works locally and can continue offline. A connected AI service is optional and may not be available on this deployment. Important claims should still be checked against trusted sources.</p>
         </form>
       </div>
     </div>

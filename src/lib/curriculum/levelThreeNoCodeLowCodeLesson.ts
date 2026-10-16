@@ -2,14 +2,14 @@ import { Lesson } from './types';
 
 export const levelThreeNoCodeLowCodeLesson: Lesson = {
   id: 'MZAIE-P3-M04-L01',
-  title: 'Building with No-Code & Low-Code AI',
+  title: 'Build a Simple AI Tool',
   levelId: 'MZAIE-P3',
   moduleId: 'MZAIE-P3-M04',
   locale: 'en-ZA',
   version: '1.0',
   estimatedMinutes: 20,
   objectives: [
-    'Explain the difference between no-code, low-code and full-code approaches.',
+    'Understand that some tools can be built without coding, with a little coding or with full coding, and choose what the task really needs.',
     'Choose the simplest practical build approach for a small AI prototype.',
     'Assemble a small prototype from clear inputs, rules, prompts, outputs and human checks.',
     'Design for mobile access, low data use, failure recovery and responsible testing.',
@@ -21,13 +21,13 @@ export const levelThreeNoCodeLowCodeLesson: Lesson = {
   offlineEligible: true,
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
-    { id:'p3m4_b1', type:'objective', variant:'standard', content:'Turn a Level 3 design into a small working prototype without over-engineering it. Use the simplest tools that can test the real user need safely.' },
-    { id:'p3m4_b2', type:'explanation', variant:'standard', content:'No-code tools let you build with visual screens, forms, rules and ready-made services. Low-code tools add small amounts of code or configuration when needed. Full-code development gives the most control, but it also adds complexity, cost and maintenance. The best choice depends on the problem, not on which option sounds most advanced.' },
+    { id:'p3m4_b1', type:'objective', variant:'standard', content:'Turn your Level 3 idea into a small working test without making it more complicated than necessary. A small working test is often called a prototype. Use the simplest tools that can safely test whether the idea helps the user.' },
+    { id:'p3m4_b2', type:'explanation', variant:'standard', content:'Some tools let you build using screens, forms and ready-made parts without writing code. This is called no-code. Low-code adds a small amount of code when needed. Full-code means building mainly with code and gives more control, but can add difficulty, cost and maintenance. Choose what the problem needs, not what sounds most advanced.' },
     { id:'p3m4_b3', type:'keyPoint', variant:'standard', content:'Build the smallest useful version first. A prototype only needs enough functionality to test whether the solution helps the intended user.' },
     { id:'p3m4_b4', type:'application', variant:'plain', content:'Use the BUILD loop: Break the solution into one essential user task. Use the simplest available tool. Identify the input. Link the processing step or prompt. Define the output. Add a human check. Limit data collection. Decide what happens when the internet, AI service or input fails.' },
     { id:'p3m4_b5', type:'example', variant:'SouthAfricanContext', content:'A community training centre wants learners to turn difficult course notes into plain-language revision questions. A first prototype could use a simple mobile form where the learner pastes non-sensitive notes, selects “plain explanation” or “practice questions”, and receives a structured result. The prototype does not need accounts, analytics, payments or a complex dashboard to test whether the core idea helps.' },
     { id:'p3m4_b6', type:'explanation', variant:'standard', content:'Think of a prototype as five connected parts: INPUT, what the user provides. RULE or PROMPT, what the system should do. PROCESS, the tool or AI service that performs the task. OUTPUT, what the user receives. CHECK, the point where a person reviews, corrects or decides what happens next.' },
-    { id:'p3m4_b7', type:'keyPoint', variant:'standard', content:'Do not collect information simply because a tool allows it. Every field, upload and stored value should have a clear reason connected to the user task.' },
+    { id:'p3m4_b7', type:'keyPoint', variant:'standard', content:'Do not collect information simply because a tool allows it. Ask why each piece of information is needed. If it is not needed for the task, do not collect it.' },
     { id:'p3m4_b8', type:'example', variant:'SouthAfricanContext', content:'A small NGO wants a volunteer notice generator. Instead of storing volunteer identity numbers, home addresses and personal profiles, the prototype may only need the event type, date, meeting place, audience and preferred language. Data minimisation makes the tool easier and safer.' },
     { id:'p3m4_b9', type:'verification', variant:'standard', content:'Test each connection in the prototype separately. Does the input accept the right information? Does the prompt follow the intended rules? Does the output stay within the required format? Does the human checkpoint appear before a high-impact action? A working screen does not prove the workflow is correct.' },
     { id:'p3m4_b10', type:'ethicsCheck', variant:'standard', content:'Before connecting an AI service, check what information would leave the device, whether the service requires an account, whether user content may be stored, and whether the task can still function safely when the service is unavailable. Avoid sending sensitive personal data into public AI tools unless there is an authorised, appropriate and protected process.' },

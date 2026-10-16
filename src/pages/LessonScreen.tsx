@@ -4,6 +4,7 @@ import { api } from '../lib/curriculum/api';
 import { ArrowLeft, Clock, CheckCircle2, Info, Lightbulb, MessageSquare, Bookmark, HelpCircle, CheckSquare, Square, ExternalLink, PlayCircle } from 'lucide-react';
 import { LessonBlock } from '../lib/curriculum/types';
 import { isLessonCompleted, toggleLessonCompletion, recordQuizScore } from '../lib/progress';
+import { getLessonEvidence, saveLessonEvidence } from '../lib/evidence';
 import { getActiveVideoResourcesForLesson } from '../lib/videoResources';
 
 function renderBlock(block: LessonBlock) {
@@ -24,11 +25,20 @@ export function LessonScreen() {
   const lesson = lessonId ? api.getLesson(lessonId) : undefined;
   const moduleData = moduleId ? api.getModule(moduleId) : undefined;
   const videoResources = lessonId ? getActiveVideoResourcesForLesson(lessonId) : [];
+  const activityGuidance = lesson.blocks
+    .filter((block) => block.type === 'activity' || block.type === 'application')
+    .map((block) => block.content);
+  const reflectionGuidance = lesson.blocks
+    .filter((block) => block.type === 'reflection')
+    .map((block) => block.content);
   const [completed, setCompleted] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [quizScore, setQuizScore] = useState<number | null>(null);
   const [quizNotice, setQuizNotice] = useState<string | null>(null);
+  const [activityResponse, setActivityResponse] = useState('');
+  const [reflectionResponse, setReflectionResponse] = useState('');
+  const [evidenceSaved, setEvidenceSaved] = useState(false);
 
   useEffect(() => {
     if (lessonId) {
@@ -37,6 +47,10 @@ export function LessonScreen() {
       setQuizSubmitted(false);
       setQuizScore(null);
       setQuizNotice(null);
+      const evidence = getLessonEvidence(lessonId);
+      setActivityResponse(evidence.activityResponse);
+      setReflectionResponse(evidence.reflectionResponse);
+      setEvidenceSaved(false);
     }
   }, [lessonId]);
 
@@ -53,6 +67,7 @@ export function LessonScreen() {
 
   const handleToggleCompleted = () => {
     if (!lessonId) return;
+
     setCompleted(toggleLessonCompletion(lessonId));
   };
 
@@ -97,7 +112,7 @@ export function LessonScreen() {
 
       {lesson.quiz && lesson.quiz.length > 0 && <section className="mt-8 pt-6 border-t-2 border-[#E2E8F0] space-y-4">
         <div className="flex items-center gap-2"><HelpCircle className="w-5 h-5 text-[#E67E22]" /><h2 className="text-base font-bold text-[#2D3E50]">Quick Knowledge Check</h2></div>
-        <p className="text-xs text-gray-500">Answer every question. Your score is saved on this device.</p>
+        <p className="text-xs text-gray-500">This is a learning check, not a pass-or-fail test. Try every question, read the feedback and try again if you need to. Your latest score is saved on this device.</p>
         <div className="space-y-4">{lesson.quiz.map((q, qIndex) => <div key={q.id} className="bg-[#F8F9FA] border-2 border-[#E2E8F0] p-4 rounded-2xl space-y-3"><div className="text-xs font-bold text-[#1A202C]"><span className="text-[#E67E22] mr-1.5">Q{qIndex + 1}.</span>{q.question}</div><div className="space-y-2">{q.options.map((opt, optIdx) => {
           const selected = selectedAnswers[q.id] === optIdx;
           const correct = optIdx === q.correctIndex;
@@ -105,11 +120,30 @@ export function LessonScreen() {
           if (quizSubmitted && correct) style = 'border-emerald-500 bg-emerald-50 text-emerald-900 font-bold';
           else if (quizSubmitted && selected && !correct) style = 'border-rose-400 bg-rose-50 text-rose-800';
           else if (selected) style = 'border-[#2D3E50] bg-slate-100 text-[#2D3E50] font-bold';
-          return <button key={optIdx} disabled={quizSubmitted} onClick={() => { setSelectedAnswers((prev) => ({ ...prev, [q.id]: optIdx })); setQuizNotice(null); }} className={`w-full p-3 rounded-xl border-2 text-left text-xs ${style}`}><span className="font-bold mr-2">{String.fromCharCode(65 + optIdx)}.</span>{opt}</button>;
+          return <button key={optIdx} onClick={() => { setSelectedAnswers((prev) => ({ ...prev, [q.id]: optIdx })); setQuizSubmitted(false); setQuizScore(null); setQuizNotice(null); }} className={`w-full p-3 rounded-xl border-2 text-left text-xs ${style}`}><span className="font-bold mr-2">{String.fromCharCode(65 + optIdx)}.</span>{opt}</button>;
         })}</div>{quizSubmitted && <div className="p-3 bg-white border border-gray-200 rounded-xl text-xs"><div className="font-bold text-[#2D3E50]">Explanation</div><p className="text-gray-600 leading-relaxed">{q.explanation}</p></div>}</div>)}</div>
         {quizNotice && <div className="p-3 bg-amber-50 border-2 border-amber-200 rounded-xl text-xs font-bold text-amber-900">{quizNotice}</div>}
-        {!quizSubmitted ? <button onClick={handleSubmitQuiz} className="w-full bg-[#2D3E50] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Submit Answers & Check Feedback</button> : <div className="p-3.5 bg-emerald-50 border-2 border-emerald-200 rounded-2xl text-center"><div className="text-emerald-800 font-bold text-sm">Quiz score: {quizScore}%</div><p className="text-[11px] text-emerald-700 mt-1">Score saved. Mark the lesson complete when you have finished reviewing the content.</p></div>}
+        {!quizSubmitted ? <button onClick={handleSubmitQuiz} className="w-full bg-[#2D3E50] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Submit Answers & Check Feedback</button> : <div className="p-3.5 bg-emerald-50 border-2 border-emerald-200 rounded-2xl text-center"><div className="text-emerald-800 font-bold text-sm">Learning check: {quizScore}%</div><p className="text-[11px] text-emerald-700 mt-1">Review the explanations. If you missed something, choose another answer and check again. This is here to help you learn, not to stop you.</p></div>}
       </section>}
+
+      <section className="mt-8 pt-6 border-t-2 border-[#E2E8F0] space-y-4">
+        <div>
+          <h2 className="text-base font-bold text-[#2D3E50]">My Learning Evidence</h2>
+          <p className="text-xs text-gray-500 mt-1">Write in your own words. Your notes are saved only on this device and are not a pass-or-fail test.</p>
+        </div>
+        <label className="block space-y-1.5">
+          <span className="text-xs font-bold text-[#2D3E50]">What did you try or apply?</span>
+          {activityGuidance.length > 0 && <div className="space-y-1">{activityGuidance.map((guidance, index) => <p key={index} className="text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-lg p-2.5">{guidance}</p>)}</div>}
+          <textarea value={activityResponse} onChange={(event) => { setActivityResponse(event.target.value); setEvidenceSaved(false); }} rows={5} placeholder="Describe what you tried, built, checked or decided." className="w-full p-3 rounded-xl border-2 border-[#E2E8F0] text-sm text-[#1A202C] bg-white focus:outline-none focus:border-[#2D3E50]" />
+        </label>
+        <label className="block space-y-1.5">
+          <span className="text-xs font-bold text-[#2D3E50]">What did you learn?</span>
+          {reflectionGuidance.length > 0 && <div className="space-y-1">{reflectionGuidance.map((guidance, index) => <p key={index} className="text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-lg p-2.5">{guidance}</p>)}</div>}
+          <textarea value={reflectionResponse} onChange={(event) => { setReflectionResponse(event.target.value); setEvidenceSaved(false); }} rows={4} placeholder="Explain what you learned, what changed in your thinking, or what you would do differently." className="w-full p-3 rounded-xl border-2 border-[#E2E8F0] text-sm text-[#1A202C] bg-white focus:outline-none focus:border-[#2D3E50]" />
+        </label>
+        <button onClick={() => { if (!lessonId) return; saveLessonEvidence(lessonId, { activityResponse, reflectionResponse }); setEvidenceSaved(true); }} className="w-full bg-[#2D3E50] text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm">Save My Evidence</button>
+        {evidenceSaved && <p className="text-xs font-bold text-emerald-700 text-center">Saved on this device.</p>}
+      </section>
 
       <div className="pt-6 border-t-2 border-[#E2E8F0] flex flex-col gap-2.5">
         <button onClick={handleToggleCompleted} className={`w-full py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 ${completed ? 'bg-emerald-600 text-white' : 'bg-white border-2 border-[#2D3E50] text-[#2D3E50]'}`}>{completed ? <CheckCircle2 className="w-4 h-4" /> : <Square className="w-4 h-4" />}<span>{completed ? 'Lesson Completed • Mark Incomplete' : 'Mark Lesson as Completed'}</span></button>

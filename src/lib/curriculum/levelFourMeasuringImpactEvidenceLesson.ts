@@ -2,7 +2,7 @@ import { Lesson } from './types';
 
 export const levelFourMeasuringImpactEvidenceLesson: Lesson = {
   id: 'MZAIE-P4-M06-L01',
-  title: 'Measuring Impact & Evidence',
+  title: 'Check Whether the Solution Really Helps',
   levelId: 'MZAIE-P4',
   moduleId: 'MZAIE-P4-M06',
   locale: 'en-ZA',
@@ -21,7 +21,7 @@ export const levelFourMeasuringImpactEvidenceLesson: Lesson = {
   offlineEligible: true,
   trustState: 'AI_ASSISTED_REVIEWED',
   blocks: [
-    { id:'p4m6_b1', type:'objective', variant:'standard', content:'Evaluate an AI-supported solution by checking whether it creates a useful, fair and observable improvement for the people it is meant to serve.' },
+    { id:'p4m6_b1', type:'objective', variant:'standard', content:'Check whether an AI-supported solution creates a real, useful and fair improvement for the people it is meant to help.' },
     { id:'p4m6_b2', type:'explanation', variant:'standard', content:'A project can look busy without making real impact. Many chats, downloads, prompts or generated answers do not prove that people were helped. Impact means something meaningful improved in the real situation.' },
     { id:'p4m6_b3', type:'keyPoint', variant:'standard', content:'Measure the change that matters, not only the activity that is easy to count.' },
     { id:'p4m6_b4', type:'application', variant:'plain', content:'Use the EVIDENCE loop: Expected outcome. Visible signs. Information to collect. Diverse feedback. Errors and harms. Next decision. Continue, improve, pause or stop.' },
@@ -29,7 +29,7 @@ export const levelFourMeasuringImpactEvidenceLesson: Lesson = {
     { id:'p4m6_b6', type:'explanation', variant:'standard', content:'Separate four levels of evidence. Activity is what happened. Output is what was produced. Outcome is what changed for users. Impact is the longer-term benefit or harm in the real setting.' },
     { id:'p4m6_b7', type:'keyPoint', variant:'standard', content:'Good evidence can be simple: before-and-after checks, short interviews, observation, completion records, error logs, user stories, support requests, or a small pilot comparison.' },
     { id:'p4m6_b8', type:'example', variant:'SouthAfricanContext', content:'An NGO uses AI to simplify job-application guidance. Downloads are an activity. Better completed applications are an outcome. More users getting interviews may be impact, but only if other factors are considered honestly.' },
-    { id:'p4m6_b9', type:'verification', variant:'standard', content:'Triangulate evidence where possible. Combine numbers with human feedback. A score can show what changed, but user comments often explain why it changed or who was left out.' },
+    { id:'p4m6_b9', type:'verification', variant:'standard', content:'Where possible, check the result in more than one way. Combine numbers with feedback from people. A score can show what changed, while user comments may explain why it changed or who was left out.' },
     { id:'p4m6_b10', type:'ethicsCheck', variant:'standard', content:'Ask whether your measurement excludes quieter users, people without data, people with disabilities, non-English speakers or those who stopped using the tool because it failed them.' },
     { id:'p4m6_b11', type:'application', variant:'SouthAfricanContext', content:'For a community AI pilot, choose three measures: one usefulness measure, one access measure and one risk measure. For example: task completion, low-data usability and number of incorrect or confusing answers reported.' },
     { id:'p4m6_b12', type:'activity', variant:'standard', content:'Choose one AI-supported project. Write: 1) the intended outcome, 2) one activity measure, 3) one output measure, 4) one outcome measure, 5) one possible harm, 6) one feedback question, 7) how you will know who was excluded, and 8) the decision rule for improving, pausing or stopping.' },

@@ -1,0 +1,36 @@
+name: Build PR Preview Artifact
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: ['main']
+
+permissions:
+  contents: read
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build candidate
+        env:
+          VITE_BUILD_SHA: ${{ github.sha }}
+        run: bun run build
+
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mzansi-ai-educator-pr-preview
+          path: dist/
+          retention-days: 7

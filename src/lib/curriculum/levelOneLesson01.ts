@@ -1,0 +1,18 @@
+import { Lesson } from './types';
+export const levelOneLesson01: Lesson = {
+  id:'MZAIE-P1-M01-L01', title:'AI Is Already Around You', levelId:'MZAIE-L1', moduleId:'MZAIE-P1-M01',
+  locale:'en-ZA', version:'2.0', estimatedMinutes:20,
+  objectives:['Recognise where AI may be used in everyday life and understand that not every automatic machine is AI.'],
+  competencyIds:['AI_UNDERSTANDING','CRITICAL_QUESTIONING'], activityIds:[], assessmentId:null, sourceIds:[], offlineEligible:true, trustState:'VERIFIED_CURRICULUM',
+  blocks:[
+    {id:'o',type:'objective',variant:'standard',content:'Recognise where AI may be used in everyday life and understand that not every automatic machine is AI.'},
+    {id:'e',type:'explanation',variant:'standard',content:'AI systems can recognise patterns, work with language, predict, recommend or generate content. Not every automatic machine is AI.'},
+    {id:'t',type:'activity',variant:'standard',content:'THINK — T: Try independently. Name three digital services you used recently and decide which might use AI.'},
+    {id:'h',type:'explanation',variant:'plain',content:'THINK — H: Hunt for understanding. Ask what task the system performs and request an explanation if a concept is unclear.'},
+    {id:'i',type:'verification',variant:'standard',content:'THINK — I: Investigate. Separate what you can observe from what you are assuming.'},
+    {id:'n',type:'application',variant:'standard',content:'THINK — N: Navigate independently. Choose another app and describe what you think it does without assistance.'},
+    {id:'k',type:'reflection',variant:'standard',content:'THINK — K: Know what you learned. Explain AI in your own words and include one thing AI is not.'},
+    {id:'s',type:'summary',variant:'standard',content:'AI can recognise patterns, make suggestions or create content. Some machines simply follow fixed instructions and are not AI.'}
+  ],
+  quiz:[{id:'q1',question:'Which statement is most accurate?',options:['Every automatic device is AI.','AI can perform tasks such as recognising patterns, predicting or generating content.','AI always thinks like a person.'],correctIndex:1,explanation:'AI describes particular computational capabilities, not every automatic device.'},{id:'q2',question:'Which is the best example of AI rather than a machine following fixed instructions?',options:['A timer switching a light off after ten minutes.','A system learning patterns from examples to sort new messages.','A kettle stopping when water boils.'],correctIndex:1,explanation:'Learning patterns from examples and using them with something new is a common AI capability.'},{id:'q3',question:'What should you do when you are unsure whether a system uses AI?',options:['Assume it is AI because it is digital.','Look for evidence about what the system actually does.','Assume it is not AI.'],correctIndex:1,explanation:'Investigating how a system works is better than guessing from its appearance.'}]
+};

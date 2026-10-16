@@ -4,8 +4,10 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
+  const base = process.env.NETLIFY === 'true' ? '/' : '/mzansi-ai-educator/';
+
   return {
-    base: '/mzansi-ai-educator/',
+    base,
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

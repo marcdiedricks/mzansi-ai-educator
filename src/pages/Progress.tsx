@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Award, Target, BookOpen, Star, Eye } from 'lucide-react';
 import { getUserProgress, getLevel2TestProgress, getLevel3TestProgress, getLevel4TestProgress, isLevel2TestPreviewEnabled, isLevel3TestPreviewEnabled, isLevel4TestPreviewEnabled } from '../lib/progress';
-import { modules } from '../lib/curriculum/data';
+import { LEVEL_ONE_MODULES } from '../lib/curriculum/levelOneCanonical';
 import { LEVEL_TWO_MODULES, LEVEL_THREE_MODULES, LEVEL_FOUR_MODULES } from '../lib/programmeLevels';
 
 export function Progress() {
@@ -27,7 +27,7 @@ export function Progress() {
     return () => window.removeEventListener('mzansi_progress_updated', handleUpdate);
   }, []);
 
-  const level1Ids = modules.flatMap((module) => module.lessonIds);
+  const level1Ids = LEVEL_ONE_MODULES.flatMap((module) => module.lessonIds);
   const level2Ids = LEVEL_TWO_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level3Ids = LEVEL_THREE_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
   const level4Ids = LEVEL_FOUR_MODULES.flatMap((module) => module.lessonId ? [module.lessonId] : []);
@@ -55,12 +55,12 @@ export function Progress() {
   const level4QuizScores = Object.entries(level4Progress.quizScores).filter(([id]) => level4Ids.includes(id));
   const average = (scores: Array<[string, number]>) => scores.length ? Math.round(scores.reduce((sum, [, score]) => sum + score, 0) / scores.length) : 0;
 
-  const competencies = [
-    { name: 'AI Fundamentals', earned: completed1 >= 1 },
-    { name: 'Ethical AI Use', earned: completed1 >= 3 },
-    { name: 'Prompt Engineering', earned: completed1 >= 4 || (level1Complete && completed2 >= 3) },
-    { name: 'Practical AI Application', earned: level1Complete && completed2 >= 1 },
-    { name: 'AI Solution Leadership', earned: level3RealComplete && completed4 >= 1 },
+  const learningMilestones = [
+    { name: 'AI Foundations Learning', reached: completed1 >= 1 },
+    { name: 'Responsible AI Learning', reached: completed1 >= 3 },
+    { name: 'Asking AI Better Questions', reached: completed1 >= 4 || (level1Complete && completed2 >= 3) },
+    { name: 'Practical AI Learning', reached: level1Complete && completed2 >= 1 },
+    { name: 'AI Leadership Learning', reached: level3RealComplete && completed4 >= 1 },
   ];
 
   return (
@@ -97,9 +97,9 @@ export function Progress() {
       {level3Preview && !level2RealComplete && <div className="bg-white border-2 border-amber-200 rounded-xl p-5 text-center"><div className="text-2xl font-bold text-amber-800">{completed3}</div><div className="text-[10px] font-bold uppercase tracking-wider text-amber-700">Level 3 Test Lessons Completed</div></div>}
       {level4Preview && !level3RealComplete && <div className="bg-white border-2 border-amber-200 rounded-xl p-5 text-center"><div className="text-2xl font-bold text-amber-800">{completed4}</div><div className="text-[10px] font-bold uppercase tracking-wider text-amber-700">Level 4 Test Lessons Completed</div></div>}
 
-      <div className="bg-white border-2 border-[#E2E8F0] rounded-xl p-5 space-y-3"><div><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Level 1 Average Quiz Score</div><div className="text-xl font-bold text-[#1A202C]">{average(level1QuizScores as Array<[string, number]>)}%</div></div><div className="border-t border-gray-200 pt-3"><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Level 2 Average Quiz Score</div><div className="text-xl font-bold text-[#1A202C]">{level2Visible ? `${average(level2QuizScores as Array<[string, number]>)}%` : 'Locked'}</div></div><div className="border-t border-gray-200 pt-3"><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{level3Preview && !level2RealComplete ? 'Level 3 Test Quiz Average' : 'Level 3 Average Quiz Score'}</div><div className="text-xl font-bold text-[#1A202C]">{level3Visible ? `${average(level3QuizScores as Array<[string, number]>)}%` : 'Locked'}</div></div><div className="border-t border-gray-200 pt-3"><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{level4Preview && !level3RealComplete ? 'Level 4 Test Quiz Average' : 'Level 4 Average Quiz Score'}</div><div className="text-xl font-bold text-[#1A202C]">{level4Visible ? `${average(level4QuizScores as Array<[string, number]>)}%` : 'Locked'}</div></div></div>
+      <div className="bg-white border-2 border-[#E2E8F0] rounded-xl p-5 space-y-3"><p className="text-xs text-gray-500">Quiz percentages are formative learning checks. They help you see what to revisit and are not pass marks or proof of competence.</p><div><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Level 1 Average Quiz Score</div><div className="text-xl font-bold text-[#1A202C]">{average(level1QuizScores as Array<[string, number]>)}%</div></div><div className="border-t border-gray-200 pt-3"><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Level 2 Average Quiz Score</div><div className="text-xl font-bold text-[#1A202C]">{level2Visible ? `${average(level2QuizScores as Array<[string, number]>)}%` : 'Locked'}</div></div><div className="border-t border-gray-200 pt-3"><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{level3Preview && !level2RealComplete ? 'Level 3 Test Quiz Average' : 'Level 3 Average Quiz Score'}</div><div className="text-xl font-bold text-[#1A202C]">{level3Visible ? `${average(level3QuizScores as Array<[string, number]>)}%` : 'Locked'}</div></div><div className="border-t border-gray-200 pt-3"><div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{level4Preview && !level3RealComplete ? 'Level 4 Test Quiz Average' : 'Level 4 Average Quiz Score'}</div><div className="text-xl font-bold text-[#1A202C]">{level4Visible ? `${average(level4QuizScores as Array<[string, number]>)}%` : 'Locked'}</div></div></div>
 
-      <section><h3 className="font-bold text-[#2D3E50] mb-3">Competencies</h3><div className="space-y-2">{competencies.map((skill) => <div key={skill.name} className={`flex items-center p-4 bg-white border-2 border-[#E2E8F0] rounded-xl ${skill.earned ? '' : 'opacity-60'}`}><Star className={`w-4 h-4 mr-3 ${skill.earned ? 'text-[#E67E22]' : 'text-gray-400'}`} /><span className="font-bold text-[#1A202C]">{skill.name}</span></div>)}</div></section>
+      <section><h3 className="font-bold text-[#2D3E50] mb-1">Learning Milestones</h3><p className="text-xs text-gray-500 mb-3">These milestones show recorded learning progress on this device. They are not proof of professional competence or an accredited qualification.</p><div className="space-y-2">{learningMilestones.map((milestone) => <div key={milestone.name} className={`flex items-center p-4 bg-white border-2 border-[#E2E8F0] rounded-xl ${milestone.reached ? '' : 'opacity-60'}`}><Star className={`w-4 h-4 mr-3 ${milestone.reached ? 'text-[#E67E22]' : 'text-gray-400'}`} /><span className="font-bold text-[#1A202C]">{milestone.name}</span></div>)}</div></section>
     </div>
   );
 }
