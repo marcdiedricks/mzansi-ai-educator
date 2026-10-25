@@ -1,0 +1,24 @@
+name: F12 browser pilot (isolated)
+on:
+  push:
+    branches: ['audit/f12-e2e-pilot-20261026']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install project dependencies from committed Bun lockfile
+        run: bun install --frozen-lockfile
+      - name: Install isolated browser test runner
+        run: npm install --no-save --package-lock=false --ignore-scripts @playwright/test@1.56.1
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run product-specific F12 pilot
+        run: npx playwright test --config=playwright.f12.config.ts
